@@ -1,59 +1,94 @@
 ---
-import MainLayout from "@/layouts/MainLayout.astro";
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<MainLayout title="Contact">
-  <div class="max-w-2xl mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold mb-4">Contact</h1>
-    <p class="text-base-content/70 mb-8">
-      Ai o întrebare sau vrei să colaborăm? Lasă-mi un mesaj mai jos.
-    </p>
+<Layout title="Contact">
+  <section class="max-w-3xl mx-auto py-12 px-4 space-y-8">
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-base-content mb-3">Contact</h1>
+      <p class="text-base-content/70 text-lg">
+        Mă poți găsi sau contacta direct pe oricare dintre platformele de mai jos.
+      </p>
+    </div>
 
-    <!-- Formular de contact -->
-    <form 
-      action="https://formspree.io/f/ID_UL_TAU_AICI" 
-      method="POST" 
-      class="flex flex-col gap-4"
-    >
-      <div>
-        <label for="name" class="block text-sm font-medium mb-1">Nume</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          required 
-          class="input input-bordered w-full"
-          placeholder="Numele tău"
-        />
+    <!-- Informații de bază / Text simplu -->
+    <div class="card bg-base-200 border border-base-300 shadow-sm p-6 space-y-3">
+      <div class="flex items-center gap-3">
+        <span class="badge badge-primary font-semibold">Locație</span>
+        <span class="text-base-content font-medium">România</span>
       </div>
-
-      <div>
-        <label for="email" class="block text-sm font-medium mb-1">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email" 
-          required 
-          class="input input-bordered w-full"
-          placeholder="adresa.ta@exemplu.com"
-        />
+      <div class="flex items-center gap-3">
+        <span class="badge badge-secondary font-semibold">Email</span>
+        <span class="text-base-content select-all font-mono">adresa.ta@domeniu.com</span>
       </div>
-
-      <div>
-        <label for="message" class="block text-sm font-medium mb-1">Mesaj</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          rows="5" 
-          required 
-          class="textarea textarea-bordered w-full"
-          placeholder="Scrie mesajul tău aici..."
-        ></textarea>
+      <div class="flex items-center gap-3">
+        <span class="badge badge-accent font-semibold">Disponibilitate</span>
+        <span class="text-base-content">Proiecte freelance & discuții tehnice</span>
       </div>
+    </div>
 
-      <button type="submit" class="btn btn-primary self-start mt-2">
-        Trimite mesajul
-      </button>
-    </form>
-  </div>
-</MainLayout>
+    <!-- Butoane de redirect integrate în tema site-ului -->
+    <div class="space-y-4">
+      <h2 class="text-xl font-semibold text-base-content">Canale & Profiluri</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Buton GitHub -->
+        <a 
+          href="https://github.com/PlesaAlexandru" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-neutral justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+        >
+          <Icon name="ri:github-fill" class="w-6 h-6 shrink-0" />
+          <div class="text-left">
+            <div class="font-bold">GitHub</div>
+            <div class="text-xs opacity-70">Urmărește codul și proiectele mele</div>
+          </div>
+        </a>
+
+        <!-- Buton LinkedIn -->
+        <a 
+          href="https://linkedin.com/in/username" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-primary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+        >
+          <Icon name="ri:linkedin-box-fill" class="w-6 h-6 shrink-0" />
+          <div class="text-left">
+            <div class="font-bold">LinkedIn</div>
+            <div class="text-xs opacity-70">Conectează-te profesional</div>
+          </div>
+        </a>
+
+        <!-- Buton Telegram / Discord -->
+        <a 
+          href="https://t.me/username" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-secondary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+        >
+          <Icon name="ri:telegram-fill" class="w-6 h-6 shrink-0" />
+          <div class="text-left">
+            <div class="font-bold">Telegram</div>
+            <div class="text-xs opacity-70">Mesagerie rapidă</div>
+          </div>
+        </a>
+
+        <!-- Buton Twitter / X -->
+        <a 
+          href="https://x.com/username" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-accent justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+        >
+          <Icon name="ri:twitter-x-fill" class="w-6 h-6 shrink-0" />
+          <div class="text-left">
+            <div class="font-bold">X (Twitter)</div>
+            <div class="text-xs opacity-70">Gânduri scurte și noutăți</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
