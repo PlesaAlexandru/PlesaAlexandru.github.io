@@ -34,10 +34,10 @@ site:
           href: /blog
           svg: "material-symbols:ink-pen-outline-rounded"
           target: _self
-        - id: docs
+        - id: documentation
           text: Documentation
-          href: /category/documentation
-          svg: "material-symbols:menu-book-outline-rounded"
+          href: /blog/category/Documentation
+          svg: "material-symbols:unknown-document-outline-rounded"
           target: _self
         - id: examples
           text: Examples
