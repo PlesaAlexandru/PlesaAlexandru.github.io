@@ -1,141 +1,141 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
+
+// LISTĂ SCALABILĂ: Adaugi sau ștergi elemente direct aici!
+const roadmap = [
+  {
+    period: "2026 — PRESENT",
+    status: "active", // 'active', 'completed', sau 'planned'
+    title: "SOC L1 Preparation & Detection Labs",
+    description: "Deepening hands-on investigation workflows via LetsDefend and enterprise alert simulations. Working on packet inspection with Wireshark and SIEM query rules.",
+    tags: ["LetsDefend", "SIEM", "Wireshark", "MITRE ATT&CK"]
+  },
+  {
+    period: "2025 — 2026",
+    status: "completed",
+    title: "Defensive Foundations & CTF Practice",
+    description: "Hands-on fundamentals across TryHackMe and Hack The Box modules. Studied adversary techniques, Windows event logs, and Linux system telemetry.",
+    tags: ["TryHackMe", "Hack The Box", "Log Analysis", "Linux"]
+  },
+  {
+    period: "INITIAL PHASE",
+    status: "completed",
+    title: "Systems, Networking & Automation",
+    description: "Built isolated lab environments. Scripting repetitive tasks with Python and Bash, studying OSI model protocols, TCP/IP fundamentals, and OS internals.",
+    tags: ["Networking", "Python", "Bash", "Home Lab"]
+  }
+];
 ---
 
 <BaseLayout title="About | Alexandru Pleșa">
-  <div class="max-w-4xl mx-auto py-10 px-4 space-y-12">
+  <div class="max-w-3xl mx-auto py-10 px-4 space-y-12">
     
-    <!-- Header Profil & Bio -->
-    <section class="flex flex-col sm:flex-row items-center sm:items-start gap-6 card bg-base-200/50 border border-base-300/80 p-6 sm:p-8 rounded-2xl shadow-sm">
-      <div class="avatar shrink-0">
-        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl ring-2 ring-primary ring-offset-2 ring-offset-base-100 overflow-hidden shadow-md">
-          <img src="/avatar.png" alt="Alexandru Pleșa" class="object-cover w-full h-full" />
+    <!-- Header Fără Poză - Stil Tehnic & Profesional -->
+    <header class="card bg-base-200/50 border border-base-300/80 p-6 sm:p-8 rounded-2xl space-y-5">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          PROFILE & BACKGROUND
         </div>
-      </div>
-
-      <div class="space-y-4 text-center sm:text-left flex-1">
-        <div>
-          <h1 class="text-3xl font-extrabold tracking-tight text-base-content">Alexandru Pleșa</h1>
-          <p class="text-primary font-medium text-sm mt-0.5">Aspiring SOC Analyst (L1) • Cybersecurity Enthusiast</p>
-        </div>
-
-        <p class="text-sm text-base-content/80 leading-relaxed">
-          Driven cybersecurity enthusiast dedicated to defending infrastructure and mastering blue team fundamentals. 
-          Currently training daily in alert triage, packet inspection, SIEM logic, and log forensics, while actively dissecting attacker techniques in hands-on CTF environments.
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
+          Alexandru Pleșa
+        </h1>
+        <p class="text-sm font-medium text-primary">
+          Aspiring SOC Analyst (L1) • Cybersecurity Enthusiast
         </p>
-
-        <!-- Acțiuni: Download CV & Contact -->
-        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1">
-          <!-- Buton CV: Pune fișierul tău CV.pdf în folderul public/ -->
-          <a 
-            href="/cv.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="btn btn-primary btn-sm gap-2 shadow-sm"
-          >
-            <Icon name="ri:file-download-line" class="w-4 h-4" />
-            Download CV
-          </a>
-          <a href="/contact" class="btn btn-outline btn-sm border-base-300 gap-2">
-            <Icon name="ri:mail-line" class="w-4 h-4" />
-            Contact Me
-          </a>
-        </div>
       </div>
-    </section>
 
-    <!-- Roadmap & Milestones (Timeline) -->
+      <p class="text-sm text-base-content/80 leading-relaxed max-w-2xl">
+        Focused on defensive operations, alert investigation, and security telemetry. 
+        Currently preparing for an entry-level L1 SOC role by analyzing realistic attack data, dissecting packet captures, and testing detection logic.
+      </p>
+
+      <!-- Butoane -->
+      <div class="flex flex-wrap items-center gap-3 pt-1">
+        <a 
+          href="/cv.pdf" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-primary btn-sm gap-2 shadow-sm font-medium"
+        >
+          <Icon name="ri:file-download-line" class="w-4 h-4" />
+          Download CV
+        </a>
+        <a href="/contact" class="btn btn-outline btn-sm border-base-300 gap-2 font-medium">
+          <Icon name="ri:mail-line" class="w-4 h-4" />
+          Get in Touch
+        </a>
+      </div>
+    </header>
+
+    <!-- Roadmap & Timeline Scalabil cu Linie Albastră Continuă -->
     <section class="space-y-6">
       <div class="space-y-1">
         <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
           <Icon name="ri:route-line" class="w-5 h-5 text-primary" />
-          Cybersecurity Journey & Roadmap
+          Roadmap & Milestone Progression
         </h2>
-        <p class="text-xs text-base-content/60">Milestones, current studies, and target certifications.</p>
+        <p class="text-xs text-base-content/60">
+          Chronological breakdown of security studies, lab milestones, and focus areas.
+        </p>
       </div>
 
-      <!-- Timeline DaisyUI nativ -->
-      <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-        
-        <!-- Step 1: Prezent / În desfășurare -->
-        <li>
-          <div class="timeline-middle">
-            <span class="flex h-4 w-4 rounded-full bg-primary/20 items-center justify-center">
-              <span class="h-2 w-2 rounded-full bg-primary animate-ping"></span>
-            </span>
-          </div>
-          <div class="timeline-start mb-10 md:text-end">
-            <time class="font-mono text-xs text-primary font-semibold">2026 • CURRENT</time>
-            <div class="text-base font-bold text-base-content">SOC L1 Readiness & Deep-Dive Labs</div>
-            <p class="text-xs text-base-content/70 mt-1">
-              Active investigation of simulated SOC incidents on LetsDefend, packet dissection with Wireshark, and mapping adversary behavior to the MITRE ATT&CK framework.
-            </p>
-          </div>
-          <hr class="bg-base-300" />
-        </li>
+      <!-- Containerul liniei albastre -->
+      <div class="relative pl-6 sm:pl-8 border-l-2 border-primary/50 ml-3 sm:ml-4 space-y-8 py-2">
+        {roadmap.map((item) => (
+          <div class="relative group">
+            
+            <!-- Punctul/Nodul de pe linia albastră -->
+            <div class={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 bg-base-100 ${
+              item.status === 'active' 
+                ? 'border-primary ring-4 ring-primary/20 bg-primary' 
+                : 'border-primary/60 group-hover:border-primary group-hover:bg-primary/40 transition-colors'
+            }`}></div>
 
-        <!-- Step 2: Certificări & Formare tehnică -->
-        <li>
-          <hr class="bg-base-300" />
-          <div class="timeline-middle">
-            <Icon name="ri:checkbox-circle-fill" class="w-4 h-4 text-emerald-400" />
-          </div>
-          <div class="timeline-end mb-10">
-            <time class="font-mono text-xs text-base-content/50">2025 – 2026</time>
-            <div class="text-base font-bold text-base-content">Hands-On Foundations (THM & HTB)</div>
-            <p class="text-xs text-base-content/70 mt-1">
-              Completed foundational learning paths in defensive security, network fundamentals, Linux forensics, and basic penetration testing to understand attacker methodologies.
-            </p>
-          </div>
-          <hr class="bg-base-300" />
-        </li>
+            <!-- Conținutul milestone-ului -->
+            <div class="card bg-base-200/40 border border-base-300/70 p-5 rounded-xl space-y-2 hover:border-primary/40 transition-all">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class={`font-mono text-xs font-semibold ${item.status === 'active' ? 'text-primary' : 'text-base-content/60'}`}>
+                  {item.period}
+                </span>
+                {item.status === 'active' && (
+                  <span class="badge badge-primary badge-xs">In Progress</span>
+                )}
+              </div>
 
-        <!-- Step 3: Startul în domeniu -->
-        <li>
-          <hr class="bg-base-300" />
-          <div class="timeline-middle">
-            <Icon name="ri:flag-fill" class="w-4 h-4 text-base-content/40" />
-          </div>
-          <div class="timeline-start mb-10 md:text-end">
-            <time class="font-mono text-xs text-base-content/50">INITIAL SPARK</time>
-            <div class="text-base font-bold text-base-content">Networking & Systems Engineering</div>
-            <p class="text-xs text-base-content/70 mt-1">
-              Building home labs, exploring operating system internals, scripting automation tools with Python/Bash, and discovering the defensive side of security.
-            </p>
-          </div>
-        </li>
+              <h3 class="text-base font-bold text-base-content">
+                {item.title}
+              </h3>
 
-      </ul>
+              <p class="text-xs text-base-content/75 leading-relaxed">
+                {item.description}
+              </p>
+
+              <!-- Tag-uri tehnice -->
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                {item.tags.map((tag) => (
+                  <span class="badge badge-ghost badge-xs font-mono text-[10px] text-base-content/70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
     </section>
 
-    <!-- Evenimente, Conferințe & Comunitate -->
-    <section class="card bg-base-200/40 border border-base-300/80 p-6 rounded-2xl space-y-4">
-      <h2 class="text-lg font-bold text-base-content flex items-center gap-2">
-        <Icon name="ri:calendar-event-line" class="w-5 h-5 text-primary" />
-        Events, CTFs & Community
-      </h2>
-      <p class="text-xs text-base-content/70 leading-relaxed">
-        I believe continuous learning thrives in community. I actively participate in local security meetups, industry conferences, and online CTF challenges to sharpen my analytical mindset and stay up to date with emerging threat landscapes.
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-        <div class="flex items-start gap-3 p-3 rounded-xl bg-base-100/60 border border-base-300/60">
-          <Icon name="ri:trophy-line" class="w-5 h-5 text-yellow-500 shrink-0 mt-0.5" />
-          <div class="text-xs">
-            <div class="font-bold text-base-content">CTF Competitions</div>
-            <div class="text-base-content/60">Regular participant in beginner/intermediate CTFs, focusing on forensics & network tasks.</div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3 p-3 rounded-xl bg-base-100/60 border border-base-300/60">
-          <Icon name="ri:community-line" class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
-          <div class="text-xs">
-            <div class="font-bold text-base-content">Conferences & Workshops</div>
-            <div class="text-base-content/60">Engaging in cybersecurity talks, webinars, and open security communities.</div>
-          </div>
-        </div>
+    <!-- Notă despre Comunitate & Evenimente -->
+    <section class="card bg-base-200/30 border border-base-300/70 p-5 rounded-xl space-y-2">
+      <div class="flex items-center gap-2 text-sm font-bold text-base-content">
+        <Icon name="ri:calendar-event-line" class="w-4 h-4 text-primary" />
+        Community, Events & CTFs
       </div>
+      <p class="text-xs text-base-content/70 leading-relaxed">
+        Active participant in capture-the-flag competitions (focusing on blue/forensics challenges) and industry webinars. Continuous engagement with local and global cybersecurity communities to remain aligned with current defense practices.
+      </p>
     </section>
 
   </div>
