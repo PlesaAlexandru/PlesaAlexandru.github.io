@@ -13,82 +13,81 @@ const recentPosts = allPosts
   <div class="max-w-4xl mx-auto py-10 px-4 space-y-12">
     
     <!-- Hero Section -->
-    <header class="space-y-5">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-medium">
-        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-        Seeking Entry-Level / Junior SOC Analyst (L1) Roles
+    <header class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-mono font-semibold tracking-wide">
+        <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+        Targeting Entry-Level / Junior SOC Analyst (L1) Roles
       </div>
 
       <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-base-content">
         Hi, I'm <span class="text-primary">Alexandru Pleșa</span>.
       </h1>
 
-      <p class="text-lg text-base-content/80 max-w-2xl leading-relaxed">
-        Passionate learner preparing for my first role as a <span class="text-base-content font-bold text-primary">SOC Analyst L1</span>. 
-        Focusing heavily on hands-on defensive labs, alert triage, log investigation, and fundamental red team methodologies to understand real-world attack vectors.
+      <p class="text-base sm:text-lg text-base-content/85 max-w-2xl leading-relaxed">
+        Passionate learner preparing for an entry-level role as a <strong class="text-primary font-bold">SOC Analyst L1</strong>. 
+        Focusing heavily on alert triage, security telemetry, log forensics, and essential adversary emulation to build resilient defenses.
       </p>
 
-      <!-- Butoane de acțiune -->
       <div class="flex flex-wrap gap-3 pt-2">
-        <a href="/contact" class="btn btn-primary gap-2 shadow-md">
+        <a href="/contact" class="btn btn-primary gap-2 shadow-lg font-medium text-sm">
           <Icon name="ri:send-plane-fill" class="w-4 h-4" />
           Get in Touch / Profiles
         </a>
-        <a href="/blog" class="btn btn-neutral bg-base-200 border-base-300 gap-2 hover:border-primary">
+        <a href="/blog" class="btn bg-slate-800/60 border border-slate-700/80 gap-2 hover:border-primary text-sm font-medium">
           <Icon name="ri:file-list-3-line" class="w-4 h-4" />
-          Lab Notes & Writeups
+          Lab Writeups
         </a>
-        <a href="https://github.com/PlesaAlexandru" target="_blank" rel="noopener noreferrer" class="btn btn-neutral bg-base-200 border-base-300 btn-square hover:border-primary" title="GitHub">
+        <a href="https://github.com/PlesaAlexandru" target="_blank" rel="noopener noreferrer" class="btn bg-slate-800/60 border border-slate-700/80 btn-square hover:border-primary" title="GitHub">
           <Icon name="ri:github-fill" class="w-5 h-5" />
         </a>
       </div>
     </header>
 
-    <!-- Core Focus: Carduri solide vizibile identice cu cele din Blog -->
+    <!-- Core Focus -->
     <section class="space-y-4">
       <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
         <Icon name="ri:shield-flash-line" class="w-5 h-5 text-primary" />
-        Areas of Focus & Hands-On Training
+        Core Focus & Security Capabilities
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         <!-- Card 1 -->
-        <div class="card bg-base-200 border border-primary/50 shadow-lg p-6 rounded-2xl space-y-3 hover:border-primary transition-all relative">
-          <div class="absolute top-3 right-3 badge badge-primary badge-xs font-semibold">Primary Focus</div>
+        <div class="card bg-slate-800/50 border border-primary/50 shadow-xl p-6 rounded-2xl space-y-3 hover:border-primary transition-all relative">
+          <div class="absolute top-3 right-3 badge badge-primary text-[10px] font-bold">Primary Focus</div>
           <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
             <Icon name="ri:radar-line" class="w-5 h-5" />
           </div>
           <h3 class="font-bold text-base text-base-content">Alert Triage & SIEM</h3>
-          <p class="text-xs text-base-content/75 leading-relaxed">
-            Investigating simulated alerts on LetsDefend, distinguishing true vs. false positives, and analyzing telemetry (Sysmon, Windows Event Logs, Auth logs).
+          <p class="text-sm text-base-content/80 leading-relaxed">
+            Investigating simulated incidents on LetsDefend, validating false positives, and analyzing telemetry across Sysmon and Windows logs.
           </p>
         </div>
 
         <!-- Card 2 -->
-        <div class="card bg-base-200 border border-base-300 shadow-lg p-6 rounded-2xl space-y-3 hover:border-primary/50 transition-all">
+        <div class="card bg-slate-800/50 border border-slate-700/80 shadow-xl p-6 rounded-2xl space-y-3 hover:border-primary/50 transition-all">
           <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
             <Icon name="ri:mail-forbid-line" class="w-5 h-5" />
           </div>
-          <h3 class="font-bold text-base text-base-content">Phishing & Packet Analysis</h3>
-          <p class="text-xs text-base-content/75 leading-relaxed">
-            Deconstructing malicious email headers, URLs, and attachments, paired with fundamental network capture examination using Wireshark.
+          <h3 class="font-bold text-base text-base-content">Phishing & PCAP Analysis</h3>
+          <p class="text-sm text-base-content/80 leading-relaxed">
+            Deconstructing headers, malicious attachments, and analyzing network traffic captures in Wireshark.
           </p>
         </div>
 
         <!-- Card 3 -->
-        <div class="card bg-base-200 border border-base-300 shadow-lg p-6 rounded-2xl space-y-3 hover:border-primary/50 transition-all">
+        <div class="card bg-slate-800/50 border border-slate-700/80 shadow-xl p-6 rounded-2xl space-y-3 hover:border-primary/50 transition-all">
           <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
             <Icon name="ri:sword-line" class="w-5 h-5" />
           </div>
           <h3 class="font-bold text-base text-base-content">Adversary Tactics (CTFs)</h3>
-          <p class="text-xs text-base-content/75 leading-relaxed">
-            Practicing foundational offensive techniques on TryHackMe and Hack The Box to better recognize attacker behavior mapped to MITRE ATT&CK.
+          <p class="text-sm text-base-content/80 leading-relaxed">
+            Practicing foundational offensive techniques on TryHackMe and HTB to map real attacker behavior directly to MITRE ATT&CK.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Articole Recente: Cadran solid bine conturat -->
+    <!-- Articole Recente -->
     <section class="space-y-4">
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
@@ -105,23 +104,23 @@ const recentPosts = allPosts
           recentPosts.map((post) => (
             <a 
               href={`/blog/${post.id}`} 
-              class="group card bg-base-200 border border-base-300 shadow-md p-6 rounded-2xl hover:border-primary/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              class="group card bg-slate-800/50 border border-slate-700/80 shadow-md p-6 rounded-2xl hover:border-primary/60 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
-              <div class="space-y-1">
-                <h3 class="font-bold text-base text-base-content group-hover:text-primary transition-colors">
+              <div class="space-y-1.5">
+                <h3 class="font-bold text-base sm:text-lg text-base-content group-hover:text-primary transition-colors">
                   {post.data.title}
                 </h3>
-                <p class="text-xs text-base-content/70 line-clamp-1">
+                <p class="text-sm text-base-content/75 line-clamp-1">
                   {post.data.description}
                 </p>
               </div>
-              <div class="text-xs font-mono text-base-content/50 shrink-0">
+              <div class="text-xs font-mono text-base-content/60 shrink-0">
                 {new Date(post.data.pubDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
               </div>
             </a>
           ))
         ) : (
-          <div class="card bg-base-200 border border-dashed border-base-300 p-8 text-center text-xs text-base-content/60">
+          <div class="card bg-slate-800/40 border border-dashed border-slate-700 p-8 text-center text-sm text-base-content/60">
             No lab writeups published yet. Add your notes in <code class="font-mono">src/content/blog/</code>!
           </div>
         )}
