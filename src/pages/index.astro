@@ -3,21 +3,20 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
-// Preluăm ultimele 3 articole de pe blog ordonate descrescător după dată
 const allPosts = await getCollection("blog");
 const recentPosts = allPosts
   .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
   .slice(0, 3);
 ---
 
-<BaseLayout title="Alexandru Pleșa | Cybersecurity & Tech Blog">
+<BaseLayout title="Alexandru Pleșa | Aspiring SOC Analyst L1">
   <div class="max-w-4xl mx-auto py-10 px-4 space-y-12">
     
-    <!-- Hero Section: Orientat către angajare / Impact profesional -->
+    <!-- Hero Section: Orientat clar pe învățare, practică și prima angajare ca L1 -->
     <header class="space-y-5">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Available for Cybersecurity Roles & CTFs
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-medium">
+        <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+        Seeking Entry-Level / Junior SOC Analyst (L1) Roles
       </div>
 
       <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-base-content">
@@ -25,19 +24,19 @@ const recentPosts = allPosts
       </h1>
 
       <p class="text-lg text-base-content/80 max-w-2xl leading-relaxed">
-        Passionate about <span class="text-base-content font-semibold">Offensive & Defensive Security</span>, 
-        vulnerability research, and systems engineering. Documenting CTF writeups, practical security lab experiments, and software engineering insights.
+        Passionate learner preparing for my first role as a <span class="text-base-content font-bold text-primary">SOC Analyst L1</span>. 
+        Focusing heavily on hands-on defensive labs, alert triage, log investigation, and fundamental red team methodologies to understand real-world attack vectors.
       </p>
 
       <!-- Butoane rapide de acțiune -->
       <div class="flex flex-wrap gap-3 pt-2">
-        <a href="/blog" class="btn btn-primary gap-2 shadow-sm">
-          <Icon name="ri:article-line" class="w-4 h-4" />
-          Read Articles
+        <a href="/contact" class="btn btn-primary gap-2 shadow-sm">
+          <Icon name="ri:send-plane-fill" class="w-4 h-4" />
+          Get in Touch / Profiles
         </a>
-        <a href="/contact" class="btn btn-outline border-base-300 gap-2">
-          <Icon name="ri:mail-send-line" class="w-4 h-4" />
-          Get in Touch
+        <a href="/blog" class="btn btn-outline border-base-300 gap-2">
+          <Icon name="ri:file-list-3-line" class="w-4 h-4" />
+          Lab Notes & Writeups
         </a>
         <a href="https://github.com/PlesaAlexandru" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-square border border-base-300" title="GitHub">
           <Icon name="ri:github-fill" class="w-5 h-5" />
@@ -45,55 +44,56 @@ const recentPosts = allPosts
       </div>
     </header>
 
-    <!-- Domenii principale de expertiză / Focus Areas -->
+    <!-- Core Focus: Pilonii de pregătire L1 -->
     <section class="space-y-4">
       <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
-        <Icon name="ri:terminal-box-line" class="w-5 h-5 text-primary" />
-        Core Focus & Skills
+        <Icon name="ri:shield-flash-line" class="w-5 h-5 text-primary" />
+        Areas of Focus & Hands-On Training
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Card 1 -->
-        <div class="card bg-base-200/50 border border-base-300/80 p-5 rounded-2xl space-y-2 hover:border-primary/50 transition-all">
-          <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center font-bold">
-            <Icon name="ri:skull-line" class="w-5 h-5" />
-          </div>
-          <h3 class="font-bold text-base text-base-content">Offensive Security</h3>
-          <p class="text-xs text-base-content/70 leading-relaxed">
-            Network penetration testing, web application vulnerabilities, privilege escalation, and CTF challenges.
-          </p>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card bg-base-200/50 border border-base-300/80 p-5 rounded-2xl space-y-2 hover:border-primary/50 transition-all">
+        <!-- Pilon 1: Alert Triage & SIEM (Nucleul L1) -->
+        <div class="card bg-base-200/50 border border-primary/40 p-5 rounded-2xl space-y-2 hover:border-primary transition-all relative overflow-hidden">
+          <div class="absolute top-2 right-2 badge badge-primary badge-xs">Primary Focus</div>
           <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">
-            <Icon name="ri:shield-check-line" class="w-5 h-5" />
+            <Icon name="ri:radar-line" class="w-5 h-5" />
           </div>
-          <h3 class="font-bold text-base text-base-content">Blue Teaming & SOC</h3>
+          <h3 class="font-bold text-base text-base-content">Alert Triage & SIEM</h3>
           <p class="text-xs text-base-content/70 leading-relaxed">
-            Incident response, log analysis, malware detection strategies, and blue team training on LetsDefend.
+            Investigating simulated alerts on LetsDefend, understanding true vs. false positives, and analyzing event logs (Sysmon, Windows Event Viewer, Auth logs).
           </p>
         </div>
 
-        <!-- Card 3 -->
+        <!-- Pilon 2: Network & Phishing Analysis -->
         <div class="card bg-base-200/50 border border-base-300/80 p-5 rounded-2xl space-y-2 hover:border-primary/50 transition-all">
           <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">
-            <Icon name="ri:code-s-slash-line" class="w-5 h-5" />
+            <Icon name="ri:mail-forbid-line" class="w-5 h-5" />
           </div>
-          <h3 class="font-bold text-base text-base-content">Systems & Scripting</h3>
+          <h3 class="font-bold text-base text-base-content">Phishing & Packet Analysis</h3>
           <p class="text-xs text-base-content/70 leading-relaxed">
-            Linux hardening, Python/Bash tool automation, secure coding practices, and infrastructure scripts.
+            Deconstructing malicious email headers, URLs, and attachments, paired with fundamental network capture examination using Wireshark.
+          </p>
+        </div>
+
+        <!-- Pilon 3: Foundational Adversary Awareness -->
+        <div class="card bg-base-200/50 border border-base-300/80 p-5 rounded-2xl space-y-2 hover:border-primary/50 transition-all">
+          <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">
+            <Icon name="ri:sword-line" class="w-5 h-5" />
+          </div>
+          <h3 class="font-bold text-base text-base-content">Adversary Tactics (CTFs)</h3>
+          <p class="text-xs text-base-content/70 leading-relaxed">
+            Practicing foundational offensive techniques on TryHackMe and Hack The Box to better recognize attacker behavior mapped to MITRE ATT&CK.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Articole recente / Latest Posts -->
+    <!-- Writeups & Documentation: Demonstrează învățarea activă -->
     <section class="space-y-4">
       <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
           <Icon name="ri:book-read-line" class="w-5 h-5 text-primary" />
-          Latest Writeups & Insights
+          Recent Lab Writeups & Studies
         </h2>
         <a href="/blog" class="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
           View all posts <Icon name="ri:arrow-right-line" class="w-3.5 h-3.5" />
@@ -104,7 +104,7 @@ const recentPosts = allPosts
         {recentPosts.length > 0 ? (
           recentPosts.map((post) => (
             <a 
-              href={`/blog/${post.id}`}
+              href={`/blog/${post.id}`} 
               class="group card bg-base-200/40 border border-base-300/70 p-5 rounded-2xl hover:bg-base-200 hover:border-base-300 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
               <div class="space-y-1">
@@ -122,7 +122,7 @@ const recentPosts = allPosts
           ))
         ) : (
           <div class="card bg-base-200/30 border border-dashed border-base-300 p-8 text-center text-xs text-base-content/50">
-            No posts published yet. Start creating your writeups in <code class="font-mono">src/content/blog/</code>!
+            No lab writeups published yet. Start documenting your investigations in <code class="font-mono">src/content/blog/</code>!
           </div>
         )}
       </div>
