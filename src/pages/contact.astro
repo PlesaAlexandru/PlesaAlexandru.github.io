@@ -6,56 +6,55 @@ import { Icon } from "astro-icon/components";
 <BaseLayout title="Contact | Alexandru Pleșa">
   <div class="max-w-3xl mx-auto py-10 px-4 space-y-10">
     
-    <!-- Header -->
-    <header class="space-y-2">
-      <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold">
+    <header class="space-y-3">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wider uppercase">
         <Icon name="ri:mail-send-line" class="w-4 h-4" />
-        GET IN TOUCH
+        Get in Touch
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
         Contact & Profiles
       </h1>
-      <p class="text-sm text-base-content/75 max-w-xl">
-        You can reach out directly via email or explore my cybersecurity platforms and professional profiles below.
+      <p class="text-base text-base-content/80 max-w-xl leading-relaxed">
+        Feel free to reach out directly via email or connect with me across these security and developer platforms.
       </p>
     </header>
 
-    <!-- Card Principal Solid (Stil Blog / MainCard) -->
-    <section class="card bg-base-200 border border-base-300 shadow-lg p-6 sm:p-8 rounded-2xl space-y-4">
+    <!-- Card Principal Solid și Deschis -->
+    <section class="card bg-slate-800/60 border border-slate-700/80 shadow-xl p-6 sm:p-8 rounded-2xl space-y-4">
       <!-- Location -->
-      <div class="flex items-center gap-3">
-        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/10 text-sky-400 border border-blue-500/20 w-20 text-center">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+        <span class="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/30 w-fit sm:w-24 text-center">
           Location
         </span>
-        <span class="text-sm text-base-content font-medium">Romania</span>
+        <span class="text-base text-base-content font-medium">Romania</span>
       </div>
 
       <!-- Email -->
-      <div class="flex items-center gap-3">
-        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/15 text-primary border border-blue-500/30 w-20 text-center">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+        <span class="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/40 w-fit sm:w-24 text-center">
           Email
         </span>
-        <span class="text-sm text-base-content select-all font-mono tracking-tight font-medium hover:text-primary transition-colors">
+        <span class="text-base text-base-content select-all font-mono font-medium hover:text-primary transition-colors">
           plesaalexandru@gmail.com
         </span>
       </div>
 
       <!-- Status -->
-      <div class="flex items-center gap-3">
-        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/10 text-sky-400 border border-blue-500/20 w-20 text-center">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+        <span class="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/30 w-fit sm:w-24 text-center">
           Status
         </span>
-        <span class="text-sm text-base-content/80">
-          Open for collaborations, CTFs, and security discussions
+        <span class="text-sm sm:text-base text-base-content/85">
+          Open for SOC L1 opportunities, CTFs, and technical discussions
         </span>
       </div>
     </section>
 
-    <!-- Butoane Profiluri: Carduri solide pline, cu hover de contur albastru -->
+    <!-- Grila de Profile cu nuanțe deschise și text clar -->
     <section class="space-y-4">
       <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
         <Icon name="ri:shield-keyhole-line" class="w-5 h-5 text-primary" />
-        CyberSec & Development Platforms
+        CyberSec & Professional Profiles
       </h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -64,14 +63,14 @@ import { Icon } from "astro-icon/components";
           href="https://github.com/PlesaAlexandru" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
+          class="card bg-slate-800/50 border border-slate-700/80 shadow-md p-4 rounded-xl flex flex-row items-center gap-4 hover:border-primary/70 hover:bg-slate-800/80 transition-all group"
         >
-          <div class="w-10 h-10 rounded-lg bg-base-300/60 flex items-center justify-center text-base-content group-hover:text-primary transition-colors shrink-0">
-            <Icon name="ri:github-fill" class="w-5 h-5" />
+          <div class="w-11 h-11 rounded-xl bg-slate-700/60 flex items-center justify-center text-slate-200 group-hover:text-primary transition-colors shrink-0">
+            <Icon name="ri:github-fill" class="w-6 h-6" />
           </div>
-          <div class="text-left">
-            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">GitHub</div>
-            <div class="text-xs text-base-content/60">Repositories and open-source projects</div>
+          <div>
+            <div class="font-bold text-base text-base-content group-hover:text-primary transition-colors">GitHub</div>
+            <div class="text-xs text-base-content/70">Source code & homelab repos</div>
           </div>
         </a>
 
@@ -80,14 +79,14 @@ import { Icon } from "astro-icon/components";
           href="https://linkedin.com/in/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
+          class="card bg-slate-800/50 border border-slate-700/80 shadow-md p-4 rounded-xl flex flex-row items-center gap-4 hover:border-primary/70 hover:bg-slate-800/80 transition-all group"
         >
-          <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-sky-400 group-hover:text-primary transition-colors shrink-0">
-            <Icon name="ri:linkedin-box-fill" class="w-5 h-5" />
+          <div class="w-11 h-11 rounded-xl bg-sky-500/15 flex items-center justify-center text-sky-400 group-hover:text-primary transition-colors shrink-0">
+            <Icon name="ri:linkedin-box-fill" class="w-6 h-6" />
           </div>
-          <div class="text-left">
-            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">LinkedIn</div>
-            <div class="text-xs text-base-content/60">Professional profile and network</div>
+          <div>
+            <div class="font-bold text-base text-base-content group-hover:text-primary transition-colors">LinkedIn</div>
+            <div class="text-xs text-base-content/70">Professional background</div>
           </div>
         </a>
 
@@ -96,14 +95,14 @@ import { Icon } from "astro-icon/components";
           href="https://tryhackme.com/p/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
+          class="card bg-slate-800/50 border border-slate-700/80 shadow-md p-4 rounded-xl flex flex-row items-center gap-4 hover:border-primary/70 hover:bg-slate-800/80 transition-all group"
         >
-          <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center text-rose-400 group-hover:text-rose-300 transition-colors shrink-0">
-            <Icon name="simple-icons:tryhackme" class="w-4 h-4" />
+          <div class="w-11 h-11 rounded-xl bg-rose-500/15 flex items-center justify-center text-rose-400 group-hover:text-rose-300 transition-colors shrink-0">
+            <Icon name="simple-icons:tryhackme" class="w-5 h-5" />
           </div>
-          <div class="text-left">
-            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">TryHackMe</div>
-            <div class="text-xs text-base-content/60">Rank and learning pathways</div>
+          <div>
+            <div class="font-bold text-base text-base-content group-hover:text-primary transition-colors">TryHackMe</div>
+            <div class="text-xs text-base-content/70">Rank & learning badges</div>
           </div>
         </a>
 
@@ -112,28 +111,30 @@ import { Icon } from "astro-icon/components";
           href="https://app.hackthebox.com/profile/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
+          class="card bg-slate-800/50 border border-slate-700/80 shadow-md p-4 rounded-xl flex flex-row items-center gap-4 hover:border-primary/70 hover:bg-slate-800/80 transition-all group"
         >
-          <Icon name="simple-icons:hackthebox" class="w-10 h-10 p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:text-emerald-300 transition-colors shrink-0" />
-          <div class="text-left">
-            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">Hack The Box</div>
-            <div class="text-xs text-base-content/60">Pwned machines and badges</div>
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-400 group-hover:text-emerald-300 transition-colors shrink-0">
+            <Icon name="simple-icons:hackthebox" class="w-5 h-5" />
+          </div>
+          <div>
+            <div class="font-bold text-base text-base-content group-hover:text-primary transition-colors">Hack The Box</div>
+            <div class="text-xs text-base-content/70">Pwned labs & machines</div>
           </div>
         </a>
 
-        <!-- LetsDefend (Span pe toată lățimea pe ecrane mari) -->
+        <!-- LetsDefend -->
         <a 
           href="https://app.letsdefend.io/user/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group sm:col-span-2"
+          class="card bg-slate-800/50 border border-slate-700/80 shadow-md p-4 rounded-xl flex flex-row items-center gap-4 hover:border-primary/70 hover:bg-slate-800/80 transition-all group sm:col-span-2"
         >
-          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300 transition-colors shrink-0">
-            <Icon name="ri:shield-keyhole-line" class="w-5 h-5" />
+          <div class="w-11 h-11 rounded-xl bg-cyan-500/15 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300 transition-colors shrink-0">
+            <Icon name="ri:shield-keyhole-line" class="w-6 h-6" />
           </div>
-          <div class="text-left">
-            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">LetsDefend</div>
-            <div class="text-xs text-base-content/60">SOC Analyst & Blue Team investigation workflows</div>
+          <div>
+            <div class="font-bold text-base text-base-content group-hover:text-primary transition-colors">LetsDefend</div>
+            <div class="text-xs text-base-content/70">SOC investigation workflows & alert triage</div>
           </div>
         </a>
       </div>
