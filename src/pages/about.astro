@@ -2,11 +2,10 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 
-// LISTĂ SCALABILĂ: Adaugi sau ștergi elemente direct aici!
 const roadmap = [
   {
     period: "2026 — PRESENT",
-    status: "active", // 'active', 'completed', sau 'planned'
+    status: "active",
     title: "SOC L1 Preparation & Detection Labs",
     description: "Deepening hands-on investigation workflows via LetsDefend and enterprise alert simulations. Working on packet inspection with Wireshark and SIEM query rules.",
     tags: ["LetsDefend", "SIEM", "Wireshark", "MITRE ATT&CK"]
@@ -31,8 +30,8 @@ const roadmap = [
 <BaseLayout title="About | Alexandru Pleșa">
   <div class="max-w-3xl mx-auto py-10 px-4 space-y-12">
     
-    <!-- Header Fără Poză - Stil Tehnic & Profesional -->
-    <header class="card bg-base-200/50 border border-base-300/80 p-6 sm:p-8 rounded-2xl space-y-5">
+    <!-- Header: Cadran solid cu vizibilitate ridicată -->
+    <header class="card bg-base-200 border border-base-300 shadow-lg p-6 sm:p-8 rounded-2xl space-y-5">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold tracking-wide">
           <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
@@ -46,30 +45,29 @@ const roadmap = [
         </p>
       </div>
 
-      <p class="text-sm text-base-content/80 leading-relaxed max-w-2xl">
+      <p class="text-sm text-base-content/85 leading-relaxed max-w-2xl">
         Focused on defensive operations, alert investigation, and security telemetry. 
         Currently preparing for an entry-level L1 SOC role by analyzing realistic attack data, dissecting packet captures, and testing detection logic.
       </p>
 
-      <!-- Butoane -->
       <div class="flex flex-wrap items-center gap-3 pt-1">
         <a 
           href="/cv.pdf" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-primary btn-sm gap-2 shadow-sm font-medium"
+          class="btn btn-primary btn-sm gap-2 shadow-md font-medium"
         >
           <Icon name="ri:file-download-line" class="w-4 h-4" />
           Download CV
         </a>
-        <a href="/contact" class="btn btn-outline btn-sm border-base-300 gap-2 font-medium">
+        <a href="/contact" class="btn btn-neutral bg-base-300 border-base-300 btn-sm gap-2 font-medium hover:border-primary">
           <Icon name="ri:mail-line" class="w-4 h-4" />
           Get in Touch
         </a>
       </div>
     </header>
 
-    <!-- Roadmap & Timeline Scalabil cu Linie Albastră Continuă -->
+    <!-- Roadmap & Timeline -->
     <section class="space-y-6">
       <div class="space-y-1">
         <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
@@ -81,20 +79,18 @@ const roadmap = [
         </p>
       </div>
 
-      <!-- Containerul liniei albastre -->
       <div class="relative pl-6 sm:pl-8 border-l-2 border-primary/50 ml-3 sm:ml-4 space-y-8 py-2">
         {roadmap.map((item) => (
           <div class="relative group">
-            
-            <!-- Punctul/Nodul de pe linia albastră -->
-            <div class={`absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full border-2 bg-base-100 ${
+            <!-- Punctul de pe linia albastră -->
+            <div class={`absolute -left-[31px] sm:-left-[39px] top-2 w-4 h-4 rounded-full border-2 bg-base-100 ${
               item.status === 'active' 
                 ? 'border-primary ring-4 ring-primary/20 bg-primary' 
                 : 'border-primary/60 group-hover:border-primary group-hover:bg-primary/40 transition-colors'
             }`}></div>
 
-            <!-- Conținutul milestone-ului -->
-            <div class="card bg-base-200/40 border border-base-300/70 p-5 rounded-xl space-y-2 hover:border-primary/40 transition-all">
+            <!-- Card solid pentru fiecare etapă -->
+            <div class="card bg-base-200 border border-base-300 shadow-md p-6 rounded-2xl space-y-3 hover:border-primary/50 transition-all">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class={`font-mono text-xs font-semibold ${item.status === 'active' ? 'text-primary' : 'text-base-content/60'}`}>
                   {item.period}
@@ -108,14 +104,13 @@ const roadmap = [
                 {item.title}
               </h3>
 
-              <p class="text-xs text-base-content/75 leading-relaxed">
+              <p class="text-xs text-base-content/80 leading-relaxed">
                 {item.description}
               </p>
 
-              <!-- Tag-uri tehnice -->
               <div class="flex flex-wrap gap-1.5 pt-2">
                 {item.tags.map((tag) => (
-                  <span class="badge badge-ghost badge-xs font-mono text-[10px] text-base-content/70">
+                  <span class="badge badge-neutral bg-base-300 border-none badge-xs font-mono text-[10px] text-base-content/80">
                     {tag}
                   </span>
                 ))}
@@ -127,13 +122,13 @@ const roadmap = [
       </div>
     </section>
 
-    <!-- Notă despre Comunitate & Evenimente -->
-    <section class="card bg-base-200/30 border border-base-300/70 p-5 rounded-xl space-y-2">
+    <!-- Card Evenimente & CTFs -->
+    <section class="card bg-base-200 border border-base-300 shadow-md p-6 rounded-2xl space-y-3">
       <div class="flex items-center gap-2 text-sm font-bold text-base-content">
         <Icon name="ri:calendar-event-line" class="w-4 h-4 text-primary" />
         Community, Events & CTFs
       </div>
-      <p class="text-xs text-base-content/70 leading-relaxed">
+      <p class="text-xs text-base-content/80 leading-relaxed">
         Active participant in capture-the-flag competitions (focusing on blue/forensics challenges) and industry webinars. Continuous engagement with local and global cybersecurity communities to remain aligned with current defense practices.
       </p>
     </section>
