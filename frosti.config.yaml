@@ -63,8 +63,8 @@ site:
 
 
 user:
-  name: PlesaAlexandru
-  site: "https://plesa-alexandru.github.io" 
+  name: PlesaAlexandru 
+  site: "https://plesaalexandru.github.io" 
   avatar: /profile.png 
   sidebar: 
     social:
