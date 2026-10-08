@@ -1,18 +1,18 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<Layout title="Contact">
-  <section class="max-w-3xl mx-auto py-12 px-4 space-y-8">
+<BaseLayout title="Contact">
+  <section class="max-w-3xl mx-auto py-8 px-4 space-y-8">
     <div>
-      <h1 class="text-3xl font-bold tracking-tight text-base-content mb-3">Contact</h1>
-      <p class="text-base-content/70 text-lg">
-        Mă poți găsi sau contacta direct pe oricare dintre platformele de mai jos.
+      <h1 class="text-3xl font-extrabold tracking-tight text-base-content mb-2">Contact</h1>
+      <p class="text-base-content/70">
+        Mă poți găsi sau contacta direct prin canalele de mai jos.
       </p>
     </div>
 
-    <!-- Informații de bază / Text simplu -->
+    <!-- Informații de bază -->
     <div class="card bg-base-200 border border-base-300 shadow-sm p-6 space-y-3">
       <div class="flex items-center gap-3">
         <span class="badge badge-primary font-semibold">Locație</span>
@@ -20,20 +20,20 @@ import { Icon } from "astro-icon/components";
       </div>
       <div class="flex items-center gap-3">
         <span class="badge badge-secondary font-semibold">Email</span>
-        <span class="text-base-content select-all font-mono">adresa.ta@domeniu.com</span>
+        <span class="text-base-content select-all font-mono font-medium">plesaalexandru@gmail.com</span>
       </div>
       <div class="flex items-center gap-3">
-        <span class="badge badge-accent font-semibold">Disponibilitate</span>
-        <span class="text-base-content">Proiecte freelance & discuții tehnice</span>
+        <span class="badge badge-accent font-semibold">Status</span>
+        <span class="text-base-content">Deschis pentru colaborări și proiecte</span>
       </div>
     </div>
 
-    <!-- Butoane de redirect integrate în tema site-ului -->
+    <!-- Butoane de profiluri integrate în tema site-ului -->
     <div class="space-y-4">
-      <h2 class="text-xl font-semibold text-base-content">Canale & Profiluri</h2>
+      <h2 class="text-xl font-bold text-base-content">Profiluri & Canale</h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <!-- Buton GitHub -->
+        <!-- GitHub -->
         <a 
           href="https://github.com/PlesaAlexandru" 
           target="_blank" 
@@ -43,13 +43,13 @@ import { Icon } from "astro-icon/components";
           <Icon name="ri:github-fill" class="w-6 h-6 shrink-0" />
           <div class="text-left">
             <div class="font-bold">GitHub</div>
-            <div class="text-xs opacity-70">Urmărește codul și proiectele mele</div>
+            <div class="text-xs opacity-70">Urmărește proiectele mele</div>
           </div>
         </a>
 
-        <!-- Buton LinkedIn -->
+        <!-- LinkedIn -->
         <a 
-          href="https://linkedin.com/in/username" 
+          href="https://linkedin.com/in/" 
           target="_blank" 
           rel="noopener noreferrer"
           class="btn btn-outline btn-primary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
@@ -61,9 +61,9 @@ import { Icon } from "astro-icon/components";
           </div>
         </a>
 
-        <!-- Buton Telegram / Discord -->
+        <!-- Telegram -->
         <a 
-          href="https://t.me/username" 
+          href="https://t.me/" 
           target="_blank" 
           rel="noopener noreferrer"
           class="btn btn-outline btn-secondary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
@@ -71,13 +71,13 @@ import { Icon } from "astro-icon/components";
           <Icon name="ri:telegram-fill" class="w-6 h-6 shrink-0" />
           <div class="text-left">
             <div class="font-bold">Telegram</div>
-            <div class="text-xs opacity-70">Mesagerie rapidă</div>
+            <div class="text-xs opacity-70">Mesagerie directă</div>
           </div>
         </a>
 
-        <!-- Buton Twitter / X -->
+        <!-- X (Twitter) -->
         <a 
-          href="https://x.com/username" 
+          href="https://x.com/" 
           target="_blank" 
           rel="noopener noreferrer"
           class="btn btn-outline btn-accent justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
@@ -85,10 +85,10 @@ import { Icon } from "astro-icon/components";
           <Icon name="ri:twitter-x-fill" class="w-6 h-6 shrink-0" />
           <div class="text-left">
             <div class="font-bold">X (Twitter)</div>
-            <div class="text-xs opacity-70">Gânduri scurte și noutăți</div>
+            <div class="text-xs opacity-70">Gânduri și update-uri</div>
           </div>
         </a>
       </div>
     </div>
   </section>
-</Layout>
+</BaseLayout>
