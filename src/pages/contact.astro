@@ -3,34 +3,60 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<BaseLayout title="Contact">
-  <section class="max-w-3xl mx-auto py-8 px-4 space-y-8">
-    <div>
-      <h1 class="text-3xl font-extrabold tracking-tight text-base-content mb-2">Contact & Profiles</h1>
-      <p class="text-base-content/70">
-        You can reach out or find my professional and cybersecurity profiles below.
+<BaseLayout title="Contact | Alexandru Pleșa">
+  <div class="max-w-3xl mx-auto py-10 px-4 space-y-10">
+    
+    <!-- Header -->
+    <header class="space-y-2">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold">
+        <Icon name="ri:mail-send-line" class="w-4 h-4" />
+        GET IN TOUCH
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
+        Contact & Profiles
+      </h1>
+      <p class="text-sm text-base-content/75 max-w-xl">
+        You can reach out directly via email or explore my cybersecurity platforms and professional profiles below.
       </p>
-    </div>
+    </header>
 
-    <!-- Informații de bază / Quick Info -->
-    <div class="card bg-base-200 border border-base-300 shadow-sm p-6 space-y-3">
+    <!-- Card Principal Solid (Stil Blog / MainCard) -->
+    <section class="card bg-base-200 border border-base-300 shadow-lg p-6 sm:p-8 rounded-2xl space-y-4">
+      <!-- Location -->
       <div class="flex items-center gap-3">
-        <span class="badge badge-primary font-semibold">Location</span>
-        <span class="text-base-content font-medium">Romania</span>
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/10 text-sky-400 border border-blue-500/20 w-20 text-center">
+          Location
+        </span>
+        <span class="text-sm text-base-content font-medium">Romania</span>
       </div>
-      <div class="flex items-center gap-3">
-        <span class="badge badge-secondary font-semibold">Email</span>
-        <span class="text-base-content select-all font-mono font-medium">plesaalexandru@gmail.com</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="badge badge-accent font-semibold">Status</span>
-        <span class="text-base-content">Open for collaborations, CTFs, and security discussions</span>
-      </div>
-    </div>
 
-    <!-- Butoane Profiluri / Profiles -->
-    <div class="space-y-4">
-      <h2 class="text-xl font-bold text-base-content">CyberSec & Development Platforms</h2>
+      <!-- Email -->
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/15 text-primary border border-blue-500/30 w-20 text-center">
+          Email
+        </span>
+        <span class="text-sm text-base-content select-all font-mono tracking-tight font-medium hover:text-primary transition-colors">
+          plesaalexandru@gmail.com
+        </span>
+      </div>
+
+      <!-- Status -->
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-mono font-medium bg-blue-500/10 text-sky-400 border border-blue-500/20 w-20 text-center">
+          Status
+        </span>
+        <span class="text-sm text-base-content/80">
+          Open for collaborations, CTFs, and security discussions
+        </span>
+      </div>
+    </section>
+
+    <!-- Butoane Profiluri: Carduri solide pline, cu hover de contur albastru -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold tracking-tight text-base-content flex items-center gap-2">
+        <Icon name="ri:shield-keyhole-line" class="w-5 h-5 text-primary" />
+        CyberSec & Development Platforms
+      </h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- GitHub -->
@@ -38,71 +64,80 @@ import { Icon } from "astro-icon/components";
           href="https://github.com/PlesaAlexandru" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-neutral justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
         >
-          <Icon name="ri:github-fill" class="w-6 h-6 shrink-0" />
+          <div class="w-10 h-10 rounded-lg bg-base-300/60 flex items-center justify-center text-base-content group-hover:text-primary transition-colors shrink-0">
+            <Icon name="ri:github-fill" class="w-5 h-5" />
+          </div>
           <div class="text-left">
-            <div class="font-bold">GitHub</div>
-            <div class="text-xs opacity-70">Repositories and open-source projects</div>
+            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">GitHub</div>
+            <div class="text-xs text-base-content/60">Repositories and open-source projects</div>
           </div>
         </a>
 
         <!-- LinkedIn -->
         <a 
-          href="https://linkedin.com/in/LINK_UL_TAU" 
+          href="https://linkedin.com/in/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-primary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
         >
-          <Icon name="ri:linkedin-box-fill" class="w-6 h-6 shrink-0" />
+          <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-sky-400 group-hover:text-primary transition-colors shrink-0">
+            <Icon name="ri:linkedin-box-fill" class="w-5 h-5" />
+          </div>
           <div class="text-left">
-            <div class="font-bold">LinkedIn</div>
-            <div class="text-xs opacity-70">Professional profile and network</div>
+            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">LinkedIn</div>
+            <div class="text-xs text-base-content/60">Professional profile and network</div>
           </div>
         </a>
 
         <!-- TryHackMe -->
         <a 
-          href="https://tryhackme.com/p/USERNAME_UL_TAU" 
+          href="https://tryhackme.com/p/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-error justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
         >
-          <Icon name="simple-icons:tryhackme" class="w-6 h-6 shrink-0" />
+          <div class="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center text-rose-400 group-hover:text-rose-300 transition-colors shrink-0">
+            <Icon name="simple-icons:tryhackme" class="w-4 h-4" />
+          </div>
           <div class="text-left">
-            <div class="font-bold">TryHackMe</div>
-            <div class="text-xs opacity-70">Rank and learning pathways</div>
+            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">TryHackMe</div>
+            <div class="text-xs text-base-content/60">Rank and learning pathways</div>
           </div>
         </a>
 
         <!-- Hack The Box -->
         <a 
-          href="https://app.hackthebox.com/profile/ID_UL_TAU" 
+          href="https://app.hackthebox.com/profile/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-success justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group"
         >
-          <Icon name="simple-icons:hackthebox" class="w-6 h-6 shrink-0" />
+          <Icon name="simple-icons:hackthebox" class="w-10 h-10 p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:text-emerald-300 transition-colors shrink-0" />
           <div class="text-left">
-            <div class="font-bold">Hack The Box</div>
-            <div class="text-xs opacity-70">Pwned machines and badges</div>
+            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">Hack The Box</div>
+            <div class="text-xs text-base-content/60">Pwned machines and badges</div>
           </div>
         </a>
 
-        <!-- LetsDefend -->
+        <!-- LetsDefend (Span pe toată lățimea pe ecrane mari) -->
         <a 
-          href="https://app.letsdefend.io/user/USERNAME_UL_TAU" 
+          href="https://app.letsdefend.io/user/" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-info justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5 sm:col-span-2"
+          class="card bg-base-200 border border-base-300 shadow-md p-4 rounded-xl flex flex-row items-center gap-3.5 hover:border-primary/60 hover:-translate-y-0.5 transition-all group sm:col-span-2"
         >
-          <Icon name="ri:shield-keyhole-line" class="w-6 h-6 shrink-0" />
+          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300 transition-colors shrink-0">
+            <Icon name="ri:shield-keyhole-line" class="w-5 h-5" />
+          </div>
           <div class="text-left">
-            <div class="font-bold">LetsDefend</div>
-            <div class="text-xs opacity-70">SOC Analyst & Blue Team training</div>
+            <div class="font-bold text-sm text-base-content group-hover:text-primary transition-colors">LetsDefend</div>
+            <div class="text-xs text-base-content/60">SOC Analyst & Blue Team investigation workflows</div>
           </div>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div>
 </BaseLayout>
