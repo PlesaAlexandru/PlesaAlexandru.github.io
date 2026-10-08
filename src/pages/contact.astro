@@ -6,9 +6,9 @@ import { Icon } from "astro-icon/components";
 <BaseLayout title="Contact">
   <section class="max-w-3xl mx-auto py-8 px-4 space-y-8">
     <div>
-      <h1 class="text-3xl font-extrabold tracking-tight text-base-content mb-2">Contact</h1>
+      <h1 class="text-3xl font-extrabold tracking-tight text-base-content mb-2">Contact & Profiluri</h1>
       <p class="text-base-content/70">
-        Mă poți găsi sau contacta direct prin canalele de mai jos.
+        Mă poți găsi pe platformele profesionale și de securitate cibernetică de mai jos.
       </p>
     </div>
 
@@ -24,13 +24,13 @@ import { Icon } from "astro-icon/components";
       </div>
       <div class="flex items-center gap-3">
         <span class="badge badge-accent font-semibold">Status</span>
-        <span class="text-base-content">Deschis pentru colaborări și proiecte</span>
+        <span class="text-base-content">Deschis pentru colaborări, CTF-uri și discuții pe securitate</span>
       </div>
     </div>
 
-    <!-- Butoane de profiluri integrate în tema site-ului -->
+    <!-- Butoane Profiluri -->
     <div class="space-y-4">
-      <h2 class="text-xl font-bold text-base-content">Profiluri & Canale</h2>
+      <h2 class="text-xl font-bold text-base-content">Platforme CyberSec & Dezvoltare</h2>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <!-- GitHub -->
@@ -43,13 +43,13 @@ import { Icon } from "astro-icon/components";
           <Icon name="ri:github-fill" class="w-6 h-6 shrink-0" />
           <div class="text-left">
             <div class="font-bold">GitHub</div>
-            <div class="text-xs opacity-70">Urmărește proiectele mele</div>
+            <div class="text-xs opacity-70">Depozite și proiecte open-source</div>
           </div>
         </a>
 
         <!-- LinkedIn -->
         <a 
-          href="https://linkedin.com/in/" 
+          href="https://linkedin.com/in/LINK_UL_TAU" 
           target="_blank" 
           rel="noopener noreferrer"
           class="btn btn-outline btn-primary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
@@ -57,35 +57,49 @@ import { Icon } from "astro-icon/components";
           <Icon name="ri:linkedin-box-fill" class="w-6 h-6 shrink-0" />
           <div class="text-left">
             <div class="font-bold">LinkedIn</div>
-            <div class="text-xs opacity-70">Conectează-te profesional</div>
+            <div class="text-xs opacity-70">Profil profesional</div>
           </div>
         </a>
 
-        <!-- Telegram -->
+        <!-- TryHackMe -->
         <a 
-          href="https://t.me/" 
+          href="https://tryhackme.com/p/USERNAME_UL_TAU" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-secondary justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="btn btn-outline btn-error justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
         >
-          <Icon name="ri:telegram-fill" class="w-6 h-6 shrink-0" />
+          <Icon name="simple-icons:tryhackme" class="w-6 h-6 shrink-0" />
           <div class="text-left">
-            <div class="font-bold">Telegram</div>
-            <div class="text-xs opacity-70">Mesagerie directă</div>
+            <div class="font-bold">TryHackMe</div>
+            <div class="text-xs opacity-70">Rank & parcurs de învățare</div>
           </div>
         </a>
 
-        <!-- X (Twitter) -->
+        <!-- Hack The Box -->
         <a 
-          href="https://x.com/" 
+          href="https://app.hackthebox.com/profile/ID_UL_TAU" 
           target="_blank" 
           rel="noopener noreferrer"
-          class="btn btn-outline btn-accent justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
+          class="btn btn-outline btn-success justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5"
         >
-          <Icon name="ri:twitter-x-fill" class="w-6 h-6 shrink-0" />
+          <Icon name="simple-icons:hackthebox" class="w-6 h-6 shrink-0" />
           <div class="text-left">
-            <div class="font-bold">X (Twitter)</div>
-            <div class="text-xs opacity-70">Gânduri și update-uri</div>
+            <div class="font-bold">Hack The Box</div>
+            <div class="text-xs opacity-70">Mașini compromise & badge-uri</div>
+          </div>
+        </a>
+
+        <!-- LetsDefend -->
+        <a 
+          href="https://app.letsdefend.io/user/USERNAME_UL_TAU" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn btn-outline btn-info justify-start gap-3 h-auto py-3 px-4 transition-all hover:-translate-y-0.5 sm:col-span-2"
+        >
+          <Icon name="ri:shield-keyhole-line" class="w-6 h-6 shrink-0" />
+          <div class="text-left">
+            <div class="font-bold">LetsDefend</div>
+            <div class="text-xs opacity-70">SOC Analyst & Blue Team training</div>
           </div>
         </a>
       </div>
