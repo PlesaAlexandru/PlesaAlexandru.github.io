@@ -6,7 +6,6 @@ site:
   language: en
   favicon: /favicon.ico 
   theme:
-    light: winter
     dark: night
     code: github-dark 
   date_format: ddd MMM DD YYYY 
