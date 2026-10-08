@@ -684,3 +684,16 @@ code {
     @apply block text-center py-8 text-base-content opacity-50;
   }
 }
+/* Centrarea completă a containerului de iconițe din sidebar */
+aside nav,
+aside .social,
+aside div[class*="grid"],
+aside div[class*="flex"] {
+  justify-content: center !important;
+  justify-items: center !important;
+}
+
+/* Aliniere flexibilă pe rânduri centrate */
+aside .flex-wrap {
+  justify-content: center !important;
+}
