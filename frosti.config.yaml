@@ -46,7 +46,7 @@ site:
           target: _self
        
     - id: project
-      text: Project
+      text: Projects
       href: /project
       svg: "material-symbols:code-blocks-outline"
       target: _self
