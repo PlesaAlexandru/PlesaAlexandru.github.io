@@ -1,107 +1,112 @@
 ---
-import { Icon } from "astro-icon/components";
-import MainCard from "@/components/MainCard.astro";
-import GitHubStats from "@/components/mdx/GitHubStats.astro";
-import RepositoryCard from "@/components/mdx/RepositoryCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+
+// Adaugi sau editezi proiectele tale direct în această listă
+const projects = [
+  {
+    title: "SOC Homelab & Incident Triage Pipeline",
+    description: "Built an isolated virtual lab reproducing AD enterprise environments. Configured Sysmon, forwarded telemetry to an open-source SIEM, and generated realistic attack traffic to write detection rules.",
+    tags: ["Sysmon", "SIEM", "Splunk / ELK", "Windows Event Logs"],
+    github: "https://github.com/PlesaAlexandru",
+    writeup: "/blog",
+    featured: true,
+  },
+  {
+    title: "Automated Phishing Analyzer & Triage Script",
+    description: "Python CLI tool parsing .eml files to extract IP reputation, header anomalies, DKIM/SPF alignment, and quarantined attachment hashes checked against VirusTotal API.",
+    tags: ["Python", "VirusTotal API", "Email Forensics", "Threat Intel"],
+    github: "https://github.com/PlesaAlexandru",
+    featured: true,
+  },
+  {
+    title: "PCAP Dissector & Suspicious Beaconing Detector",
+    description: "Network capture analysis utility using Scapy/Tshark to identify anomalous outbound HTTP/DNS beaconing intervals and DNS tunneling patterns.",
+    tags: ["Wireshark", "Scapy", "Network Security", "Bash"],
+    github: "https://github.com/PlesaAlexandru",
+    featured: false,
+  },
+  {
+    title: "Linux Hardening & Baseline Audit Scripts",
+    description: "Modular Bash scripts aligning Ubuntu/Debian server configurations with basic CIS benchmark recommendations (SSH hardening, firewall rules, user privilege review).",
+    tags: ["Linux", "Bash", "Hardening", "Audit"],
+    github: "https://github.com/PlesaAlexandru",
+    featured: false,
+  },
+];
 ---
 
-<BaseLayout title="Projects">
-  <MainCard
-    title="Projects"
-    description="A showcase of my open-source projects and contributions on GitHub."
-    textOverlay="PROJECTS"
-    infoIcon="lucide:code-2"
-  >
-    <!-- Featured Projects -->
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:star" class="w-6 h-6 text-primary" />
-        <span>Featured Projects</span>
-      </h2>
+<BaseLayout title="Projects | Alexandru Pleșa">
+  <div class="max-w-4xl mx-auto py-10 px-4 space-y-10">
+    
+    <!-- Header curat, fără watermark sau branding de temă -->
+    <header class="space-y-2">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold">
+        <Icon name="ri:folder-code-line" class="w-4 h-4" />
+        PORTFOLIO / LABS
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-base-content">
+        Projects & Hands-on Work
+      </h1>
+      <p class="text-sm text-base-content/70 max-w-2xl">
+        Practical implementations covering security monitoring, log pipeline automation, tool development, and homelab engineering.
+      </p>
+    </header>
 
-      <GitHubStats username="EveSunMaple" repositoryName="Frosti" />
+    <!-- Grilă de proiecte -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {projects.map((proj) => (
+        <article class={`card bg-base-200/50 border ${proj.featured ? 'border-primary/40' : 'border-base-300/80'} p-6 rounded-2xl flex flex-col justify-between hover:border-primary/60 transition-all space-y-4`}>
+          <div class="space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <h2 class="text-lg font-bold text-base-content leading-snug">
+                {proj.title}
+              </h2>
+              {proj.featured && (
+                <span class="badge badge-primary badge-sm shrink-0">Featured</span>
+              )}
+            </div>
+
+            <p class="text-xs text-base-content/75 leading-relaxed">
+              {proj.description}
+            </p>
+
+            <!-- Tag-uri tehnice -->
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              {proj.tags.map((t) => (
+                <span class="badge badge-ghost badge-sm font-mono text-[10px] text-base-content/80">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Linkuri proiect -->
+          <div class="flex items-center gap-3 pt-3 border-t border-base-300/50">
+            {proj.github && (
+              <a
+                href={proj.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-ghost btn-xs gap-1.5 font-medium"
+              >
+                <Icon name="ri:github-fill" class="w-3.5 h-3.5" />
+                Source Code
+              </a>
+            )}
+            {proj.writeup && (
+              <a
+                href={proj.writeup}
+                class="btn btn-ghost btn-xs gap-1.5 font-medium text-primary"
+              >
+                <Icon name="ri:article-line" class="w-3.5 h-3.5" />
+                Read Writeup
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
     </section>
 
-    <!-- My Repositories -->
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:folder" class="w-6 h-6 text-primary" />
-        <span>My Repositories</span>
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <RepositoryCard repo="EveSunMaple/Frosti" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/SaroProck" isPinned={true} />
-        <RepositoryCard repo="EveSunMaple/astion-static" />
-        <RepositoryCard repo="EveSunMaple/astro-update-theme" />
-        <RepositoryCard repo="EveSunMaple/Word-testing-application" />
-        <RepositoryCard repo="EveSunMaple/Smooth-Snake-Game" />
-      </div>
-
-      <div class="flex justify-center mt-10">
-        <a
-          href="https://github.com/EveSunMaple?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-outline gap-2"
-        >
-          <Icon name="lucide:github" class="w-5 h-5" />
-          <span>View More on GitHub</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Open Source Contributions -->
-    <section class="py-4">
-      <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-        <Icon name="lucide:git-pull-request" class="w-6 h-6 text-primary" />
-        <span>Open Source Contributions</span>
-      </h2>
-
-      <div class="card bg-base-200 p-6">
-        <ul class="space-y-6">
-          {
-            [
-              {
-                project: "Astro",
-                description: "Contributed to performance improvements and bug fixes",
-                url: "https://github.com/withastro/astro",
-              },
-              {
-                project: "TailwindCSS",
-                description: "Added new utility classes and documentation improvements",
-                url: "https://github.com/tailwindlabs/tailwindcss",
-              },
-              {
-                project: "DaisyUI",
-                description: "Contributed component enhancements and theme improvements",
-                url: "https://github.com/saadeghi/daisyui",
-              },
-            ].map((contrib) => (
-              <li class="flex items-start gap-4">
-                <div class="flex-shrink-0 bg-base-300 p-2 rounded-full">
-                  <Icon name="lucide:git-commit" class="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold">
-                    <a
-                      href={contrib.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="hover:text-primary transition-colors flex items-center gap-1"
-                    >
-                      {contrib.project}
-                      <Icon name="lucide:external-link" class="w-4 h-4" />
-                    </a>
-                  </h3>
-                  <p class="text-base-content/80">{contrib.description}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
-  </MainCard>
+  </div>
 </BaseLayout>
