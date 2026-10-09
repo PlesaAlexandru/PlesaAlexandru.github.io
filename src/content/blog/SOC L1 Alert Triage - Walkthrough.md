@@ -37,7 +37,7 @@ QUESTIONS:
 Filter by date => **Answer: Double-Extension File Creation**
 
 ## ALERT PROPERTIES
-![487](Pasted-image-20261009161553.png)
+![](../../assets/Pasted-image-20261009161553.png)
  **Alert Properties**
 ![](../../assets/Pasted-image-20261009161613.png)
 ![](../../assets/Pasted-image-20261009161626.png)

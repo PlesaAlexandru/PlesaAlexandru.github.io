@@ -42,8 +42,8 @@
               "state": {
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
-                "showSearch": false,
-                "searchQuery": ""
+                "showSearch": true,
+                "searchQuery": "Pasted-image-20261009161553.png"
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
