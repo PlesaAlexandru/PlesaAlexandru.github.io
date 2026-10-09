@@ -10,7 +10,7 @@ tags:
   - Walkthrough
   - Alert_Triage
 ---
-
+---
 ## From Events to Alerts
 
 First, an event must occur, it can be anything like an user login, process launch or file download. Then, the system is logs the event and then it must be shipped to an security solution such as an SIEM or EDR. Alerts are automated notifications that saves time of a SOC Analyst, which is a huge improvement in efficiency.
