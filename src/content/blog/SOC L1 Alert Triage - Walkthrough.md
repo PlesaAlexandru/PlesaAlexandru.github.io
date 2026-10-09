@@ -149,10 +149,12 @@ Flag: THM{how_could_this_user_fall_for_it?}
 ![](../../assets/Pasted-image-20261009172917.png)
 Description:   
 This rule detects any download from GitHub. While GitHub stores lots of great projects that our IT team uses, it also stores malicious scripts and exploits that must not be downloaded by the users.
-Accessed URL:
-https[:]//github.com/facebook/react.
-When verified, the link changes into https[:]//github.com/react/react which means the original source redirects us here.
-Source and details look legitimate => Flase Positive.
 
-Verdict = Flase positive.
-Flag: THM{should_we_allow_github_for_devs?}
+Accessed URL:https[:]//github.com/facebook/react.
+
+When verified, the link changes into https[:]//github.com/react/react which means the original source redirects us here.
+
+Source and details look legitimate => **Flase Positive**.
+
+**Verdict**: Flase positive.
+**Flag**: THM{should_we_allow_github_for_devs?}

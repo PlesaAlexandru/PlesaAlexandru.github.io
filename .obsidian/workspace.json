@@ -43,7 +43,7 @@
                 "sortOrder": "alphabetical",
                 "autoReveal": false,
                 "showSearch": true,
-                "searchQuery": "Pasted-image-20261009161553.png"
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -184,7 +184,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -198,8 +198,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d9c2818928c03d6f",
+  "active": "601ade13e3d2fcb0",
   "lastOpenFiles": [
+    "src/assets/Pasted-image-20261009161553.png",
+    "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
     "src/assets/Pasted-image-20261009172917.png",
     "src/assets/Pasted-image-20261009172225.png",
     "src/assets/Pasted-image-20261009172208.png",
@@ -210,9 +212,7 @@
     "src/assets/Pasted-image-20261009170728.png",
     "src/assets/Pasted-image-20261009170325.png",
     "src/assets/Pasted-image-20261009170143.png",
-    "src/assets/Pasted-image-20261009165352.png",
     "src/content/blog/mathematics-examples.md",
-    "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
     "2026-10-09.md",
     "README.md",
     "src/content/blog/adding-comment-systems.md",
