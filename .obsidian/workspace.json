@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:powershell",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -79,7 +79,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -200,8 +201,10 @@
   },
   "active": "601ade13e3d2fcb0",
   "lastOpenFiles": [
-    "src/content/blog/mathematics-examples.md",
+    "2026-10-09.md",
     "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
+    "src/content/blog/adding-comment-systems.md",
+    "src/content/blog/mathematics-examples.md",
     "src/content/blog/Alert Triaje SOC 1/Pasted image 20261009153926.png",
     "src/content/blog/Alert Triaje SOC 1/Pasted image 20261009172917.png",
     "src/content/blog/Alert Triaje SOC 1/Pasted image 20261009172225.png",
@@ -215,7 +218,6 @@
     "src/content/blog/Alert Triaje SOC 1",
     "src/content/blog/Images",
     "src/content/blog/New folder",
-    "src/content/blog/adding-comment-systems.md",
     "src/content/blog/markdown-style-guide.md",
     "src/content/blog/Test.md"
   ]
