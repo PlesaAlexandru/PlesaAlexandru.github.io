@@ -176,6 +176,26 @@ const jsonLd =
   }
 </style>
 
+<style is:global>
+  /* Fundal curat fără blur greoi, optimizat pentru randare instantanee */
+  .medium-zoom-overlay {
+    z-index: 9998 !important;
+    background: rgba(5, 10, 20, 0.92) !important;
+    will-change: opacity;
+  }
+
+  /* Forțează procesarea pe GPU pentru tranzicții 60 FPS fără frame drops */
+  .medium-zoom-image {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .medium-zoom-image--opened {
+    z-index: 9999 !important;
+    cursor: zoom-out !important;
+  }
+</style>
+
 <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
 
 <script is:inline>
@@ -184,17 +204,15 @@ const jsonLd =
   function initImageZoom() {
     if (typeof mediumZoom === 'undefined') return;
 
-    // Distruge instanța veche dacă navighezi între pagini
     if (zoomInstance) {
       zoomInstance.detach();
     }
 
     zoomInstance = mediumZoom('.prose img, article img, .markdown img', {
       margin: 32,
-      background: 'rgba(5, 10, 20, 0.88)',
+      background: 'rgba(5, 10, 20, 0.92)',
     });
 
-    // Închide imaginea dacă utilizatorul dă scroll sau apasă tasta Escape
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && zoomInstance) {
         zoomInstance.close();
