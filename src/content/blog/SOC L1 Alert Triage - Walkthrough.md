@@ -14,7 +14,7 @@ tags:
 ## From Events to Alerts
 
 First, an event must occur, it can be anything like an user login, process launch or file download. Then, the system is logs the event and then it must be shipped to an security solution such as an SIEM or EDR. Alerts are automated notifications that saves time of a SOC Analyst, which is a huge improvement in efficiency.
-![](/public/Assets/Pasted-image-20261009153926.png)
+![](../../assets/Pasted-image-20261009153926.png)
 ## L1 Role in Alert Triage
 
 SOC L1 are the first in line. But the levels are doing different stuff, such as:
@@ -28,25 +28,25 @@ QUESTIONS:
 
 **What is the number of alerts you see in the SOC dashboard?**
 
-![](/public/Assets/Pasted-image-20261009154743.png)
+![](../../assets/Pasted-image-20261009154743.png)
 **Answer**: 5
 
  **What is the name of the most recent alert you see?**
-![](/public/Assets/Pasted-image-20261009154842.png)
+![](../../assets/Pasted-image-20261009154842.png)
 
 Filter by date => **Answer: Double-Extension File Creation**
 
 ## ALERT PROPERTIES
 ![487](Pasted-image-20261009161553.png)
  **Alert Properties**
-![](/public/Assets/Pasted-image-20261009161613.png)
-![](/public/Assets/Pasted-image-20261009161626.png)
+![](../../assets/Pasted-image-20261009161613.png)
+![](../../assets/Pasted-image-20261009161626.png)
 
 Questions: 
 
   
 **What was the verdict for the "Unusual VPN Login Location" alert?**
-![](/public/Assets/Pasted-image-20261009162455.png)
+![](../../assets/Pasted-image-20261009162455.png)
 Answer: False Positive
 
 **What user was mentioned in the "Unusual VPN Login Location" alert?**
@@ -77,14 +77,14 @@ Should you first take the newest alerts and then the older ones? (Yea/Nay)
 
 Assign yourself to the first-priority alert and change its status to **In Progress**.  The name of your selected alert will be the answer to the question.
 
-![](/public/Assets/Pasted-image-20261009165112.png)
+![](../../assets/Pasted-image-20261009165112.png)
 
 Filter by severity -> Critical 
 **Answer: Potential Data Exfiltration
 
 ## Alert Triage
 
-![](/public/Assets/Pasted-image-20261009165352.png)
+![](../../assets/Pasted-image-20261009165352.png)
 
 **Initial Actions**
 Assigning yourself to the alert -> Move it to In Progress -> Details
@@ -103,7 +103,7 @@ Your decisions here determine whether you found or missed the potential cyberatt
 Questions:
 **Which flag did you receive after you correctly triaged the first-priority alert?**
 
-![](/public/Assets/Pasted-image-20261009170143.png)
+![](../../assets/Pasted-image-20261009170143.png)
 
 From the description we receive:
 This rule detects 5 or more gigabytes of data sent from a single device to a single destination within a day, which may indicate data exfiltration to untrusted location.
@@ -111,13 +111,13 @@ This rule detects 5 or more gigabytes of data sent from a single device to a sin
 First, we need to understand the normal ZOOM call data usage:
 
 The values are close to 5GBs. Which is achievable due to a higher number of users with a Full HD quality. 
-![](/public/Assets/Pasted-image-20261009172225.png)
+![](../../assets/Pasted-image-20261009172225.png)
 
 We are given the source IP which is 192[.]168[.]45[.]66.
 With that we can use a checker to see if the IP is flagged as a fraud or a legitimate source.
-![](/public/Assets/Pasted-image-20261009170728.png)
+![](../../assets/Pasted-image-20261009170728.png)
 
-![](/public/Assets/Pasted-image-20261009170952.png)
+![](../../assets/Pasted-image-20261009170952.png)
 Ip is private, but for the sake of practice, I also went trough the process of verifying it.
 
 The source is UK04/MEETINGROOM, which can mean that an call was happening and also the destination  *.zoom.us* looks legit
@@ -127,7 +127,7 @@ Flag: THM{looks_like_lots_of_zoom_meetings}
 
 **Which flag did you receive after you correctly triaged the second-priority alert?**
 
-![](/public/Assets/Pasted-image-20261009171131.png)
+![](../../assets/Pasted-image-20261009171131.png)
 Desc: This rule detects a creation of a double-extension file like '*.pdf.exe' or '*.gif.lnk', often used by hackers in phishing attacks to trick users into opening the malicious executable.
 
 We can see that in  the target file:   
@@ -137,8 +137,8 @@ Affected user: **S.Conway**
 The extension: .mp4.exe is not a real .mp4 file. It is an executable that is hiding itself into an mp4 file which is a video format.
 Source of download: 
 https[:]//freecatvideoshd.monster/cats2025.mp4.exe
-![](/public/Assets/Pasted-image-20261009171611.png)
-![](/public/Assets/Pasted-image-20261009171829.png)
+![](../../assets/Pasted-image-20261009171611.png)
+![](../../assets/Pasted-image-20261009171829.png)
 A quick search of the hash reveal a really high score in the virustotal.
 
 Verdict: **True Positive**
@@ -146,7 +146,7 @@ Flag: THM{how_could_this_user_fall_for_it?}
 
 **Which flag did you receive after you correctly triaged the third-priority alert?**
 
-![](/public/Assets/Pasted-image-20261009172917.png)
+![](../../assets/Pasted-image-20261009172917.png)
 Description:   
 This rule detects any download from GitHub. While GitHub stores lots of great projects that our IT team uses, it also stores malicious scripts and exploits that must not be downloaded by the users.
 Accessed URL:

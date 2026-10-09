@@ -1,4 +1,5 @@
 {
   "useMarkdownLinks": true,
-  "attachmentFolderPath": "public/Assets"
+  "attachmentFolderPath": "src/assets",
+  "alwaysUpdateLinks": true
 }
