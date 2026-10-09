@@ -162,18 +162,22 @@ const jsonLd =
         });
       });
     </script>
-    <script>
-      import mediumZoom from 'medium-zoom';
-    
-      // Activează zoom la click pe toate imaginile din conținutul articolului
-      document.addEventListener('astro:page-load', () => {
-        mediumZoom('.prose img, article img, .markdown img', {
-          margin: 24,
-          background: 'rgba(10, 15, 30, 0.9)',
-          scrollOffset: 0,
-        });
+    <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
+
+<script is:inline>
+  function initImageZoom() {
+    if (typeof mediumZoom !== 'undefined') {
+      mediumZoom('.prose img, article img, .markdown img, main img', {
+        margin: 24,
+        background: 'rgba(10, 15, 30, 0.9)',
       });
-    </script>
+    }
+  }
+
+  // Se execută la încărcarea paginii și la navigarea internă din Astro
+  document.addEventListener('DOMContentLoaded', initImageZoom);
+  document.addEventListener('astro:page-load', initImageZoom);
+</script>
 
     <style is:inline>
       .btn-copy {
