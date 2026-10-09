@@ -164,17 +164,44 @@ const jsonLd =
     </script>
     <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
 
+<style is:global>
+  /* Asigură că imaginea mărită și fundalul stau peste orice alt element din pagină */
+  .medium-zoom-overlay {
+    z-index: 9998 !important;
+    backdrop-filter: blur(8px);
+  }
+  .medium-zoom-image--opened {
+    z-index: 9999 !important;
+    cursor: zoom-out !important;
+  }
+</style>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
+
 <script is:inline>
+  let zoomInstance = null;
+
   function initImageZoom() {
-    if (typeof mediumZoom !== 'undefined') {
-      mediumZoom('.prose img, article img, .markdown img, main img', {
-        margin: 24,
-        background: 'rgba(10, 15, 30, 0.9)',
-      });
+    if (typeof mediumZoom === 'undefined') return;
+
+    // Distruge instanța veche dacă navighezi între pagini
+    if (zoomInstance) {
+      zoomInstance.detach();
     }
+
+    zoomInstance = mediumZoom('.prose img, article img, .markdown img', {
+      margin: 32,
+      background: 'rgba(5, 10, 20, 0.88)',
+    });
+
+    // Închide imaginea dacă utilizatorul dă scroll sau apasă tasta Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && zoomInstance) {
+        zoomInstance.close();
+      }
+    });
   }
 
-  // Se execută la încărcarea paginii și la navigarea internă din Astro
   document.addEventListener('DOMContentLoaded', initImageZoom);
   document.addEventListener('astro:page-load', initImageZoom);
 </script>
