@@ -4,7 +4,6 @@ site:
   title: Blog Plesa Alexandru
   description: Personal Blog for CyberSecurity Writeups, Projects and more.
   language: en
-  favicon: /favicon.ico 
   theme:
     dark: night
     code: github-dark 
