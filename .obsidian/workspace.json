@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Test.md",
+                "file": "src/content/blog/markdown-style-guide.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Test"
+              "title": "markdown-style-guide"
             }
           }
         ]
@@ -117,7 +117,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/blog/Test.md",
+                "file": "src/content/blog/markdown-style-guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -160,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/blog/Test.md",
+                "file": "src/content/blog/markdown-style-guide.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -200,9 +200,10 @@
   },
   "active": "601ade13e3d2fcb0",
   "lastOpenFiles": [
-    "Pasted image 20261009150053.png",
-    "src/content/blog/mathematics-examples.md",
     "src/content/blog/Test.md",
-    "src/content/blog/markdown-style-guide.md"
+    "src/content/blog/markdown-style-guide.md",
+    "src/content/blog/adding-comment-systems.md",
+    "src/content/blog/mathematics-examples.md",
+    "Pasted image 20261009150053.png"
   ]
 }
