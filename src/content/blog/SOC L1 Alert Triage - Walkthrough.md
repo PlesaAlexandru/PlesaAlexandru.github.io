@@ -47,11 +47,11 @@ Questions:
   
 **What was the verdict for the "Unusual VPN Login Location" alert?**
 ![](../../assets/Pasted-image-20261009162455.png)
-Answer: False Positive
+**Answer**: False Positive
 
 **What user was mentioned in the "Unusual VPN Login Location" alert?**
 
-Answer: M.Clark
+**Answer**: M.Clark
 
 ## Alert Prioritisation 
 
@@ -80,7 +80,7 @@ Assign yourself to the first-priority alert and change its status to **In Progr
 ![](../../assets/Pasted-image-20261009165112.png)
 
 Filter by severity -> Critical 
-**Answer: Potential Data Exfiltration
+**Answer**: Potential Data Exfiltration
 
 ## Alert Triage
 
@@ -123,26 +123,24 @@ Ip is private, but for the sake of practice, I also went trough the process of v
 The source is UK04/MEETINGROOM, which can mean that an call was happening and also the destination  *.zoom.us* looks legit
 That being said, final verdict is: **Flase Positive**.
 
-Flag: THM{looks_like_lots_of_zoom_meetings}
+**Flag**: THM{looks_like_lots_of_zoom_meetings}
 
 **Which flag did you receive after you correctly triaged the second-priority alert?**
 
 ![](../../assets/Pasted-image-20261009171131.png)
 Desc: This rule detects a creation of a double-extension file like '*.pdf.exe' or '*.gif.lnk', often used by hackers in phishing attacks to trick users into opening the malicious executable.
 
-We can see that in  the target file:   
-C:\Users\S.Conway\Downloads\cats2025.mp4.exe
-Affected user: **S.Conway** 
+We can see that in  the target file:   `C:\Users\S.Conway\Downloads\cats2025.mp4.exe`
+Affected user: `S.Conway` 
 
-The extension: .mp4.exe is not a real .mp4 file. It is an executable that is hiding itself into an mp4 file which is a video format.
-Source of download: 
-https[:]//freecatvideoshd.monster/cats2025.mp4.exe
+The extension: `.mp4.exe` is not a real `.mp4` file. It is an executable that is hiding itself into an mp4 file which is a video format.
+Source of download:  `https[:]//freecatvideoshd.monster/cats2025.mp4.exe`
 ![](../../assets/Pasted-image-20261009171611.png)
 ![](../../assets/Pasted-image-20261009171829.png)
-A quick search of the hash reveal a really high score in the virustotal.
+A quick search of the hash reveal a really high score in the VirusTotal.
 
-Verdict: **True Positive**
-Flag: THM{how_could_this_user_fall_for_it?}
+**Verdict**: `True Positive.`
+**Flag**: `THM{how_could_this_user_fall_for_it?}`
 
 **Which flag did you receive after you correctly triaged the third-priority alert?**
 
@@ -150,11 +148,11 @@ Flag: THM{how_could_this_user_fall_for_it?}
 Description:   
 This rule detects any download from GitHub. While GitHub stores lots of great projects that our IT team uses, it also stores malicious scripts and exploits that must not be downloaded by the users.
 
-Accessed URL:https[:]//github.com/facebook/react.
+Accessed URL:  `https[:]//github.com/facebook/react`
 
-When verified, the link changes into https[:]//github.com/react/react which means the original source redirects us here.
+When verified, the link changes into `https[:]//github.com/react/react` which means the original source redirects us here.
 
 Source and details look legitimate => **Flase Positive**.
 
-**Verdict**: Flase positive.
-**Flag**: THM{should_we_allow_github_for_devs?}
+**Verdict**: `Flase positive`.
+**Flag**: `THM{should_we_allow_github_for_devs?}`
