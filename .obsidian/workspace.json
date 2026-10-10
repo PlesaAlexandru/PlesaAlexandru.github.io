@@ -11,14 +11,12 @@
             "id": "601ade13e3d2fcb0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Tutorial Markup/mathematics-examples.md",
-                "mode": "source",
-                "source": false
+                "file": "src/assets/Pasted-image-20261009153926.png"
               },
-              "icon": "lucide-file",
-              "title": "mathematics-examples"
+              "icon": "lucide-image",
+              "title": "Pasted-image-20261009153926"
             }
           }
         ]
@@ -198,21 +196,28 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "601ade13e3d2fcb0",
+  "active": "d9c2818928c03d6f",
   "lastOpenFiles": [
-    "Tutorial Markup",
+    "Tutorial Markup/frosti-mdx.mdx",
+    "Tutorial Markup/using-mdx.mdx",
+    "public/GITHUB1.png",
+    "public/logo.webp",
+    "docs/SECURITY.md",
+    "docs/preview-light.png",
+    "docs/README.zh-CN.md",
+    "docs/CONTRIBUTING.md",
+    "docs/CODE_OF_CONDUCT.md",
+    "docs/CHANGELOG.md",
+    "docs/400-lighthouse.png",
     "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
+    "Tutorial Markup/mathematics-examples.md",
+    "Tutorial Markup",
     "src/assets/Pasted-image-20261009161553.png",
     "src/assets/Pasted-image-20261009172917.png",
     "src/assets/Pasted-image-20261009172225.png",
     "src/assets/Pasted-image-20261009172208.png",
     "src/assets/Pasted-image-20261009171829.png",
     "src/assets/Pasted-image-20261009171611.png",
-    "src/assets/Pasted-image-20261009171131.png",
-    "src/assets/Pasted-image-20261009170952.png",
-    "src/assets/Pasted-image-20261009170728.png",
-    "src/assets/Pasted-image-20261009170325.png",
-    "Tutorial Markup/mathematics-examples.md",
     "2026-10-09.md",
     "README.md",
     "Tutorial Markup/adding-comment-systems.md",
