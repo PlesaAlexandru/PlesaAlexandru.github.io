@@ -102,7 +102,7 @@ To escalate the alert, in most cases, all you have to do is to **reassign the a
 L2 analyst decides if it to an higher importance or not and decide the further actions.
 It is generally fine for L1 to request senior support if something is unclear. Especially in your first months
 
-![700](Pasted%20image%2020261011180543.png)
+![](../../assets/Pasted%20image%2020261011180543.png)
 
 
 ## QUESTIONS:
