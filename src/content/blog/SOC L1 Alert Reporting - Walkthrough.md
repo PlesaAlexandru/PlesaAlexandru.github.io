@@ -15,7 +15,7 @@ tags:
 
 Analysts receive alerts via SIEM, EDR or different Ticket Management solutions. Most of them are closed as False Positive or handled by an L1 Analyst, but the more important ones are sent to the L2 or higher based on the workflow. 
 
-![](Pasted%20image%2020261011151554.png)
+![](../../assets/Pasted%20image%2020261011151554.png)
 
 ## Alert Reporting
 
@@ -58,18 +58,18 @@ Format typically uses the 5 Ws theory. An well structured report should answer t
 - **Why**: The most important W, the reasoning for your final verdict
 
 Report sample:
-![](Pasted%20image%2020261011153245.png)
+![](../../assets/Pasted%20image%2020261011153245.png)
 
 ## QUESTIONS:
 
 **According to the SOC dashboard, which user email leaked the sensitive document?**
-![](Pasted%20image%2020261011154600.png)
+![](../../assets/Pasted%20image%2020261011154600.png)
 Answer: m.boslan@tryhackme[.]thm
 
 This mail is really foundational due to the fact that the Data Leak is of the most important aspects in company, Data leaks are against CONFIDENCIALITY, first term in the foundational structure of the cybersecurity, CIA Triad. 
 
 **Looking at the new alerts, who is the "sender" of the suspicious, likely phishing email?**
-![](Pasted%20image%2020261011154701.png)
+![](../../assets/Pasted%20image%2020261011154701.png)
 Answer: support@microsoft[.]com
 
 Huge red flags: 
@@ -97,7 +97,7 @@ You should escalate the alerts if:
 4. You just do not fully understand the alert and need some help from more senior analysts
 
 To escalate the alert, in most cases, all you have to do is to **reassign the alert to the L2 on shift** and ping them in corporate chat or in person
-![](Pasted%20image%2020261011180235.png)
+![](../../assets/Pasted%20image%2020261011180235.png)
 
 L2 analyst decides if it to an higher importance or not and decide the further actions.
 It is generally fine for L1 to request senior support if something is unclear. Especially in your first months
@@ -108,7 +108,7 @@ It is generally fine for L1 to request senior support if something is unclear. E
 ## QUESTIONS:
 
 Who is your current L2 in the SOC dashboard that you can assign (escalate) the alerts to?
-![](Pasted%20image%2020261011182714.png)
+![](../../assets/Pasted%20image%2020261011182714.png)
 **Answer**: E.Fleming
 
 What flag did you receive after correctly escalating the alert from the previous task to L2?  
@@ -118,7 +118,7 @@ What flag did you receive after correctly escalating the alert from the previous
 
 Now, investigate the second new alert and provide a detailed alert comment.  
 What flag did you get after escalating this alert according to the workflow?
-![](Pasted%20image%2020261011182842.png)
+![](../../assets/Pasted%20image%2020261011182842.png)
 Process lineage analysis reveals that cmd.exe was spawned by C:\Users\Public\revshell.exe, which originated directly from the IIS worker process (C:\Windows\System32\inetsrv\w3wp.exe). This execution chain strongly suggests a web application compromise. Indicates post-exploitation reconnaissance targeting domain architecture and privileged groups.
 Required escalation asap.
 
@@ -143,7 +143,7 @@ Required escalation asap.
     Do not skip the alert - investigate what you can and report the issue to your L2 on shift or SOC engineer.
 ## Communication By L2
 
-![](Pasted%20image%2020261011183330.png)
+![](../../assets/Pasted%20image%2020261011183330.png)
 
 ## QUESTIONS:
 
