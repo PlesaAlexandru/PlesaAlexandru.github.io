@@ -20,11 +20,9 @@ Analysts receive alerts via SIEM, EDR or different Ticket Management solutions. 
 ## Alert Reporting
 
 Before closing or passing the alert to L2, you might have to report it, based on the standard of the team, company etc. This is really important and especially for the true positive ones.
-
 ## Alert Escalation
 
 When escalating, L2 reads the report which is a huge time saviour if done right.
-
 ## Communication
 
 You may also need to communicate with other departments during or after the analysis. For example, ask the IT team if they confirm granting administrative privileges to some users or contact HR to get more information about the newly hired employee.
