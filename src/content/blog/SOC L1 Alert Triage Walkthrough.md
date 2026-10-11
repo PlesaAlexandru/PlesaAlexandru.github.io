@@ -1,6 +1,6 @@
 ---
-title: SOC L1 Alert Tirage - Walkthrough
-description: "SOC L1 investigation walkthrough covering alert triage, Basic lab with a simulated SIEM and 3 alerts with severities: Crucial, High, Low"
+title: SOC L1 Alert Tirage Walkthrough
+description: "SOC L1 investigation walkthrough covering alert triage, Basic lab with a simulated SIEM and 3 alerts with severities: Crucial, High, Low. The lab can be found on TryHackMe."
 pubDate: 2026-10-09
 categories:
   - SOC
