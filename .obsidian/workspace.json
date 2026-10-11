@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/SOC L1 Alert Reporting.md",
+                "file": "src/content/blog/SOC L1 Alert Reporting - Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SOC L1 Alert Reporting"
+              "title": "SOC L1 Alert Reporting - Walkthrough"
             }
           }
         ]
@@ -211,7 +211,7 @@
     "src/assets/Pasted image 20261011154600.png",
     "src/assets/Pasted image 20261011153245.png",
     "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
-    "src/content/blog/SOC L1 Alert Reporting.md",
+    "src/content/blog/SOC L1 Alert Reporting - Walkthrough.md",
     "src/assets/Pasted image 20261011151554.png",
     "Tutorial Markup/frosti-mdx.mdx",
     "Tutorial Markup/using-mdx.mdx",

@@ -66,9 +66,21 @@ Report sample:
 ![](Pasted%20image%2020261011154600.png)
 Answer: m.boslan@tryhackme[.]thm
 
+This mail is really foundational due to the fact that the Data Leak is of the most important aspects in company, Data leaks are against CONFIDENCIALITY, first term in the foundational structure of the cybersecurity, CIA Triad. 
+
 **Looking at the new alerts, who is the "sender" of the suspicious, likely phishing email?**
 ![](Pasted%20image%2020261011154701.png)
 Answer: support@microsoft[.]com
+
+Huge red flags: 
+- Microsoft doesn't use support@microsoft[.]com. They use an internal, custom service for managing tickets.
+- Urgency, Huge numbers, step-by-step indications are also huge indicators of phishing, they are used to lure the user.
+- 600% increase is unrealistic and never possible
+- SPF / FAILED, DKIM / FAILED
+- REPORT.rar, unprofessional name and not a common practice for support teams to send files in .rar extensions. They typically sent files as they are without grouping it into archived document.
+- Report with no date, no notice
+
+
 
 **Open the phishing alert, read its details, and try to understand the activity.**  
 **Using the Five Ws template, what flag did you receive after writing a good report?**  
@@ -93,7 +105,7 @@ It is generally fine for L1 to request senior support if something is unclear. E
 ![700](Pasted%20image%2020261011180543.png)
 
 
-## Questions:
+## QUESTIONS:
 
 Who is your current L2 in the SOC dashboard that you can assign (escalate) the alerts to?
 ![](Pasted%20image%2020261011182714.png)
@@ -108,6 +120,7 @@ Now, investigate the second new alert and provide a detailed alert comment.
 What flag did you get after escalating this alert according to the workflow?
 ![](Pasted%20image%2020261011182842.png)
 Process lineage analysis reveals that cmd.exe was spawned by C:\Users\Public\revshell.exe, which originated directly from the IIS worker process (C:\Windows\System32\inetsrv\w3wp.exe). This execution chain strongly suggests a web application compromise. Indicates post-exploitation reconnaissance targeting domain architecture and privileged groups.
+Required escalation asap.
 
 **Answer**: THM{looks_like_webshell_via_old_exchange}
 
