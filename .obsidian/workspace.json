@@ -11,12 +11,14 @@
             "id": "601ade13e3d2fcb0",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "src/assets/Pasted-image-20261009153926.png"
+                "file": "src/content/blog/SOC L1 Alert Reporting.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted-image-20261009153926"
+              "icon": "lucide-file",
+              "title": "SOC L1 Alert Reporting"
             }
           }
         ]
@@ -196,28 +198,30 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d9c2818928c03d6f",
+  "active": "601ade13e3d2fcb0",
   "lastOpenFiles": [
+    "src/assets/Pasted image 20261011183330.png",
+    "src/assets/Pasted image 20261011182842.png",
+    "src/assets/Pasted image 20261011182822.png",
+    "src/assets/Pasted image 20261011182714.png",
+    "src/assets/Pasted image 20261011182701.png",
+    "src/assets/Pasted image 20261011180543.png",
+    "src/assets/Pasted image 20261011180235.png",
+    "src/assets/Pasted image 20261011154701.png",
+    "src/assets/Pasted image 20261011154600.png",
+    "src/assets/Pasted image 20261011153245.png",
+    "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
+    "src/content/blog/SOC L1 Alert Reporting.md",
+    "src/assets/Pasted image 20261011151554.png",
     "Tutorial Markup/frosti-mdx.mdx",
     "Tutorial Markup/using-mdx.mdx",
-    "public/GITHUB1.png",
-    "public/logo.webp",
     "docs/SECURITY.md",
-    "docs/preview-light.png",
     "docs/README.zh-CN.md",
     "docs/CONTRIBUTING.md",
     "docs/CODE_OF_CONDUCT.md",
     "docs/CHANGELOG.md",
-    "docs/400-lighthouse.png",
-    "src/content/blog/SOC L1 Alert Triage - Walkthrough.md",
     "Tutorial Markup/mathematics-examples.md",
     "Tutorial Markup",
-    "src/assets/Pasted-image-20261009161553.png",
-    "src/assets/Pasted-image-20261009172917.png",
-    "src/assets/Pasted-image-20261009172225.png",
-    "src/assets/Pasted-image-20261009172208.png",
-    "src/assets/Pasted-image-20261009171829.png",
-    "src/assets/Pasted-image-20261009171611.png",
     "2026-10-09.md",
     "README.md",
     "Tutorial Markup/adding-comment-systems.md",

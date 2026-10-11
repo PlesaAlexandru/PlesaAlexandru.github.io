@@ -24,7 +24,7 @@ SOC L1 are the first in line. But the levels are doing different stuff, such as:
 - **SOC engineers:**  Ensure the alerts contain enough information required for efficient alert triage
 - **SOC manager:**  Track speed and quality of alert triage to ensure that real attacks won't be missed
 
-QUESTIONS:
+## QUESTIONS:
 
 **What is the number of alerts you see in the SOC dashboard?**
 
@@ -65,7 +65,7 @@ Every SOC Team choses it's own prioritisation rules and most commonly used appro
 3. **Sort by time**  
     Start with the oldest alerts and end with the newest ones. The idea is that if both alerts are about two breaches, the hacker from the older breach is likely already dumping your data, while the "newcomer" has just started the discovery.
 
-**Questions**:
+## Questions:
 
 
 Should you first prioritise medium over low severity alerts? (Yea/Nay)
@@ -100,11 +100,10 @@ Some teams develop **Workbooks**(also known as playbooks or runbooks).If workbo
 **Final Actions**
 Your decisions here determine whether you found or missed the potential cyberattack. First, decide if the alert you investigated is malicious (True Positive) or not (False Positive). Then, prepare your detailed comment explaining your analysis steps and verdict reasoning, return to the dashboard and move it to the **Closed** status.
 
-Questions:
+## Questions:
+
 **Which flag did you receive after you correctly triaged the first-priority alert?**
-
 ![](../../assets/Pasted-image-20261009170143.png)
-
 From the description we receive:
 This rule detects 5 or more gigabytes of data sent from a single device to a single destination within a day, which may indicate data exfiltration to untrusted location.
 
