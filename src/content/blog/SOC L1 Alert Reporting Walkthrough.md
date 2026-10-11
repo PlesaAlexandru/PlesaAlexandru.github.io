@@ -1,7 +1,7 @@
 ---
 title: SOC L1 Alert Reporting - Walkthrough
 description: "SOC L1 investigation walkthrough covering alert reporting, Basic lab with a simulated SIEM and 5 alerts with severities: High, Medium, Low"
-pubDate: 2026-10-11
+pubDate: 2026-10-10
 categories:
   - SOC
   - Walkthrough
