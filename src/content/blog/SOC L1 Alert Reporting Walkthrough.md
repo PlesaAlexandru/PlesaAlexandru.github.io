@@ -1,7 +1,7 @@
 ---
 title: SOC L1 Alert Reporting - Walkthrough
 description: "SOC L1 investigation walkthrough covering alert reporting, Basic lab with a simulated SIEM and 5 alerts with severities: High, Medium, Low"
-pubDate: 2026-11-09
+pubDate: 2026-10-11
 categories:
   - SOC
   - Walkthrough
@@ -32,10 +32,10 @@ You may also need to communicate with other departments during or after the anal
 
 ## QUESTIONS:
 
-**What is the process of passing suspicious alerts to an L2 analyst for review?**
+**What is the process of passing suspicious alerts to an L2 analyst for review?**  
 Answer: Alert Escalation
 
-**What is the process of formally describing alert details and findings?**
+**What is the process of formally describing alert details and findings?**  
 Answer: Alert Reporting
 
 ## REPORTING GUIDE
@@ -62,13 +62,13 @@ Report sample:
 
 ## QUESTIONS:
 
-**According to the SOC dashboard, which user email leaked the sensitive document?**
+**According to the SOC dashboard, which user email leaked the sensitive document?**  
 ![](../../assets/Pasted%20image%2020261011154600.png)
 Answer: m.boslan@tryhackme[.]thm
 
-This mail is really foundational due to the fact that the Data Leak is of the most important aspects in company, Data leaks are against CONFIDENCIALITY, first term in the foundational structure of the cybersecurity, CIA Triad. 
+This mail is really foundational due to the fact that the Data Leak is of the most important aspects in company, Data leaks are against CONFIDENCIALITY, first term in the foundational structure of the cybersecurity, CIA Triad.  
 
-**Looking at the new alerts, who is the "sender" of the suspicious, likely phishing email?**
+**Looking at the new alerts, who is the "sender" of the suspicious, likely phishing email?**  
 ![](../../assets/Pasted%20image%2020261011154701.png)
 Answer: support@microsoft[.]com
 
@@ -107,20 +107,20 @@ It is generally fine for L1 to request senior support if something is unclear. E
 
 ## QUESTIONS:
 
-Who is your current L2 in the SOC dashboard that you can assign (escalate) the alerts to?
+Who is your current L2 in the SOC dashboard that you can assign (escalate) the alerts to?  
 ![](../../assets/Pasted%20image%2020261011182714.png)
 **Answer**: E.Fleming
 
 What flag did you receive after correctly escalating the alert from the previous task to L2?  
-**Note:** Set the right assignee and add an intermediate verdict (TP or FP)
+**Note:** Set the right assignee and add an intermediate verdict (TP or FP)  
 
 **Answer**: THM{good_job_escalating_your_first_alert}
 
 Now, investigate the second new alert and provide a detailed alert comment.  
-What flag did you get after escalating this alert according to the workflow?
+What flag did you get after escalating this alert according to the workflow?  
 ![](../../assets/Pasted%20image%2020261011182842.png)
 Process lineage analysis reveals that cmd.exe was spawned by C:\Users\Public\revshell.exe, which originated directly from the IIS worker process (C:\Windows\System32\inetsrv\w3wp.exe). This execution chain strongly suggests a web application compromise. Indicates post-exploitation reconnaissance targeting domain architecture and privileged groups.
-Required escalation asap.
+Required escalation asap.  
 
 **Answer**: THM{looks_like_webshell_via_old_exchange}
 
@@ -147,8 +147,8 @@ Required escalation asap.
 
 ## QUESTIONS:
 
-S**hould you first try to contact your manager in case of a critical threat (Yea/Nay)?**
+S**hould you first try to contact your manager in case of a critical threat (Yea/Nay)?**  
 Answer: Nay, first L2->L3->Manager if not crisis procedure present
 
-**Should you immediately contact your L2 if you think you missed the attack (Yea/Nay)?**
+**Should you immediately contact your L2 if you think you missed the attack (Yea/Nay)?**  
 Answer: Yea, the sooner the better
