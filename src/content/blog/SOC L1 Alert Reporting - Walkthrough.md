@@ -145,7 +145,7 @@ Required escalation asap.
 
 ![](Pasted%20image%2020261011183330.png)
 
-## Questions:
+## QUESTIONS:
 
 S**hould you first try to contact your manager in case of a critical threat (Yea/Nay)?**
 Answer: Nay, first L2->L3->Manager if not crisis procedure present
