@@ -62,7 +62,7 @@ Answer: US Financial Adviser
 
 **Checking the asset inventory, what data does the HQ-FINFS-02 server store?**
 ![](../../assets/Pasted%20image%2020261012040511.png)
-Answer: Financial Records
+Answer: Financial Records  
 
 **Finally, does the file sharing from the scenario look legitimate and expected? (Yea/Nay)**
 Answer: Yea.  
