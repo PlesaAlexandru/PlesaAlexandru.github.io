@@ -5,10 +5,11 @@ pubDate: 2026-10-10
 categories:
   - SOC
   - Walkthrough
+  - TryHackMe
 tags:
   - TryHackMe
   - Walkthrough
-  - Alert_Reporting
+  - Rooms
 ---
 ---
 ## Alert Funnel

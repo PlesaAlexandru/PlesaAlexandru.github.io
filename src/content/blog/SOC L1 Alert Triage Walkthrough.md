@@ -5,10 +5,11 @@ pubDate: 2026-10-09
 categories:
   - SOC
   - Walkthrough
+  - TryHackMe
 tags:
   - TryHackMe
   - Walkthrough
-  - Alert_Triage
+  - Rooms
 ---
 ---
 ## From Events to Alerts
