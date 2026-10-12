@@ -65,7 +65,7 @@ Answer: US Financial Adviser
 Answer: Financial Records
 
 **Finally, does the file sharing from the scenario look legitimate and expected? (Yea/Nay)**
-Answer: Yea.
+Answer: Yea.  
 The role, person and server matches the scenario, with this little information, we can decide as being legit. 
 
 ---
