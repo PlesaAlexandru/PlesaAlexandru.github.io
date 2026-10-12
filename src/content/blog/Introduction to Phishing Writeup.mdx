@@ -21,8 +21,10 @@ import Kbd from "../../components/mdx/Kbd.astro";
 import Success from "../../components/mdx/Success.astro";
 import Warning from "../../components/mdx/Warning.astro";
 import TimeLine from "../../components/mdx/TimeLine.astro";
-import LinkCard from "../../components/mdx/LinkCard.astro";
-## <Info>IMPORTANT NOTE!</Info>
+import LinkCard from "../../components/mdx/LinkCard.astro";  
+
+
+ <Info>IMPORTANT NOTE!</Info>
 
 This scenario is done right after the SOC Team Internals Module. So every alert is done without checking for **SPF, DKIM, DMARC**, to follow the exact path on TryHackMe.  Personal workflow will be:
 `*Understanding the problem -> Finding the evidence -> Giving an verdict and escalate if needed.*`  
@@ -52,21 +54,22 @@ The first alert we got, with other 4 alerts incoming. The first one was chosen b
 > **content:**  
 > Hi Ms. Garcia,\n\nWelcome to TheTryDaily!\n\nAs part of your onboarding, please complete your final profile setup so we can configure your access.\n\nKindly please click the link below:\n\n<[a] href="https[:]//hrconnex.thm/onboarding/15400654060/j.garcia">Set Up My Profile<[a]>.\n\nIf you have questions, please reach out to the HR Onboarding Team.  
 
-**PROCESS AND NOTES:**
+**PROCESS AND NOTES:**  
 
 Understand the alert:
-	The alert was created because the email contains one or more external links with suspicious characteristics. We are also told to check the endpoints and firewall or proxy logs but we are limited by the simulation and can't do that. The alert is only saying that it was received but we are not sure if the host pressed the button from the email.
+	The alert was created because the email contains one or more external links with suspicious characteristics. We are also told to check the endpoints and firewall or proxy logs but we are limited by the simulation and can't do that. The alert is only saying that it was received but we are not sure if the host pressed the button from the email.  
 
-URL Analysis:
+URL Analysis:  
 The setup button have the linked URL: https[:]//hrconnex.thm/onboarding/15400654060/j.garcia
-which includes the receiver real name (j.garcia), the real domain (hrconnex.thm) and the real cause (onboarding).
+which includes the receiver real name (j.garcia), the real domain (hrconnex.thm) and the real cause (onboarding).  
 
-With limited access, we cannot view the endpoints, logs, history of any form, so due to the fact that the email looks like an request to complete to Setup the profile on TheTryDaily.
+With limited access, we cannot view the endpoints, logs, history of any form, so due to the fact that the email looks like an request to complete to Setup the profile on TheTryDaily.  
 
-The URL wasn't accessible, maybe due to the introductory simulation. So the final evidence we could theoretically gather would be to get an answer if the host really signed up on the website. But again, without SPF, DKIM, DMARC or contacting the host, we can only access the face value of the mail.
+The URL wasn't accessible, maybe due to the introductory simulation. So the final evidence we could theoretically gather would be to get an answer if the host really signed up on the website. But again, without SPF, DKIM, DMARC or contacting the host, we can only access the face value of the mail and the given detection tool.  
+![](../../assets/Pasted%20image%2020261013020518.png)
 
-With that being mentioned, final verdict is:
-<Success>False positive, no escalation needed</Success>
+With that being mentioned, final verdict is:  
+<Success>False positive, no escalation needed</Success>  
 
 
 ![](../../assets/Pasted%20image%2020261013001150.png)
