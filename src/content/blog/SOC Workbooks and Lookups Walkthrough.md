@@ -21,12 +21,12 @@ We are given an scenario about a file named: "Financial Report US 2024.xlsx" sen
 - Why could R.Lund need access to the corporate financial records?  
 
 ## Identity Inventory
-![](Pasted%20image%2020261012034927.png)
+![](../../assets/Pasted%20image%2020261012034927.png)
 
 Identity inventory is a catalogue of corporate employees (user accounts), services (machine accounts), and their details like privileges, contacts, and roles within the company. For the scenario above, identity inventory would help you get context about G.Baker and R.Lund, and make it simpler to decide if the activity was expected or not.  
 
 Exemple:  
-![](Pasted%20image%2020261012035232.png)
+![](../../assets/Pasted%20image%2020261012035232.png)
 
 **Sources of Identities**
 
@@ -39,11 +39,11 @@ Exemple:
 
 ## Asset Inventory
 
-![](Pasted%20image%2020261012035737.png)
+![](../../assets/Pasted%20image%2020261012035737.png)
 
 Assets can be hardware, software, employees and others. It can be also names asset lookup. For the scenario above, asset inventory would help you get context about the HQ-FINFS-02 server.
 
-![](Pasted%20image%2020261012040106.png)
+![](../../assets/Pasted%20image%2020261012040106.png)
 
 **Sources of Assets**
 
@@ -57,11 +57,11 @@ Assets can be hardware, software, employees and others. It can be also names ass
 ## QUESTIONS:
 
 **Looking at the identity inventory, what is the role of R.Lund at the company?**
-![](Pasted%20image%2020261012040324.png)
+![](../../assets/Pasted%20image%2020261012040324.png)
 Answer: US Financial Adviser
 
 **Checking the asset inventory, what data does the HQ-FINFS-02 server store?**
-![](Pasted%20image%2020261012040511.png)
+![](../../assets/Pasted%20image%2020261012040511.png)
 Answer: Financial Records
 
 **Finally, does the file sharing from the scenario look legitimate and expected? (Yea/Nay)**
