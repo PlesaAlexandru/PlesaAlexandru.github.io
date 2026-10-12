@@ -1,0 +1,146 @@
+---
+title: Introduction to Phishing Writeup
+description: s Simulated SIEM with 4 phishing alerts, from which 3 are email related and 1 is firewall. The simulation is done right after SOC Team Internals Module.
+pubDate: 2026-10-11
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+  - Phishing
+---
+---
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+## <Info>IMPORTANT NOTE!</Info>
+
+This scenario is done right after the SOC Team Internals Module. So every alert is done without checking for **SPF, DKIM, DMARC**, to follow the exact path on TryHackMe.  Personal workflow will be:
+`*Understanding the problem -> Finding the evidence -> Giving an verdict and escalate if needed.*`  
+
+## Scenario objectives  
+
+- Monitor and analyze real-time alerts.
+- Identify and document critical events such as suspicious emails and attachments.
+- Create detailed case reports based on your observations to help your team understand the full scope of alerts and malicious activity.  
+## Alerts:  
+
+The first alert we got, with other 4 alerts incoming. The first one was chosen by the fact of not having other alerts. 
+
+
+![](../../assets/Pasted%20image%2020261013000003.png)
+> **ALERT ID** #8814 - Email Alert  
+> 
+> **Description**:  This alert was triggered by an inbound email contains one or more external links due to potentially suspicious characteristics. As part of the investigation, check firewall or proxy logs to determine whether any endpoints have attempted to access the URLs in the email and whether those connections were allowed or blocked.  
+> 
+> **datasource**: email  
+> **timestamp:** 10/12/2026 21:56:47.871  
+> **subject:** Action Required: Finalize Your Onboarding Profile  
+> **sender:** onboarding@hrconnex[.]thm  
+> **recipient**: j.garcia@thetrydaily[.]thm  
+> **attachment:** None  
+> **direction:** inbound  
+> **content:**  
+> Hi Ms. Garcia,\n\nWelcome to TheTryDaily!\n\nAs part of your onboarding, please complete your final profile setup so we can configure your access.\n\nKindly please click the link below:\n\n<[a] href="https[:]//hrconnex.thm/onboarding/15400654060/j.garcia">Set Up My Profile<[a]>.\n\nIf you have questions, please reach out to the HR Onboarding Team.  
+
+**PROCESS AND NOTES:**
+
+Understand the alert:
+	The alert was created because the email contains one or more external links with suspicious characteristics. We are also told to check the endpoints and firewall or proxy logs but we are limited by the simulation and can't do that. The alert is only saying that it was received but we are not sure if the host pressed the button from the email.
+
+URL Analysis:
+The setup button have the linked URL: https[:]//hrconnex.thm/onboarding/15400654060/j.garcia
+which includes the receiver real name (j.garcia), the real domain (hrconnex.thm) and the real cause (onboarding).
+
+With limited access, we cannot view the endpoints, logs, history of any form, so due to the fact that the email looks like an request to complete to Setup the profile on TheTryDaily.
+
+The URL wasn't accessible, maybe due to the introductory simulation. So the final evidence we could theoretically gather would be to get an answer if the host really signed up on the website. But again, without SPF, DKIM, DMARC or contacting the host, we can only access the face value of the mail.
+
+With that being mentioned, final verdict is:
+<Success>False positive, no escalation needed</Success>
+
+
+![](../../assets/Pasted%20image%2020261013001150.png)
+> **ALERT ID** #8816 - Firewall
+> 
+> **Description**: This alert was triggered when a user attempted to access an external URL that is listed in the organization's blacklist or threat intelligence feeds. The firewall or proxy successfully blocked the outbound request, preventing the connection. Note: The blacklist only covers known threats. It does not guarantee protection against new or unknown malicious domains.  
+> 
+> **datasource:** firewall  
+> **timestamp:** 10/12/2026 22:01:14.871  
+> **Action:** blocked  
+> **SourceIP:** 10.20.2.17  
+> **SourcePort:** 34257  
+> **DestinationIP:** 67.199.248.11  
+> **DestinationPort:** 80  
+> **URL:** mhttp://bit[.]ly/3sHkX3da12340  
+> **Application:** web-browsing  
+> **Protocol:** TCP  
+> **Rule:** Blocked Websites  
+
+![](../../assets/Pasted%20image%2020261013002706.png)
+![](../../assets/Pasted%20image%2020261013001424.png)
+![](../../assets/Pasted%20image%2020261013001450.png)
+![](../../assets/Pasted%20image%2020261013001737.png)
+
+![](../../assets/Pasted%20image%2020261013002946.png)
+> **ALERT ID** #8817 - Email Alert  
+> 
+> **Description:**  
+> This alert was triggered by an inbound email contains one or more external links due to potentially suspicious characteristics. As part of the investigation, check firewall or proxy logs to determine whether any endpoints have attempted to access the URLs in the email and whether those connections were allowed or blocked.  
+> 
+> **datasource:** email  
+> **timestamp:** 10/12/2026 22:02:18.871  
+> **subject:** Unusual Sign-In Activity on Your Microsoft Account  
+> **sender:** no-reply@m1crosoftsupport[.]co  
+> **recipient:** c.allen@thetrydaily[.]thm  
+> **attachment:** None  
+> **content:**  
+> Hi C.Allen,\n\nWe detected an unusual sign-in attempt on your Microsoft account.\n\nLocation: Lagos, Nigeria\n\nIP Address: 102.89.222.143\n\nIf this was not you, please secure your account immediately to avoid unauthorized access.\n\n<[a]href="https[:]//m1crosoftsupport.co/login">Review Activity</[a]>\n\nThank you,\n\nMicrosoft Account Security Team  
+> **direction:** inbound  
+
+![](../../assets/Pasted%20image%2020261013003540.png)
+
+![](../../assets/Pasted%20image%2020261013003555.png)
+![](../../assets/Pasted%20image%2020261013003613.png)
+
+m1crosoftsupport.co is not a real domain, it's simulating a real company support team (Microsoft Support). Although, microsoft doesn't use an email for support, they use a CRM (Customer Relationship Management) solution. The link provided also leads to: https[:]//m1crosoftsupport.co/login.  
+
+![](../../assets/Pasted%20image%2020261013004047.png)
+> **ALERT ID** #8815 - Email Alert  
+> 
+> **Description:**  
+> This alert was triggered by an inbound email contains one or more external links due to potentially suspicious characteristics. As part of the investigation, check firewall or proxy logs to determine whether any endpoints have attempted to access the URLs in the email and whether those connections were allowed or blocked.  
+> 
+> **datasource:** email  
+> **timestamp:** 10/12/2026 22:00:00.871  
+> **subject:** Your Amazon Package Couldn’t Be Delivered – Action Required  
+> **sender:** urgents@amazon[.]biz  
+> **recipient:** h.harris@thetrydaily[.]thm  
+> **attachment:** None  
+> **content:**  
+> Dear Customer,\n\nWe were unable to deliver your package due to an incomplete address.\n\nPlease confirm your shipping information by clicking the link below:\n\nhttp[:]//bit.ly/3sHkX3da12340\n\nIf we don’t hear from you within 48 hours, your package will be returned to sender.\n\nThank you,\n\nAmazon Delivery  
+> **direction:** inbound  
+
+
+![](../../assets/Pasted%20image%2020261013004327.png)
+
+
+![](../../assets/Pasted%20image%2020261013004847.png)
+
+![](../../assets/Pasted%20image%2020261013004904.png)
+![](../../assets/Pasted%20image%2020261013004916.png)
+![](../../assets/Pasted%20image%2020261013004928.png)
+![](../../assets/Pasted%20image%2020261013004941.png)
+
+
+
+
