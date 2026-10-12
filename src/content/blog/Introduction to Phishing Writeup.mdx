@@ -53,7 +53,7 @@ The first alert we got, with other 4 alerts incoming. The first one was chosen b
 
 **PROCESS AND NOTES:**  
 
-Understand the alert:
+Understand the alert:  
 	The alert was created because the email contains one or more external links with suspicious characteristics. We are also told to check the endpoints and firewall or proxy logs but we are limited by the simulation and can't do that. The alert is only saying that it was received but we are not sure if the host pressed the button from the email.  
 
 URL Analysis:  
@@ -67,8 +67,9 @@ The URL wasn't accessible, maybe due to the introductory simulation. So the fina
 ![](../../assets/Pasted%20image%2020261013020518.png)
 
 With that being mentioned, final verdict is:  
-<Success>False positive, no escalation needed</Success>  
+<Success>FLASE POSITIVE, no escalation needed</Success>  
 
+---
 
 ![](../../assets/Pasted%20image%2020261013001150.png)
 > **ALERT ID** #8816 - Firewall
@@ -86,6 +87,11 @@ With that being mentioned, final verdict is:
 > **Application:** web-browsing  
 > **Protocol:** TCP  
 > **Rule:** Blocked Websites  
+
+Understand the alert:  
+	The alert was created because when a user attempted to access an external URL that is listed in the organization's blacklist or threat intelligence feeds. Which means the damage was done. Based on the findings an host training might be necessary.
+
+
 
 ![](../../assets/Pasted%20image%2020261013002706.png)
 ![](../../assets/Pasted%20image%2020261013001424.png)
