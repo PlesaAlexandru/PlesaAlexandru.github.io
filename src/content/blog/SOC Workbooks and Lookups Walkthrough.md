@@ -110,7 +110,7 @@ With asset inventory and network diagrams, you can get enough context about the 
 
 A SOC workbook (or playbook/runbook) standardizes threat investigation and response. Designed by senior engineers to guide entry-level L1 analysts through complex scenarios, these step-by-step procedures minimize errors, streamline triage, and ensure consistent handling across all incoming alerts.
 
-## Workbook Example
+	## Workbook Example
 **Unusual Login Location Workbook**  
 ![](../../assets/Pasted%20image%2020261012160138.png) 
 The diagram above is a typical example of an investigation workbook aimed to help L1 analysts triage alerts about atypical email, web, or corporate VPN login. Most workbook diagrams are supplemented with a detailed textual guide and links to the mentioned resources. Also, note how the workbook is divided into three logical groups. By following the steps in the correct order, you can guarantee high-quality alert triage and eliminate cases where the verdict is made without enough evidence:  
