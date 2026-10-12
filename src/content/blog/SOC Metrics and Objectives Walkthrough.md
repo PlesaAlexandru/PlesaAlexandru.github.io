@@ -29,7 +29,7 @@ Goal of SOC is to protect C.I.A of the the company. The L1 analysts' role in thi
 This metric is counting the overall number of alerts, if a SOC analyst have 80 alerts, can be overwhelming but also 0 alerts could mean a SIEM problem, which needs attention. **5 to 30 alerts per day per L1 analyst is a good metric**.  
 
 ## False Positive Rate
-![444](Pasted%20image%2020261012164114.png)
+![444](../../assets/Pasted%20image%2020261012164114.png)
   
 If you have around 94% TP could be a sign of not enough tunning, with more noise, analysts tend to become less vigilant and more likely to miss the threat and treat all alerts just like "yet another spam". A False Positive rate of **0% is an unachievable ideal, but 80% or higher is a serious problem**, usually fixed by a tool and detection rules tuning, often called "False Positive Remediation".
 
