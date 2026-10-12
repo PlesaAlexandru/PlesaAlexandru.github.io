@@ -29,7 +29,7 @@ Goal of SOC is to protect C.I.A of the the company. The L1 analysts' role in thi
 This metric is counting the overall number of alerts, if a SOC analyst have 80 alerts, can be overwhelming but also 0 alerts could mean a SIEM problem, which needs attention. **5 to 30 alerts per day per L1 analyst is a good metric**.  
 
 ## False Positive Rate
-![428](Pasted%20image%2020261012164114.png)
+![444](Pasted%20image%2020261012164114.png)
   
 If you have around 94% TP could be a sign of not enough tunning, with more noise, analysts tend to become less vigilant and more likely to miss the threat and treat all alerts just like "yet another spam". A False Positive rate of **0% is an unachievable ideal, but 80% or higher is a serious problem**, usually fixed by a tool and detection rules tuning, often called "False Positive Remediation".
 
@@ -39,7 +39,7 @@ L2 analysts rely on L1 to filter out the noise and escalate only the actionable,
   
 
 ## Threat Detection Rate
-![494](Pasted%20image%2020261012164725.png)
+![444](../../assets/Pasted%20image%2020261012164725.png)
 
 Imagine that out of six attacks for 2025, your SOC team detected and prevented four attacks, missed the fifth because of the broken detection rule, and the sixth because one of the L1 analysts misclassified the breach as False Positive. The resulting metric is TDR = 4 / 6 = 67%, and this is a very bad result. The threat detection rate **should always be at 100%** since every missed threat can have devastating consequences, such as ransomware infection and data exfiltration.
 
@@ -55,7 +55,7 @@ Answer: 80%, 10/50 = 0.2 * 100 = 20% , 100-20=80%
 
 We have to remember that an alert is not enough to stop an attack. The requirements to ensure a quick detection and remediation of the threat are commonly grouped into a **Service Level Agreement (SLA)** - a document signed between the internal SOC team and its company management, or by the managed SOC provider (MSSP) and its customers. The agreement usually requires quick threat detection (measured by **MTTD**), timely alert acknowledgement by L1 analysts (measured by **MTTA**), and finally, prompt response to the threat, like isolating the device or securing the breached account (measured by **MTTR**):  
 
-![](Pasted%20image%2020261012192431.png)
+![](../../assets/Pasted%20image%2020261012192431.png)
 
 ## Reference Table
 
@@ -89,7 +89,7 @@ Answer: 12,10,51
 
 Metrics were made so SOC workflow can be efficient and, therefore, make the attacks less successful. They are also used to monitor performance. So how can you improve the metrics?
 
-![](Pasted%20image%2020261012193401.png)
+![](../../assets/Pasted%20image%2020261012193401.png)
 
 ## Reference Table
 
@@ -113,13 +113,13 @@ For this lab, imagine yourself as a SOC manager receiving different complaints r
 ## QUESTIONS:
 
 **What flag did you get after completing the first scenario?**  
-![](Pasted%20image%2020261012195012.png)
-Answer:THM{mttr:quick_start_but_slow_response}  
+![](../../assets/Pasted%20image%2020261012195012.png)
+Answer:THM{mttr:quick_start_but_slow_response}
 
 **What flag did you get after completing the second scenario?**  
-![](Pasted%20image%2020261012194931.png)
+![](../../assets/Pasted%20image%2020261012194931.png)
 Answer: THM{mttd:time_between_attack_and_alert}  
 
 **What flag did you get after completing the third scenario?**  
-![](Pasted%20image%2020261012194800.png)
+![](../../assets/Pasted%20image%2020261012194800.png)
 Answer: THM{fpr:the_main_cause_of_l1_burnout}  
