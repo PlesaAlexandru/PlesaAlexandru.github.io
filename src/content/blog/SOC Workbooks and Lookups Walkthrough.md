@@ -80,7 +80,7 @@ Consider the scenario where you are investigating a chain of related alerts base
 
 To investigate the case above, you will have to find out what service is running at the 10443 port and why anyone would connect there. Then, identify the subnet the 10.10.0.53 IP belongs to and why it would ever try to connect to other subnets. A **network diagram**, a visual schema presenting existing locations, subnets, and their connections, is an answer to your questions:  
 
-![](Pasted%20image%2020261012155125.png)
+![](../../assets/Pasted%20image%2020261012155125.png)
 
 Depending on a company's size and structure, you may see more complex diagrams, but their use for SOC analysts remains the same - to help understand suspicious network activity. In our scenario, you can refer to the network diagram and reconstruct the attack path as follows:  
 
@@ -95,7 +95,7 @@ Depending on a company's size and structure, you may see more complex diagrams, 
 Answer: VPN, mentioned in the task.  
 
 **Now, which subnet would the server behind 172.16.15.99 IP belong to?**  
-![](Pasted%20image%2020261012155428.png)  
+![](../../assets/Pasted%20image%2020261012155428.png)  
 172.16.15.99 is corresponding to database subnet.  
 Answer: Database subnet
 
@@ -112,7 +112,7 @@ A SOC workbook (or playbook/runbook) standardizes threat investigation and respo
 
 ## Workbook Example
 **Unusual Login Location Workbook**  
-![](Pasted%20image%2020261012160138.png) 
+![](../../assets/Pasted%20image%2020261012160138.png) 
 The diagram above is a typical example of an investigation workbook aimed to help L1 analysts triage alerts about atypical email, web, or corporate VPN login. Most workbook diagrams are supplemented with a detailed textual guide and links to the mentioned resources. Also, note how the workbook is divided into three logical groups. By following the steps in the correct order, you can guarantee high-quality alert triage and eliminate cases where the verdict is made without enough evidence:  
 
 1. **Enrichment**: Use Threat Intelligence and identity inventory to get information about the affected user
@@ -137,13 +137,13 @@ Different teams have different approaches to workbook building. Some teams may h
 ## QUESTIONS:
 
 **What flag did you receive after completing the first workbook?**  
-![](Pasted%20image%2020261012161048.png)
+![](../../assets/Pasted%20image%2020261012161048.png)
 Answer: THM{the_most_common_soc_workbook}  
 
 **What flag did you receive after completing the second workbook?**  
-![](Pasted%20image%2020261012161318.png)
+![](../../assets/Pasted%20image%2020261012161318.png)
 Answer: THM{be_vigilant_with_powershell}  
 
 **What flag did you receive after completing the third workbook?**  
-![](Pasted%20image%2020261012161645.png)
+![](../../assets/Pasted%20image%2020261012161645.png)
 Answer: THM{asset_inventory_is_essential}  
