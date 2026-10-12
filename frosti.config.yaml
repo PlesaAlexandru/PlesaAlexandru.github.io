@@ -66,37 +66,37 @@ user:
       ariaLabel: "GitHub"
       title: "GitHub"
       svg: "ri:github-fill"
-    - href: "https://linkedin.com/in/"
+    - href: "https://www.linkedin.com/in/alexandru-plesa/"
       ariaLabel: "LinkedIn"
       title: "LinkedIn"
       svg: "ri:linkedin-box-fill"
-    - href: "https://tryhackme.com/p/"
+    - href: "https://tryhackme.com/p/NonManifest"
       ariaLabel: "TryHackMe"
       title: "TryHackMe"
       svg: "simple-icons:tryhackme"
-    - href: "https://app.hackthebox.com/profile/"
+    - href: "https://profile.hackthebox.com/profile/019cf5f3-9b99-730d-a41f-e64133130a89?utm_medium=copy_url"
       ariaLabel: "Hack The Box"
       title: "Hack The Box"
       svg: "simple-icons:hackthebox"
-    - href: "https://app.letsdefend.io/user/"
+    - href: "https://app.letsdefend.io/user/NonManifest"
       ariaLabel: "LetsDefend"
       title: "LetsDefend"
       svg: "ri:shield-keyhole-line"
   footer:
     social:
-      - href: "https://afdian.com/a/saroprock" 
+      - href: "" 
         ariaLabel: Support my work 
         title: Support my work 
         svg: "ri:cup-line"
-      - href: "https://github.com/EveSunMaple"
+      - href: ""
         ariaLabel: Github
         title: Github
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/438392347"
+      - href: ""
         ariaLabel: BiliBili
         title: BiliBili
         svg: "ri:bilibili-line"
-      - href: "https://x.com/EveSunMaple"
+      - href: ""
         ariaLabel: X(twitter)
         title: X(twitter)
         svg: "ri:twitter-line"
