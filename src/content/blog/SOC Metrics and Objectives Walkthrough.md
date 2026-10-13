@@ -10,6 +10,7 @@ tags:
   - TryHackMe
   - Walkthrough
   - Rooms
+image: /image/Metrics_Obj.png
 ---
 ---
 

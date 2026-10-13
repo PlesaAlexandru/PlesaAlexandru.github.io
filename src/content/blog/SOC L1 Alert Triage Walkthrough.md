@@ -10,6 +10,7 @@ tags:
   - TryHackMe
   - Walkthrough
   - Rooms
+image: /image/Alert_Triage.png
 ---
 ---
 ## From Events to Alerts
