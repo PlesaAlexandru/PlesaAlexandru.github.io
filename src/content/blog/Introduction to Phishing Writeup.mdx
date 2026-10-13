@@ -99,7 +99,7 @@ Internal platform
   
 The internal platform finds the IP as being **MALICIOUS**. Which is already a huge red flag. But for more information, I also used different platforms that are used for IP analysis to make more evidence based decision. So, below you can see listed some platforms and their results.  
 
-Abuseipdb.com
+AbuseIPDB.com
 ![454](../../assets/Pasted%20image%2020261013001424.png)  
   
 The IP belongs to `bit[.]ly` which is a legitimate service.  
@@ -129,6 +129,8 @@ Final verdict, with limited tools for verifications, is:
 
 ---
 
+The remaining alerts are the exact same severity level (Medium), which gives me the right to pick the oldest one.
+
 ![](../../assets/Pasted%20image%2020261013002946.png)
 > **ALERT ID** #8817 - Email Alert  
 > 
@@ -145,12 +147,30 @@ Final verdict, with limited tools for verifications, is:
 > Hi C.Allen,\n\nWe detected an unusual sign-in attempt on your Microsoft account.\n\nLocation: Lagos, Nigeria\n\nIP Address: 102.89.222.143\n\nIf this was not you, please secure your account immediately to avoid unauthorized access.\n\n`<[a]href="https[:]//m1crosoftsupport.co/login">Review Activity</[a]>`\n\nThank you,\n\nMicrosoft Account Security Team  
 > **direction:** inbound  
 
+Understand the alert:  
+	The alert was generated because n inbound email contains one or more external links due to potentially suspicious characteristics. We can already see the luring aspect of the mail but it is common practice for the "Unusual activity email" to appear in cases where your account is compromised.
+
+So, we can already spot the typo (m1crosoftsupport[.]co) from the sender (no-reply@m1crosoftsupport[.]co), which is already a confirmation of the luring aspect of urgency mentioned before. The attacker is trying to lure the target with similar looking domains and uncertainty of "unusual activity". The attacker also attached the location and IP Address(102[.]89[.]222[.]143) and location (Nigeria), we can do a quick search for the IP provided, just to see if the information inside the email looks legitimate, but we need to mention that the IP is not the sender's IP, it is part of the scam.  
+
+Internal tools.
 ![](../../assets/Pasted%20image%2020261013003540.png)
 
-![](../../assets/Pasted%20image%2020261013003555.png)
-![](../../assets/Pasted%20image%2020261013003613.png)
+AbuseIPDB:
+![](../../assets/Pasted%20image%2020261013140045.png)
 
-m1crosoftsupport.co is not a real domain, it's simulating a real company support team (Microsoft Support). Although, microsoft doesn't use an email for support, they use a CRM (Customer Relationship Management) solution. The link provided also leads to: `https[:]//m1crosoftsupport.co/login`.  
+ip2proxy:
+![](../../assets/Pasted%20image%2020261013135531.png)
+Even if the IP is matching the location, that doesn't prove the email is legit, the attacker could use stolen IPs from other breaches, for example, to make the email more trustful.
+
+In the end, m1crosoftsupport.co is not a real domain, it's simulating a real company support team (Microsoft Support). Although, microsoft doesn't use an email for support, they use a custom CRM (Customer Relationship Management) solution. The link provided also leads to: `https[:]//m1crosoftsupport.co/login`. The email provided is using an template of "unusual activity notice" but the sender gives it away.
+
+Final verdict:
+<Success>TRUE POSITIVE, no escalation </Success>
+
+
+---
+
+Last alert of the simulation:
 
 ![](../../assets/Pasted%20image%2020261013004047.png)
 > **ALERT ID** #8815 - Email Alert  
@@ -168,9 +188,32 @@ m1crosoftsupport.co is not a real domain, it's simulating a real company support
 > Dear Customer,\n\nWe were unable to deliver your package due to an incomplete address.\n\nPlease confirm your shipping information by clicking the link below:\n\n`http[:]//bit.ly/3sHkX3da12340`\n\nIf we don’t hear from you within 48 hours, your package will be returned to sender.\n\nThank you,\n\nAmazon Delivery  
 > **direction:** inbound  
 
+Understand the alert:  
+	The alert was triggered because n inbound email contains one or more external links due to potentially suspicious characteristics. As the last alert, the attacker looks like it is using urgency ("we don’t hear from you within 48 hours, your package will be returned to sender") which could be an legitimate email, we have to look at the evidence and decide if it is legit or just abusing urgency for the clicks.  
 
-![](../../assets/Pasted%20image%2020261013004327.png)
+Sender (urgents@amazon[.]biz) is using an legitimate service (Amazon) to impersonate the real company and it's practices. Amazon doesn't use urgents@amazon[.]biz for this type of problems as seen in the screenshot below:
+![](../../assets/Pasted%20image%2020261013141416.png)
+Our sender email is .biz instead of .com
 
+Another aspect to look for, the link is a shortened form link, which is absolutely not necessary for a company like amazon. At the first glance we can see it is the exact same shortened link as we analyzed before.
+
+ALERT #8816:
+![](Pasted%20image%2020261013004327.png)
+ALERT ID: #8816:  
+`http[:]//bit.ly/3sHkX3da12340`  
+ALERT ID: #8815:  
+`http[:]//bit.ly/3sHkX3da12340`  
+
+Which means that the attacker is on the second attack and could be more to follow, in that case, a deeper investigation could occur in order to find more details about the bad actor.  
+
+With that being said, the sender domain is not an legitimate Amazon domain for emails. Amazon uses .com instead of .biz, even if they use amazon.biz to redirect the user to amazon.com, sender email stays consistent due to internal regulations. Also, the link provided for the action is the exact same link as the alert before, which brings more attention to the second attempt of the attacker. With limited checking and resources, we can only inspect it but the URL should be immediately blocked or put on a blacklist.
+
+Final verdict:
+<Success>TRUE POSITIVE, no escalation </Success>
+
+---
+
+## RESULTS OF THE SIMULATION:
 
 ![](../../assets/Pasted%20image%2020261013004847.png)
 
@@ -179,6 +222,6 @@ m1crosoftsupport.co is not a real domain, it's simulating a real company support
 ![](../../assets/Pasted%20image%2020261013004928.png)
 ![](../../assets/Pasted%20image%2020261013004941.png)
 
-
+Note: TTR was higher due to the noting factor of the whole simulation. We prioritized information gathering than speed. I tried to get as much information as I could with limited information in an simulated environment.
 
 

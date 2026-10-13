@@ -184,7 +184,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 205.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,6 +200,10 @@
   },
   "active": "601ade13e3d2fcb0",
   "lastOpenFiles": [
+    "src/assets/Pasted image 20261013141416.png",
+    "src/assets/Pasted image 20261013140045.png",
+    "src/assets/Pasted image 20261013135648.png",
+    "src/assets/Pasted image 20261013135531.png",
     "src/assets/Pasted image 20261013032420.png",
     "src/assets/Pasted image 20261013020518.png",
     "src/assets/Pasted image 20261013020454.png",
@@ -214,10 +218,6 @@
     "src/assets/Pasted image 20261013001424.png",
     "src/assets/Pasted image 20261013001150.png",
     "src/assets/Pasted image 20261013001450.png",
-    "src/assets/Pasted image 20261012161318.png",
-    "src/assets/Pasted image 20261012161028.png",
-    "src/assets/Pasted image 20261012040511.png",
-    "src/assets/Pasted image 20261011154600.png",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
     "public/ps6F69.tmp",
