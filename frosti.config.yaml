@@ -33,13 +33,13 @@ site:
           svg: "material-symbols:ink-pen-outline-rounded"
           target: _self
         - id: documentation
-          text: Documentation
-          href: /blog/category/Documentation
+          text: Writeups
+          href: /blog/category/Writeup
           svg: "material-symbols:unknown-document-outline-rounded"
           target: _self
         - id: examples
-          text: Examples
-          href: /blog/category/Examples
+          text: Walkthrough
+          href: /blog/category/Walkthrough
           svg: "material-symbols:deployed-code-outline"
           target: _self
        
