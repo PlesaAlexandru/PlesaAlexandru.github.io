@@ -67,9 +67,11 @@ The URL wasn't accessible, maybe due to the introductory simulation. So the fina
 ![](../../assets/Pasted%20image%2020261013020518.png)
 
 With that being mentioned, final verdict is:  
-<Success>FLASE POSITIVE, no escalation needed</Success>  
+<Success>FALSE POSITIVE, no escalation needed</Success>  
 
 ---
+
+Next, we already have 3 more alerts, we are going to pick the most important one based on severity, which is an high firewall alert.    
 
 ![](../../assets/Pasted%20image%2020261013001150.png)
 > **ALERT ID** #8816 - Firewall
@@ -91,12 +93,43 @@ With that being mentioned, final verdict is:
 Understand the alert:  
 	The alert was created because when a user attempted to access an external URL that is listed in the organization's blacklist or threat intelligence feeds. Which means the damage was done. Based on the findings an host training might be necessary.
 
+**IP Checks:**
+Internal platform
+![684](../../assets/Pasted%20image%2020261013002706.png)
+  
+The internal platform finds the IP as being **MALICIOUS**. Which is already a huge red flag. But for more information, I also used different platforms that are used for IP analysis to make more evidence based decision. So, below you can see listed some platforms and their results.  
 
+Abuseipdb.com  
+![454](../../assets/Pasted%20image%2020261013001424.png)  
+  
+The IP belongs to `bit[.]ly` which is a legitimate service.  
+Result: 29% Elevated, with 72 reports just in the last 2 weeks. Which confirms the suspicion about it being Malicious, because bit[.]ly is used as a scamming method, and in the end an True Positive (TP) case. 
 
-![](../../assets/Pasted%20image%2020261013002706.png)
-![](../../assets/Pasted%20image%2020261013001424.png)
+![](Pasted%20image%2020261013032420.png)  
+<cite>Source:https[:]//www.researchgate.net/publication/263163925_bitlymalicious_Deep_Dive_into_Short_URL_based_e-Crime_Detection</cite>
+
+Let's use other 2 platforms just for the sake of learning.  
+  
+VirusTotal:  
 ![](../../assets/Pasted%20image%2020261013001450.png)
+  
+Result: One finding of it being an IP used for Phishing attacks. We can also try to access the URL  directly in an isolated envoierment.   
+
+Direct Access to the bit[.]ly link via browserling.com
 ![](../../assets/Pasted%20image%2020261013001737.png)
+Result: The URL is not accessible via direct connection due to it being sent by an suspended account.  
+
+After a quick analysis, we can already tell there are a lot of huge red flags, such as:  
+- Shortening an URL for no reason given.    
+- All indicators reveal the fact that the IP is Malicious, but worth noting the fact that the IP is marked as being Malicious due to the nature of bit[.]ly as a service.
+- The suspended account on bit[.]ly. 
+
+Final verdict, with limited tools for verifications, is:
+
+<Error>Maybe something went wrong? </Error>
+
+
+---
 
 ![](../../assets/Pasted%20image%2020261013002946.png)
 > **ALERT ID** #8817 - Email Alert  
