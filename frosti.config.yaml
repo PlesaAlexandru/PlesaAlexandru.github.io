@@ -38,7 +38,7 @@ site:
           svg: "material-symbols:unknown-document-outline-rounded"
           target: _self
         - id: examples
-          text: Walkthrough
+          text: Walkthroughs
           href: /blog/category/Walkthrough
           svg: "material-symbols:deployed-code-outline"
           target: _self
