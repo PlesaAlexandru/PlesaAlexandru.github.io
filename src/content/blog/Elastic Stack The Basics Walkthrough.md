@@ -35,13 +35,13 @@ Logstash is a data processing engine that takes data from different sources, fil
 3. The **Output** part is where the user wants the filtered data to be sent. It can be a listening port, Kibana Interface, Elasticsearch database, or file. 
 
 Logstash supports many Input, Output, and Filter plugins.
-![214](Pasted%20image%2020261014215041.png)
+![273](../../assets/Pasted%20image%2020261014215041.png)
 
 ## 3. Beats
 
 Beats are host-based agents known as data-shippers that ship/transfer data from the endpoints to Elasticsearch. Each beat is a single-purpose agent that sends specific data to Elasticsearch. All available beats are shown below.
 
-![664](Pasted%20image%2020261014215104.png)
+![646](../../assets/Pasted%20image%2020261014215104.png)
 
 ## 4. Kibana
 
@@ -281,7 +281,7 @@ Dashboards provide good visibility into log collection. A user can create multip
 By now, we have saved a few `Searches` from the `Discover tab`, created some `Visualizations`, and saved them. It's time to explore the dashboard tab and create a custom dashboard. The steps to create a dashboard are:
 
 - Go to the `Dashboard tab` and click on the `Create dashboard.`
-![](../../assets/Pasted%20image%2020261014234142.png)
+![568](../../assets/Pasted%20image%2020261014234142.png)
 - Click on `Add from Library.`
 - Click on the visualizations and saved searches. It will be added to the dashboard.
 - Once the items are added, adjust them accordingly, as shown below.
