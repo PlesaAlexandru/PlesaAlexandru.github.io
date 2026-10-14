@@ -27,7 +27,7 @@ Splunk Forwarder is a lightweight agent installed on the endpoint intended to be
 - Linux host generating host-centric logs.
 - Database generating DB connection requests, responses, and errors.
 
-![657](Pasted%20image%2020261014205323.png)
+![](../../assets/Pasted%20image%2020261014205323.png)
 The forwarder collects the data from the log sources and sends it to the Splunk Indexer.
 
 ## Splunk Indexer
