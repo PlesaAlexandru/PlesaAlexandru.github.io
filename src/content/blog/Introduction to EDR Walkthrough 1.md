@@ -1,5 +1,5 @@
 ---
-title: Introduction to EDR Walkthrough
+title: Introduction to EDR Walkthrough TEST
 description: Learning the fundamentals of EDR and explore its features and working.
 pubDate: 2026-10-13
 categories:
