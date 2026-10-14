@@ -143,7 +143,6 @@ Answer: Agent
 **An EDR agent is also known as a?**  
 Answer: Sensor  
 
-
 ## EDR Telemetry
 
 Data collected by agents is called **Telemetry**. 
@@ -177,7 +176,7 @@ Answer: Registry
 
 ## Detection
 
-![423](../../assets/Pasted%20image%2020261013230826.png)
+![278](../../assets/Pasted%20image%2020261013230826.png)
 
 Based on the telemetry received from the endpoints, some advanced detection techniques are applied to this data. Some of these techniques include:
 
