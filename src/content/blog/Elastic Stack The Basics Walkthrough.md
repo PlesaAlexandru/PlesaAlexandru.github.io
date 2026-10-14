@@ -10,7 +10,7 @@ tags:
   - TryHackMe
   - Walkthrough
   - Rooms
-image: /image/Elastic_Stack_The-_Basics.png
+image: /image/Elastic_Stack_The _Basics.png
 ---
 ---
 
@@ -35,7 +35,7 @@ Logstash is a data processing engine that takes data from different sources, fil
 3. The **Output** part is where the user wants the filtered data to be sent. It can be a listening port, Kibana Interface, Elasticsearch database, or file. 
 
 Logstash supports many Input, Output, and Filter plugins.
-![273](../../assets/Pasted%20image%2020261014215041.png)
+![](../../assets/Pasted%20image%2020261014215041.png)
 
 ## 3. Beats
 
