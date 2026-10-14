@@ -169,11 +169,11 @@ index=VPN_Logs
 ## QUESTIONS:
 
 **Upload the data attached to this task and create an index "VPN_Logs". How many events are present in the log file?**  
+We can just see the events in top left.
 ![](../../assets/Pasted%20image%2020261014211508.png)
 Answer: 2862    
 
 **How many log events are captured by the user Maleena?**  
-
 We can add the following expression: UserName=Maleena  
 ![](../../assets/Pasted%20image%2020261014211743.png)
 Answer: 60  
