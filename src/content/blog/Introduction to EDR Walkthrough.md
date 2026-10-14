@@ -13,7 +13,7 @@ tags:
 image: /image/introd-to-edr.png
 ---
 ---
-## Executive Summary
+## Summary
 
 WIP
 
