@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Splunk The Basics Walkthrough.md",
+                "file": "src/content/blog/Elastic Stack The Basics Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Splunk The Basics Walkthrough"
+              "title": "Elastic Stack The Basics Walkthrough"
             }
           }
         ]
@@ -200,23 +200,24 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
+    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
+    "src/assets/Pasted image 20261014234142.png",
+    "src/assets/Pasted image 20261014234057.png",
+    "src/assets/Pasted image 20261014233300.png",
+    "src/assets/Pasted image 20261014233257.png",
+    "src/assets/Pasted image 20261014232423.png",
+    "src/assets/Pasted image 20261014232406.png",
+    "src/assets/Pasted image 20261014232345.png",
+    "src/assets/Pasted image 20261014231754.png",
+    "src/assets/Pasted image 20261014231309.png",
+    "src/assets/Pasted image 20261014231256.png",
     "src/content/blog/Splunk The Basics Walkthrough.md",
+    "src/content/blog/Introduction to EDR Walkthrough.md",
     "public/image/Elastic_Stack_The-_Basics_tmp31199",
-    "public/image/Elastic_Stack_The-_Basics.png",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
-    "src/assets/Pasted image 20261014212708.png",
-    "src/assets/Pasted image 20261014212547.png",
-    "src/assets/Pasted image 20261014212428.png",
-    "src/assets/Pasted image 20261014212123.png",
-    "src/assets/Pasted image 20261014211743.png",
-    "src/assets/Pasted image 20261014211508.png",
-    "src/assets/Pasted image 20261014210704.png",
-    "src/assets/Pasted image 20261014210644.png",
-    "src/assets/Pasted image 20261014210551.png",
     "public/image/introd-to-splunk_tmp4099",
     "src/content/blog/Introduction to Phishing Writeup.mdx",
-    "src/content/blog/Introduction to EDR Walkthrough.md",
     "public/image/introd-to-edr_tmp20564",
     "public/image/Alert_Triage_tmp785",
     "public/image/Metrics_Obj_tmp1632",
@@ -224,7 +225,6 @@
     "public/image/Alert_Reporting_tmp14760",
     "public/image/introd-to-phising_tmp1588",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
-    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
     "public/image/introd-to-phising_tmp7797",
     "Tutorial Markup/markdown-style-guide.md",
