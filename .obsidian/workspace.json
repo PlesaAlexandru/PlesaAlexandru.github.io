@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Introduction to SOAR Walkthrough.md",
+                "file": "src/content/blog/Pyramid Of Pain Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Introduction to SOAR Walkthrough"
+              "title": "Pyramid Of Pain Walkthrough"
             }
           }
         ]
@@ -200,28 +200,28 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
+    "src/content/blog/Introduction to SOAR Walkthrough.md",
+    "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/content/blog/Elastic Stack The Basics Walkthrough.md",
+    "src/assets/Pasted image 20261015170202.png",
+    "src/assets/Pasted image 20261015170152.png",
+    "src/assets/Pasted image 20261015165628.png",
+    "src/assets/Pasted image 20261015164326.png",
+    "src/assets/Pasted image 20261015163541.png",
+    "src/assets/Pasted image 20261015163431.png",
+    "src/assets/Pasted image 20261015161355.png",
+    "src/assets/Pasted image 20261015161202.png",
+    "src/assets/Pasted image 20261015160804.png",
+    "src/assets/Pasted image 20261015160452.png",
     "src/content/blog/Splunk The Basics Walkthrough.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
-    "src/content/blog/Introduction to SOAR Walkthrough.md",
-    "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "src/content/blog/Introduction to Phishing Writeup.mdx",
     "src/content/blog/Introduction to EDR Walkthrough.md",
-    "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "2026-10-15.md",
     "public/image/piramidofpain_tmp6207",
-    "public/image/piramidofpain.png",
-    "src/assets/Pasted image 20261015134502.png",
-    "src/assets/Pasted image 20261015134436.png",
-    "src/assets/Pasted image 20261015134423.png",
-    "src/assets/Pasted image 20261015134414.png",
-    "src/assets/Pasted image 20261015134404.png",
-    "src/assets/Pasted image 20261015133250.png",
-    "src/assets/Pasted image 20261015132853.png",
-    "src/assets/Pasted image 20261015131537.png",
-    "src/assets/Pasted image 20261015130822.png",
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
     "Backup/Introduction to EDR Walkthrough.md",
     "Backup",
