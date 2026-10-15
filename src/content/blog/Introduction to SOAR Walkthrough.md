@@ -14,4 +14,8 @@ image: /image/introd-to-soar.png
 ---
 ---
 
+## Summary:
+
+---
+
 
