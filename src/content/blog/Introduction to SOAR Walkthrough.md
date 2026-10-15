@@ -123,7 +123,7 @@ In this scenario, your job is to determine and set which parts of the workflow s
 
 * **How would you describe the experience of an overload of security events being triggered within a SOC?**  
   *Answer:* Alert Fatigue
-* 
+
 * **The act of connecting and integrating security tools and systems into seamless workflows is known as?**  
   *Answer:* Orchestration
 
