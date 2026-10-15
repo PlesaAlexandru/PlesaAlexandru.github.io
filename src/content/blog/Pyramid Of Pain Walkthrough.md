@@ -236,7 +236,7 @@ I will post the end result of the matching description with the process:
 ![](../../assets/Pasted%20image%2020261015170152.png)
 ![](../../assets/Pasted%20image%2020261015170202.png)
 The flag received: THM{PYRAMIDS_COMPLETE}  
-
+## Q&A
 <details>
 <summary>Click to view TryHackMe Room Q&A</summary>
 

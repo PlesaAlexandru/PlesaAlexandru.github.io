@@ -159,7 +159,7 @@ Assuming the role of a SOC Analyst at TECH THM, alert triage was conducted on mu
 
 ---
 
-## Room Solutions & Review
+## Q&A
 
 <details>
 <summary>Questions from the room</summary>

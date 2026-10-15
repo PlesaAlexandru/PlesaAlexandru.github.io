@@ -117,7 +117,7 @@ In this scenario, your job is to determine and set which parts of the workflow s
 ![](../../assets/Pasted%20image%2020261015134436.png)
 ![](../../assets/Pasted%20image%2020261015134502.png)
 
-
+## Q&A
 <details>
 <summary>Click to view TryHackMe Room Q&A</summary>
 
