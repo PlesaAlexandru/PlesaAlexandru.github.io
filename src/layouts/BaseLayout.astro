@@ -165,26 +165,14 @@ const jsonLd =
     <script is:inline src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script>
 
 <style is:global>
-  /* Asigură că imaginea mărită și fundalul stau peste orice alt element din pagină */
+  /* Fundal solid semi-transparent în nuanța Dark Navy/Slate a temei Frosti */
   .medium-zoom-overlay {
     z-index: 9998 !important;
-    backdrop-filter: blur(8px);
-  }
-  .medium-zoom-image--opened {
-    z-index: 9999 !important;
-    cursor: zoom-out !important;
-  }
-</style>
-
-<style is:global>
-  /* Fundal curat fără blur greoi, optimizat pentru randare instantanee */
-  .medium-zoom-overlay {
-    z-index: 9998 !important;
-    background: rgba(5, 10, 20, 0.92) !important;
+    background-color: rgba(15, 23, 42, 0.88) !important;
     will-change: opacity;
   }
 
-  /* Forțează procesarea pe GPU pentru tranzicții 60 FPS fără frame drops */
+  /* Rulare accelerată pe GPU pentru a elimina orice lag la deschidere/închidere */
   .medium-zoom-image {
     will-change: transform;
     transform: translateZ(0);
@@ -208,9 +196,9 @@ const jsonLd =
       zoomInstance.detach();
     }
 
-    zoomInstance = mediumZoom('.prose img, article img, .markdown img', {
+    zoomInstance = mediumZoom('.prose img, article img, .markdown img, main img', {
       margin: 32,
-      background: 'rgba(5, 10, 20, 0.92)',
+      background: 'rgba(15, 23, 42, 0.88)',
     });
 
     window.addEventListener('keydown', (e) => {
