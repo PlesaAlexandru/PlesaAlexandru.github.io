@@ -140,6 +140,6 @@ In this scenario, your job is to determine and set which parts of the workflow s
   *Answer:* Mitigation plan
 
 * **What is the flag received?**  
-  *Answer:* `THM{AUT0M@T1N6_S3CUR1T}`
+  *Answer:* `THM{AUT0M@T1N6_S3CUR1T}¥`
 
 </details>
