@@ -15,7 +15,10 @@ image: /image/introd-to-edr.png
 ---
 ## Summary
 
-WIP
+Endpoint Detection and Response is a complimentary solution for the detections solutions that is capable through sensors or agents to detect anomalies even without past experience unlike antiviruses. 
+EDR is working based on the behaviour, IOC, Mitre chain of action and anomalies overall.
+AV on the other hand, is not capable of adapting to newer problems, some issues would still pass the antivirus solution.
+So it is important to go hand in hand to improve security of the host and collect telemetry to further improve visibility, which is one of the three pillars of EDR, detect the anomaly and response in time.
 
 ---
 
