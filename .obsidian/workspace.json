@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Pyramid Of Pain Walkthrough.md",
+                "file": "src/content/blog/Cyber Kill Chain Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Pyramid Of Pain Walkthrough"
+              "title": "Cyber Kill Chain Walkthrough"
             }
           }
         ]
@@ -184,7 +184,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 205.5
+    "width": 208.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,8 +200,11 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
-    "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/content/blog/Cyber Kill Chain Walkthrough.md",
+    "public/image/chain_thumb_tmp22051",
+    "public/image/chain_thumb.png",
+    "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/assets/Pasted image 20261015170202.png",
     "src/assets/Pasted image 20261015170152.png",
@@ -212,7 +215,6 @@
     "src/assets/Pasted image 20261015161355.png",
     "src/assets/Pasted image 20261015161202.png",
     "src/assets/Pasted image 20261015160804.png",
-    "src/assets/Pasted image 20261015160452.png",
     "src/content/blog/Splunk The Basics Walkthrough.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
@@ -231,7 +233,6 @@
     "public/image/introd-to-edr_tmp20564",
     "public/image/Alert_Triage_tmp785",
     "public/image/Metrics_Obj_tmp1632",
-    "public/image/Workbooks_Lookups_tmp15390",
     "Tutorial Markup/markdown-style-guide.md",
     "Tutorial Markup/adding-comment-systems.md",
     "Tutorial Markup/mathematics-examples.md",
