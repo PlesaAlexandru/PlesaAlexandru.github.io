@@ -1,7 +1,7 @@
 ---
 title: Introduction to SOAR Walkthrough
 description: Learn the concepts and methodology surrounding security orchestration, automation, and response.
-pubDate: 2026-10-15
+pubDate: 2026-10-14
 categories:
   - SOC
   - Walkthrough
