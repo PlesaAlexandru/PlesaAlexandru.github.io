@@ -10,7 +10,7 @@ tags:
   - TryHackMe
   - Walkthrough
   - Rooms
-image: /image/Elastic_Stack_The _Basics.png
+image: /image/Elastic_Stack_The-_Basics.png
 ---
 ---
 
