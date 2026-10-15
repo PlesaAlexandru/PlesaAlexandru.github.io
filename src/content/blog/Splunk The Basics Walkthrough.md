@@ -13,7 +13,6 @@ tags:
 image: /image/introd-to-splunk.png
 ---
 ---
-
 ## Splunk Components
 Splunk has three main components: Forwarder, Indexer, and Search Head. These components work together to help us search and analyze the data. These components are explained below:
 ![](../../assets/Pasted%20image%2020261014205102.png)
