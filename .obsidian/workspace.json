@@ -184,7 +184,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 208.5
+    "width": 212.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,29 +200,29 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
-    "src/content/blog/Cyber Kill Chain Walkthrough.md",
+    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
+    "src/assets/Pasted image 20261016235222.png",
+    "src/assets/Pasted image 20261016235030.png",
+    "src/assets/Pasted image 20261016235000.png",
+    "src/assets/Pasted image 20261016234913.png",
+    "src/assets/Pasted image 20261016234408.png",
+    "src/assets/Pasted image 20261016230934.png",
+    "src/assets/Pasted image 20261016230918.png",
+    "src/assets/Pasted image 20261016213635.png",
+    "src/assets/Pasted image 20261016213539.png",
+    "src/assets/Pasted image 20261016210039.png",
+    "src/content/blog/Cyber Kill Chain Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Introduction to Phishing Writeup.mdx",
     "src/content/blog/Introduction to EDR Walkthrough.md",
-    "src/assets/Pasted image 20261015203449.png",
-    "src/assets/Pasted image 20261015203433.png",
-    "src/assets/Pasted image 20261015172332.png",
-    "src/assets/Pasted image 20261015172319.png",
-    "src/assets/Pasted image 20261015172311.png",
-    "src/assets/Pasted image 20261015172301.png",
-    "src/assets/Pasted image 20261015172250.png",
-    "src/assets/Pasted image 20261015172241.png",
-    "src/assets/Pasted image 20261015172227.png",
-    "src/assets/Pasted image 20261015172220.png",
     "public/image/chain_thumb_tmp22051",
     "src/content/blog/Splunk The Basics Walkthrough.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
-    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "2026-10-15.md",
     "public/image/piramidofpain_tmp6207",
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
@@ -244,7 +244,6 @@
     "docs/CONTRIBUTING.md",
     "docs/CODE_OF_CONDUCT.md",
     "docs/CHANGELOG.md",
-    "2026-10-09.md",
-    "src/content/blog/Test.md"
+    "2026-10-09.md"
   ]
 }
