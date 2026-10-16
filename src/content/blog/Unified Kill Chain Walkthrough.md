@@ -169,15 +169,15 @@ With the credentials and elevated privileges, the adversary would seek to move t
 ![](../../assets/Pasted%20image%2020261016230934.png)
 
 
-#### **Collection** (MITRE Tactic TA0009)
+**Collection** (MITRE Tactic TA0009)
 
 This, in turn, compromises the confidentiality of the data and would lead to the next attack stage, Exfiltration. The main target sources include drives, browsers, audio, video and email.
 
-#### **Exfiltration** (MITRE Tactic TA0010)
+**Exfiltration** (MITRE Tactic TA0010)
 
 The adversary would seek to steal data, which would be packaged using encryption measures and compression to avoid any detection. The C2 channel and tunnel deployed in the earlier phases will come in handy during this process.
 
-#### **Impact** (MITRE Tactic TA0040)
+**Impact** (MITRE Tactic TA0040)
 
 If the adversary seeks to compromise the integrity and availability of the data assets, they would manipulate, interrupt or destroy these assets. The goal would be to disrupt business and operational processes and may involve removing account access, disk wipes, and data encryption such as ransomware, defacement and denial of service (DoS) attacks.
 
