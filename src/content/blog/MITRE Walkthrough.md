@@ -1,7 +1,7 @@
 ---
 title: MITRE Walkthrough
 description: In this room, we will focus on MITRE's cyber security frameworks and resources, including MITRE ATT&CK®, the CAR Knowledge Base, D3FEND, MITRE Engage™, and other relevant tools.
-pubDate: 2026-10-16
+pubDate: 2026-10-18
 categories:
   - SOC
   - Walkthrough

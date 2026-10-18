@@ -1,7 +1,7 @@
 ---
 title: Unified Kill Chain Walkthrough
 description: The Unified Kill Chain is a framework which establishes the phases of an attack, and a means of identifying and mitigating risk to IT assets.
-pubDate: 2026-10-16
+pubDate: 2026-10-17
 categories:
   - SOC
   - Walkthrough
