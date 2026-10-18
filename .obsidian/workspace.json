@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Unified Kill Chain Walkthrough.md",
+                "file": "src/content/blog/MITRE Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Unified Kill Chain Walkthrough"
+              "title": "MITRE Walkthrough"
             }
           }
         ]
@@ -200,22 +200,24 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
-    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
+    "src/content/blog/Introduction to SOAR Walkthrough.md",
+    "src/content/blog/MITRE Walkthrough.md",
+    "src/assets/Pasted image 20261018172101.png",
+    "src/assets/Pasted image 20261018172048.png",
+    "src/assets/Pasted image 20261018171728.png",
+    "src/assets/Pasted image 20261018171711.png",
+    "src/assets/Pasted image 20261018171704.png",
+    "src/assets/Pasted image 20261018171513.png",
+    "src/assets/Pasted image 20261018171451.png",
+    "src/assets/Pasted image 20261018171104.png",
+    "src/assets/Pasted image 20261018170727.png",
+    "src/assets/Pasted image 20261018170559.png",
+    "Backup/Template Walkthrough.md",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
-    "src/assets/Pasted image 20261016235222.png",
-    "src/assets/Pasted image 20261016235030.png",
-    "src/assets/Pasted image 20261016235000.png",
-    "src/assets/Pasted image 20261016234913.png",
-    "src/assets/Pasted image 20261016234408.png",
-    "src/assets/Pasted image 20261016230934.png",
-    "src/assets/Pasted image 20261016230918.png",
-    "src/assets/Pasted image 20261016213635.png",
-    "src/assets/Pasted image 20261016213539.png",
-    "src/assets/Pasted image 20261016210039.png",
+    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/content/blog/Cyber Kill Chain Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
-    "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Introduction to Phishing Writeup.mdx",
     "src/content/blog/Introduction to EDR Walkthrough.md",
     "public/image/chain_thumb_tmp22051",
@@ -242,8 +244,6 @@
     "docs/SECURITY.md",
     "docs/README.zh-CN.md",
     "docs/CONTRIBUTING.md",
-    "docs/CODE_OF_CONDUCT.md",
-    "docs/CHANGELOG.md",
-    "2026-10-09.md"
+    "docs/CODE_OF_CONDUCT.md"
   ]
 }
