@@ -7,7 +7,10 @@ const {
   baseUrl,
   isOnly = false,
 } = Astro.props as PaginationNumberProps;
-const href = number === 1 ? baseUrl : `${baseUrl}/${number}`;
+
+// Asigurăm formatul corect al linkului
+const normalizedBase = baseUrl === "/" ? "" : baseUrl.replace(/\/$/, "");
+const href = Number(number) === 1 ? (normalizedBase || "/") : `${normalizedBase}/${number}`;
 ---
 
 <a
