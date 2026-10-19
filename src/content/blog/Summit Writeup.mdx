@@ -1,6 +1,6 @@
 ---
 title: Summit Writeup
-description: Five malware basic analysis and blocks, based on the Pyramid of Pain. From hashes to rules and behaviour blocking.
+description: Analyzing and blocking five evolving malware stages across the Pyramid of Pain. From hashes to rules and behaviour blocking.
 pubDate: 2026-10-19
 categories:
   - SOC
@@ -426,3 +426,5 @@ Email received after blocking the modifying of the file.
 ## Conclusions and Ending note
 
 Overall, an enjoyable challenge with easy to understand simulated space. Not a true challenge to be fair but at least it puts in perspective the Pyramid of Pain which is really important to also have an hand on support for the theory.
+
+We saw how one malware can go multiple stages to bypass the detections and restrictions. From file sizing, hashes, DNS, behaviours and other artifacts we discovered the file is malicious and reused in other attacks on the same target/host by modifying or adapting based on the rules. 
