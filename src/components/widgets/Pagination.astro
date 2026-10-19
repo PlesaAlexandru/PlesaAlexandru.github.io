@@ -5,7 +5,11 @@ import PaginationArrow from "./PaginationArrow.astro";
 import PaginationDropdown from "./PaginationDropdown.astro";
 import PaginationNumber from "./PaginationNumber.astro";
 
-const { page, totalPages, pageLinks, baseUrl } = Astro.props as PaginationProps;
+const { page, totalPages, pageLinks, baseUrl: rawBaseUrl } = Astro.props as PaginationProps;
+
+// Curățăm orice număr de pagină de la final (/2, /3 etc.) din baseUrl
+const cleanBase = (rawBaseUrl || "").replace(/\/page\/\d+\/?$/, "").replace(/\/\d+\/?$/, "");
+const baseUrl = cleanBase === "" ? "/" : cleanBase;
 ---
 
 <div class="flex justify-between items-center w-full gap-2 order-4" transition:name="pagination">
