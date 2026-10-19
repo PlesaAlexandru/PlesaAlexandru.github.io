@@ -330,24 +330,99 @@ The email received:
 
 ![](../../assets/Pasted%20image%2020261018192537.png)
 
+### First step: Third party Verification / Internal Verification
 
-
-
-
-
-
+As we can see, the host `10[.]10[.]15[.]12` is sending 97 bytes every 30 minutes, which is more of an heartbeat signal ("I am alive" message to the attacker). This C2 behaviour is constant through the whole log file.  
+Let's use internal Malware Sandbox to check `sample5.exe` for more details.  
 ![](../../assets/Pasted%20image%2020261018192704.png)
 ![](../../assets/Pasted%20image%2020261018192710.png)
 ![](../../assets/Pasted%20image%2020261018192716.png)
 
+HTTP Request shows 2 instances, one is `sample5.exe` and another `beacon.bat` (Self explanatory name). A GET method (to get the `beacon.bat`) and one is POST (For the keep-alive function). An important fact is that we can see the hostname (?hostname=WK102).  
+
+DNS request is showing only one instance: `bababa10la[.]cn` and based on the information provided, it is a Cloud Service provider that could be a legitimate service. So blocking the whole DNS is not the way to go.  
+
+Third Party Services didn't return anything worth mentioning.  
+
+In anyway, we can block the network connections, via a similar way as the behaviour blocking.  
+
+### Second step: Blocking the malicious file  
+
+For the blocking method, we are going to use Network Blocking, but we want to block the keep alive signal, which have a constant 97 bytes every 30 minutes.  
 
 ![](../../assets/Pasted%20image%2020261018193855.png)
 
+**Steps:**
+1. Go to Sigma Rule Builder  
+2. Select Sysmon Event Logs  
+3. Select Network Connections  
+4. Add the remote IP  (Any because the IPs can change)
+5. Add the remote PORT (Any because the ports can change)  
+6. Add Size (97 bytes because the keep alive signal is constant 97 bytes)
+7. Add frequency
+8. ATTCK ID (`Command and Control TA0011`)
+9. Validate Rule  
 
 ![](../../assets/Pasted%20image%2020261018193901.png)
 
+## Sixth attachment - commands.log
 ![](../../assets/Pasted%20image%2020261018193942.png)
+> **File Overview**: `sample6.exe`  
+> 
+> **File Name**: `sample6.exe`  
+> **Sender**: Sphinx (sphinx@pentesting[.]thm)  
+> **Email Date:** 9/5/2023 1:02 PM  
+> **Attached Log:** `commands.log`  
+> 
+> **Behaviour Analysis Summary**  
+> **Suspicious**: Enumerates system directories and files, redirecting output to a temporary log file.  
+> **Suspicious**: Enumerates local administrators, network configurations, and active connections.  
+> **Suspicious**: Gathers system information and running services for data exfiltration.  
+
+### First step: Third party Verification / Internal Verification
+
+Here we can see a string full of commands with something in common, every command is collected to the `exfiltr8.log` file from `%temp%`.  So it is a post exploitation log file that collects data from the machine. (Exfiltration -  Exfiltr8 is also a name used just to make it obvious).
+
+**List and short description of the commands:**
+
+`dir c:\ >> %temp%\exfiltr8.log` - Lists root directory contents  
+
+`dir "c:\Documents and Settings" >> %temp%\exfiltr8.log` - Lists legacy user profiles and folders  
+
+`dir "c:\Program Files\" >> %temp%\exfiltr8.log `- Checks installed software and applications  
+
+`dir d:\ >> %temp%\exfiltr8.log `- Lists secondary drive contents  
+
+`net localgroup administrator >> %temp%\exfiltr8.log `- Identifies local admin users  
+
+`ver >> %temp%\exfiltr8.log` - Gets the Windows OS build/version  
+
+`systeminfo >> %temp%\exfiltr8.log `- Gathers detailed OS, hardware, and patch information  
+
+`ipconfig /all >> %temp%\exfiltr8.log `- Dumps complete network adapter configuration  
+
+`netstat -ano >> %temp%\exfiltr8.log` - Displays active network connections, ports, and PIDs  
+
+`net start >> %temp%\exfiltr8.log `- Lists currently running Windows **services**  
+
+
+### Second step: Blocking the malicious file  
+
+**Steps:**
+1. Go to Sigma Rule Builder  
+2. Select Sysmon Event Logs  
+3. Select File Creation and Modification (Storing means modification)  
+4. Add the general file path %temp%
+5. Add the file name `exfiltr8.log`  
+6. Add ATTCK ID (Exfiltration TA0010)
+7. Validate Rule  
 
 ![](../../assets/Pasted%20image%2020261018194427.png)
 
+## Ending
+Email received after blocking the modifying of the file.  
 ![](../../assets/Pasted%20image%2020261018194744.png)
+
+## Conclusions and Ending note
+
+Overall, an enjoyable challenge with easy to understand simulated space. Not a true challenge to be fair but at least it puts in perspective the Pyramid of Pain which is really important to also have an hand on support for the theory.
