@@ -1,0 +1,343 @@
+---
+title: Summit Writeup
+description: Template
+pubDate: 2026-10-18
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+image: /image/Summit_c.png
+---
+---
+## Important Notes:
+
+- No Answers, but the methodologies will be explained thoroughly.
+- Screenshots with answers will be blurred or censored
+- No skipped step
+
+---
+## Objective
+
+After participating in one too many incident response activities, PicoSecure has decided to conduct a threat simulation and detection engineering engagement to bolster its malware detection capabilities. You have been assigned to work with an external penetration tester in an iterative purple-team scenario. The tester will be attempting to execute malware samples on a simulated internal user workstation. At the same time, you will need to configure PicoSecure's security tools to detect and prevent the malware from executing.
+
+Following the **Pyramid of Pain's** ascending priority of indicators, your objective is to increase the simulated adversaries' cost of operations and chase them away for good. Each level of the pyramid allows you to detect and prevent various indicators of attack.
+
+---
+
+## Overview of the challenge
+
+**What is the first flag you receive after successfully detecting sample1.exe?**
+![](../../assets/Pasted%20image%2020261018185908.png)
+So, first, we can access different internal tools from the CTF, but I also used tools such as: AbuseIPDB, VirusTotal, Browserling, and others.
+
+It only worked on the first flag. `sample1.exe` is available on VirusTotal to get more insights but the rest will be hidden, with little details outside the simulation.
+
+Let's focus on the first step.
+Let's check it in the Malware Sandbox.
+This is the result:
+![](../../assets/Pasted%20image%2020261018185656.png)
+
+The given report looks similar to VirusTotal, giving three hashes (MD5, SHA1, SHA256), behaviour analysis, general information.
+
+## First sample - sample1
+
+![](../../assets/Pasted%20image%2020261018185643.png)
+
+> File Overview: `sample1.exe` 
+> 
+> **File Name:** `sample1.exe`
+> **File Size:** 202.50 KB
+> **File Type:** PE32+ executable (GUI) x86-64, for MS Windows
+> **MIME Type:** `application/x-dosexec`
+> **Analysis Date & OS:** September 5, 2023 on Windows 10x64 v1803
+> **Detection Tag:** Trojan.Metasploit.A
+> 
+> **Hashes**
+> - **MD5:** `cbda8ae000aa9cbe7c8b982bae006c2a`
+> - **SHA1:** `83d2791ca93e58688598485aa62597c0ebbf7610`
+> - **SHA256:** `9c550591a25c6228cb7d74d970d133d75c961ffed2ef7180144859cc09efca8c`
+> 
+> **Behaviour Analysis Summary**
+> - **Malicious:** METASPLOIT was detected (Process ID: 2492).
+> - **Suspicious:** Connects to an unusual port (Process ID: 2492).
+> - **Informational Actions (PID: 2492):**
+>     - Reads the machine GUID from the registry.
+>     - Checks LSA protection.
+>     - Reads the computer name.
+>     - Checks supported system languages.
+> 
+### First step: Third party Verification / Internal Verification
+
+Having a closer look at the results, we can see that is a Trojan made in / executed in Metasploit, an  framework for finding vulnerabilities and exploiting them.
+
+**What is the file?**
+`sample1.exe` is an executable file, with the size of 202.5KB (important for later)
+Before we look at any more details, let's put the hash in a VirusTotal scan.
+![](../../assets/Pasted%20image%2020261019010311.png)
+**Detection Rate:** **62 / 71 security vendors** flagged the file as malicious, confirming high-confidence classification as a Metasploit-generated Trojan.
+
+**Anomaly Note: File Size Discrepancy**
+During cross-referencing, a discrepancy in file size was observed despite identical cryptographic hashes:
+
+| File provided in the simulation | File shown in the VirusTotal |
+| ------------------------------- | ---------------------------- |
+| `202.50 KB`                     | `7.00 KB`                    |
+
+The difference could be explained either by the difference between Memory and Virtual Size or by the way that simulated sandbox is working. In any case, the hashes being the same means the file is the same.
+
+**Why is this file malicious?**
+It is shown multiple times as being a Trojan (is an app that should look legit but actually hides a malicious payload, similar to the trojan horse analogy). Also, the metasploit is also mentioned, which is a pentesting framework packed with exploits and payloads. Also, meterpreter is mentioned, which is a payload used for post-exploitation with an command-and-control interface.
+
+So, we know it is **malicious**, as seen in the bottom we got a couple of reasons on why based on behaviour.
+
+![](../../assets/Pasted%20image%2020261018185723.png)
+
+### Second step: Blocking the malicious file
+
+Here we have limited options, but for this one we are going to block the sample with `Hash Blocking`
+File blocking via hash, generally is not recommended because of how hashing works. Changing even 1 byte will totally change the entire hash, which is a common practice to bypass the same target. It is also on the lowest level on the Pyramid of Pain.
+
+**Steps:** 
+1. Go to manage hashes
+2. Select the type of hash and paste it in the Hash Value
+3. Submit (if the hash is correctly blocked, it will turn green as in the picture below)
+
+![](../../assets/Pasted%20image%2020261018185831.png)
+
+After we successfully blocked the hash, we receive the first flag along side with another email from the same sender. This time with another `.exe` file attached. 
+
+![](../../assets/Pasted%20image%2020261018185855.png)
+
+## Second sample - sample2
+![](../../assets/Pasted%20image%2020261018185947.png)
+
+> **File Overview:** `sample2.exe`
+> 
+> **File Name:** `sample2.exe` 
+> **File Size:** 202.73 KB 
+> **File Type:** PE32+ executable (GUI) x86-64, for MS Windows 
+> **MIME Type:** `application/x-dosexec` 
+> **Analysis Date & OS:** September 5, 2023 on Windows 10x64 v1803 
+> **Detection Tag:** Trojan.Metasploit.A 
+> 
+> **Hashes**
+> **MD5:** `4d661bf605d6b0b15915a533b572a6bd`
+> **SHA1:** `6878976974c27c8547cfc5acc90fb28ad2f0e975`
+> **SHA256:** `d576245e85e6b752b2fdffa43abaab1b2e1383556b0169fd04924d6cebc1cdf9`
+> 
+> **Behaviour Analysis Summary**
+> **Malicious:** METASPLOIT was detected (Process ID: 1927).
+> **Suspicious:** Connects to an unusual IP address and connects to an unusual port (Process ID: 1927).
+> - Informational Actions (PID: 1927): Reads the machine GUID from the registry.
+> - Checks LSA protection.
+> - Reads the computer name.
+> - Checks supported system languages.
+
+This time, we also have an Network Activity tab. Which is really important because we can see the exact connections that `sample2.exe` is doing when executed.
+First, we see 3 connections and 1 HTTP request. 
+The first one is sketchy (`154[.]35[.]10[.]113[:]4444`) because is connecting to the 4444 port which is typically used on metasploit / reverse shells.
+The last 2 seems legit, 443 port is port used for HTTPS. For this simulation we will be focusing on the first connection.
+
+![](../../assets/Pasted%20image%2020261018185954.png)
+### First step: Third party Verification / Internal Verification
+
+The goal is to understand the source of the attack and to find as much information before anything.
+We can check the IP provided in AbuseIPDB, but it could be useless because attackers use other infected machines to not be detected. In this case, the machine have a really low risk (0%) which could be, based on the attack, an pentesting exercise (which is the case in this simulation) or a new infected machine from Cognet Communications, LLC (U.S.A).
+No valuable information provided from this basic search, but I did it for the sake of learning and curiosity.
+
+![](../../assets/Pasted%20image%2020261019141122.png)
+
+An important thing to mention!
+The file size of the `sample2.exe` is oddly similar to `sample1.exe` which is a sign that the attacker changed the code slightly to bypass the hash blocking.
+
+Let's compare the hashes.
+
+| MD5                              | Source        |
+| -------------------------------- | ------------- |
+| 4d661bf605d6b0b15915a533b572a6bd | `sample2.exe` |
+| cbda8ae000aa9cbe7c8b982bae006c2a | `sample1.exe` |
+
+The hashes are completely different, but it is not a totally completely different file, it was a bit changed to skip the hash verification.
+![](../../assets/Pasted%20image%2020261019144853.png)
+The behaviour is the same as in `sample1.exe`.
+### Second step: Blocking the malicious file
+
+This time, as mentioned in the email, blocking it by hash will not be enough. The next option would be to block via IP.
+
+**Steps:**
+1. Go to Firewall Rule Manager
+2. Create a new rule with the following details
+3. Save rule (If done correctly, It should turn green and You should have a popup notification with the flag / an email )
+
+![](../../assets/Pasted%20image%2020261019140852.png)
+
+Before we move on, I wanted to explain the rule in case anyone needs it.
+Type: Egress (Outgoing - The request is an GET request from our machine to another)
+Source IP: Any (We don't care what is our IP, if we have to block an Outgoing request we can block Any Source IPs)
+Destination IP: 154.35.10.113 (Is the malicious address)
+Action: Deny (To block the attack)
+
+The email received after blocking:
+![](../../assets/Pasted%20image%2020261018191515.png)
+## Third sample - sample3
+![](../../assets/Pasted%20image%2020261018190633.png)
+> **File Overview:** `sample3.exe`
+> 
+> **File Name:** `sample3.exe` 
+> **File Size:** 207.12 KB 
+> **File Type:** PE32+ executable (GUI) x86-64, for MS Windows 
+> **MIME Type:** `application/x-dosexec` 
+> **Analysis Date & OS:** September 5, 2023 on Windows 10x64 v1803 
+> **Detection Tag:** Trojan.Metasploit.A 
+> 
+> **Hash**
+	**MD5**: `e31f0c62927d9d5a897b4c45e3c64dbc`
+	**SHA1**: `a92d3de6b1e3ab295f10587ca75f15318cb85a7b`
+	**SHA256**: `acb9b1260bcd08a465f9f300ac463b9b1215c097ebe44610359bb80881fe6a05` 
+>**Behaviour Analysis Summary**
+	Malicious: METASPLOIT was detected (Process ID: 1021) and downloads executable files from the Internet via backdoor.exe (Process ID: 2712).
+	Suspicious: Connects to an unusual IP address and connects to an unusual port (Process ID: 1021).
+>     - Informational Actions (PID: 1021): Reads the machine GUID from the registry.
+>     - Checks LSA protection.
+>     - Reads the computer name.
+>     - Checks supported system languages.
+
+### First step: Third party Verification / Internal Verification
+
+Similar as before, we receive a similar looking file where Hash checking is not working and IP blocking is useless.
+What other options do we have? We can see that the `sample3.exe` is doing a couple of connections, such as Microsoft (which seems legit in this case, the right port, right domain), but also with `emudyn.bresonicz.info` which means we can block it via DNS (Domain Name System). I tried accessing it with Browserling (sandbox tool) but with no success.
+
+![](../../assets/Pasted%20image%2020261018190642.png)
+
+Also, file sizing is really close to the original `sample2.exe`. Which means, little to no changes, maybe 1-2 new instructions were added. But the behaviour stays the same, this time is mentioned an backdoor which is visible in the HTTP Request tab.
+
+| Size (KB) | Filename      |
+| --------- | ------------- |
+| 207.12    | `sample3.exe` |
+| 202.73    | `sample2.exe` |
+| 202.50    | `sample1.exe` |
+### Second step: Blocking the malicious file
+
+Let's create DNS rule in the DNS Rule Manager. The rule should have
+- A name for the rule to know exactly what it is blocking
+- Category of the blocking (if we are blocking Malware for example)
+- Domain Name (The domain blocked) ~ ! Blocking the subdomain will be inefficient, we have to block the whole domain, it doesn't look legit so blocking the whole domain should not be a problem.
+- Action should be Deny
+
+![](../../assets/Pasted%20image%2020261018191305.png)
+
+**Steps:**
+1. Go to DNS Rule Manager
+2. Create DNS Rule
+3. Copy the settings or make your own with the mentions
+4. Save rule
+5. Done, if it turns green, it is good to go
+
+![](../../assets/Pasted%20image%2020261018191243.png)
+
+The email received after blocking:
+![](../../assets/Pasted%20image%2020261018191525.png)
+## Fourth sample - sample4
+![](../../assets/Pasted%20image%2020261018191426.png)
+> **File Overview:** `sample4.exe`
+> 
+> **File Name:** `sample4.exe` 
+> **File Size:** 219.46 KB 
+> **File Type:** PE32+ executable (GUI) x86-64, for MS Windows 
+> **MIME Type:** `application/x-dosexec` 
+> **Analysis Date & OS:** September 5, 2023 on Windows 10x64 v1803 
+> **Detection Tag:** None 
+> 
+> **Hashes** 
+> **MD5:** `5f29ff19d99fe244eaf5835ce01a4631` 
+> **SHA1:** `cd12d2328f700ae1ba1296a5f011bfc5a49f456d` 
+> **SHA256:** `a80cffb40cea83c1a20973a5b803828e67691f71f3c878edb5a139634d7dd422` 
+> 
+> **Behaviour Analysis Summary** 
+> **Malicious:** Disables Windows Defender Real-time monitoring (Process ID: 3806). 
+> **Malicious:** Downloads executable files from the Internet via backdoor.exe (Process ID: 1367). **Suspicious:** Connects to an unusual IP address (Process ID: 3806). 
+> **Suspicious:** Connects to an unusual port (Process ID: 3806). 
+> **Suspicious:** Makes changes to the registry (Process ID: 3806). 
+> 
+> Informational Actions (PID: 3806): 
+> Reads the machine GUID from the registry. 
+> Informational Actions (PID: 3806): 
+> Checks LSA protection. 
+> Informational Actions (PID: 3806): 
+> Reads the computer name. 
+> Informational Actions (PID: 3806): 
+> Checks supported system languages.
+
+### First step: Third party Verification / Internal Verification
+
+The DNS has changed to `cranes0ft.iniware.xyz` from `emudyn.bresonicz.info`.
+So DNS blocking will be inefficient if the attacked already changes the DNS addresses that easily.
+Also accessing this DNS in browserling is not returning anything valuable.
+The backdoor is still the same, `backdoor.exe`.
+We have no VirusTotal report, AbuseIPDB return an 0 risk IP, browserling sandbox can't access the DNS (it is not a real website). So we are limited by the simulation.
+
+![](../../assets/Pasted%20image%2020261018191439.png)
+
+We also have a new `Registry Activity` tab. Here we can see other artifacts that `sample4.exe` is leaving behind such as Registry modifications.
+
+![](../../assets/Pasted%20image%2020261018191446.png)
+
+The first event means that `sample4.exe` is disabling the Windows Defender Real Time Protection.
+This technique is also called `Defense Impairment (TA0112)`.
+We can see by looking at the registry, it is changing the value from 0 to 1 on the DpaDisabled registry rule (in the simulation, due to the OS, it is called **DisableRealtimeMonitoring**), which actually disables the service.
+The other 2 activities, seems legit, no need for further investigation, only if any other artifacts appear.
+
+![](../../assets/Pasted%20image%2020261019152447.png)
+
+We are not able to find anything for IP, Hashes, DNS searches. So the next thing remaining is Dynamic Analysis or Just blocking the file, because we don't have access to the file, we will just block it via Registry Restrictions.
+### Second step: Blocking the malicious file
+
+**Steps:**
+1. Go to Sigma Rule Builder
+2. Select Sysmon Event Logs
+3. Select Registry Modification
+4. Add the key (Path towards the rule)
+5. Add Registry Name (The rule's name)
+6. Add Value 1 (1 = Enable, 0 = Disable)
+7. ATTCK ID (We didn't have the TA0112 available so the next option is TA0005 Defense Evasion)
+8. Validate Rule
+
+![](../../assets/Pasted%20image%2020261018192346.png)
+
+The result should look like this:
+![](../../assets/Pasted%20image%2020261018192354.png)
+
+The email received:
+![](../../assets/Pasted%20image%2020261018192408.png)
+
+## Fifth attachment - outgoing_connections.log
+
+![](../../assets/Pasted%20image%2020261018192527.png)
+
+![](../../assets/Pasted%20image%2020261018192537.png)
+
+
+
+
+
+
+
+![](../../assets/Pasted%20image%2020261018192704.png)
+![](../../assets/Pasted%20image%2020261018192710.png)
+![](../../assets/Pasted%20image%2020261018192716.png)
+
+
+![](../../assets/Pasted%20image%2020261018193855.png)
+
+
+![](../../assets/Pasted%20image%2020261018193901.png)
+
+![](../../assets/Pasted%20image%2020261018193942.png)
+
+![](../../assets/Pasted%20image%2020261018194427.png)
+
+![](../../assets/Pasted%20image%2020261018194744.png)
