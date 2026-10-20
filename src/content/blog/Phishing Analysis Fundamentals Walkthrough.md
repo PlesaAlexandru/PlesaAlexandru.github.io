@@ -1,7 +1,7 @@
 ---
 title: Phishing Analysis Fundamentals Walkthrough
 description: Phishing Analysis Fundamentals. Header and body analysis of three practice emails. Nothing hard, but really important for beginners.
-pubDate: 2026-10-16
+pubDate: 2026-10-20
 categories:
   - SOC
   - Walkthrough
