@@ -241,7 +241,7 @@ What is the defanged `X-Originating-IP`?**
 
 * **Continue analyzing the email message source.  
 Which mail server generated the `Authentication-Results` header?**  
-  *Answer:* aaaaaaaaaa
+  *Answer:* atlas102[.]free[.]mail[.]gq1[.]yahoo[.]com
 
 * **What attack, signified by the acronym BEC, uses a compromised email to trick employees into fraud?**  
   *Answer:* Business Email Compromise
