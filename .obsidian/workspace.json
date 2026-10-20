@@ -200,9 +200,14 @@
   },
   "active": "6c836355bc6f662f",
   "lastOpenFiles": [
-    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
-    "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
+    "src/content/blog/Phishing Analysis Tools Walkthrough.md",
     "src/content/blog/Phishing Emails in Action Walkthrough.md",
+    "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/content/blog/Summit Writeup.mdx",
+    "public/image/phish-tools_tmp30819",
+    "public/image/phish-tools.png",
+    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/assets/Pasted image 20261020164227.png",
     "src/assets/Pasted image 20261020164015.png",
     "src/assets/Pasted image 20261020163922.png",
@@ -212,13 +217,10 @@
     "src/assets/Pasted image 20261020163033.png",
     "src/assets/Pasted image 20261020162336.png",
     "src/assets/Pasted image 20261020162323.png",
-    "src/assets/Pasted image 20261020162320.png",
     "public/image/phish-in-action_tmp20056",
     "public/image/Summit_c_tmp11121",
-    "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
     "public/image/introd-to-phishing-fund_tmp4508",
     "Backup/Template Walkthrough.md",
-    "src/content/blog/Summit Writeup.mdx",
     "Backup/Introduction to EDR Walkthrough 1.md",
     "src/content/blog/Eviction Walkthrough.mdx",
     "public/image/evictionthm_tmp18883",
@@ -227,7 +229,6 @@
     "src/assets/Pasted image 20261018191515.png.~tmp",
     "src/assets/Pasted image 20261018191525.png.~tmp",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
-    "src/assets/Pasted image 20261018192408.png.~tmp",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
     "Backup/Introduction to EDR Walkthrough.md",
     "Tutorial Markup/mathematics-examples.md",
@@ -243,7 +244,6 @@
     "Tutorial Markup/markdown-style-guide.md",
     "Tutorial Markup/adding-comment-systems.md",
     "README.md",
-    "2026-10-11.md",
-    "docs/SECURITY.md"
+    "2026-10-11.md"
   ]
 }

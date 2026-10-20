@@ -199,7 +199,7 @@ What is this type of attack called?**
   *Answer:* credential harvesting
 
 * **  What is the actual sender email address hidden behind the `Netllx billing` display name?**  
-  *Answer:* z99@musacombi.online
+  *Answer:* z99@musacombi[.]online
 
 * **What does the acronym BCC stand for?**  
   *Answer:* Blind Carbon Copy
