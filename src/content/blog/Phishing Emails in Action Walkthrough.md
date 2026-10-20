@@ -183,6 +183,8 @@ If successfully executed, the attacker could:
 ![](../../assets/Pasted%20image%2020261020164227.png)
 ## Conclusion
 
+Useful to understand phishing attacks with examples and what-if focused analysis.
+
 ## Q&A
 <details>
 <summary>Click to view TryHackMe Room Q&A</summary>
