@@ -307,7 +307,7 @@ What is the full path to the malicious binary?**
 
 * **Next, the malicious file downloads COVID-themed malware.  
 What domain was it downloaded from (e.g., malware.thm)?**  
-  *Answer:* biz9holdings.com
+  *Answer:* biz9holdings[.]com
 
 * **What network threat is associated with the download?**  
   *Answer:* ET INFO Suspicious GET Request with Possible COVID-19 URI M1
