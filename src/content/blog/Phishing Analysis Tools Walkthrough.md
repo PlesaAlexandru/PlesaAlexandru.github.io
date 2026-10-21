@@ -1,7 +1,7 @@
 ---
 title: Phishing Analysis Tools Walkthrough
 description: Learn the tools used to aid an analyst to investigate suspicious emails. With 3 practical examples where we can use the tools provided.
-pubDate: 2026-10-20
+pubDate: 2026-10-21
 categories:
   - SOC
   - Walkthrough
