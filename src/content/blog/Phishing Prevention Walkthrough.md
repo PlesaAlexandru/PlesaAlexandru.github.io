@@ -272,7 +272,7 @@ Even with strong technical defenses in place, some phishing emails will inevitab
   *Answer:* document.zip
 
 * **According to the message in packet `270`, which Host IP address is not responding, making the message undeliverable?**  
-  *Answer:* 212.253.25.152
+  *Answer:* 212[.]253[.]25[.]152
 
 * **By filtering for `imf`, which email client was used to send the message containing the attachment `attachment.scr`?**  
   *Answer:* Microsoft Outlook Express 6.00.2600.0000
