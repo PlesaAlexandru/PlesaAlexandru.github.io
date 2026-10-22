@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Phishing Analysis Tools Walkthrough.md",
+                "file": "src/content/blog/Phishing Prevention Walkthrough.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Phishing Analysis Tools Walkthrough"
+              "title": "Phishing Prevention Walkthrough"
             }
           }
         ]
@@ -202,20 +202,20 @@
   "lastOpenFiles": [
     "src/content/blog/Phishing Emails in Action Walkthrough.md",
     "src/content/blog/Phishing Prevention Walkthrough.md",
-    "Backup/Template Walkthrough.md",
+    "src/assets/Pasted image 20261022170546.png",
+    "src/assets/Pasted image 20261022170242.png",
+    "src/assets/Pasted image 20261022170103.png",
+    "src/assets/Pasted image 20261022170021.png",
+    "src/assets/Pasted image 20261022165937.png",
+    "src/assets/Pasted image 20261022164853.png",
+    "src/assets/Pasted image 20261022164346.png",
+    "src/assets/Pasted image 20261022164119.png",
+    "src/assets/Pasted image 20261022163852.png",
+    "src/assets/Pasted image 20261022163833.png",
     "src/content/blog/Phishing Analysis Tools Walkthrough.md",
+    "Backup/Template Walkthrough.md",
     "public/image/phish-prev_tmp7148",
-    "public/image/phish-prev.png",
     "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
-    "src/assets/Pasted image 20261021173805.png",
-    "src/assets/Pasted image 20261021173324.png",
-    "src/assets/Pasted image 20261021173222.png",
-    "src/assets/Pasted image 20261021172558.png",
-    "src/assets/Pasted image 20261021171756.png",
-    "src/assets/Pasted image 20261021171348.png",
-    "src/assets/Pasted image 20261021170925.png",
-    "src/assets/Pasted image 20261021170847.png",
-    "src/assets/Pasted image 20261021170643.png",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "src/content/blog/Summit Writeup.mdx",
     "public/image/phish-tools_tmp30819",
@@ -244,7 +244,6 @@
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
     "Tutorial Markup/markdown-style-guide.md",
     "Tutorial Markup/adding-comment-systems.md",
-    "README.md",
-    "2026-10-11.md"
+    "README.md"
   ]
 }
