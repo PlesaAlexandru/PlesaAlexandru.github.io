@@ -1,0 +1,135 @@
+---
+title: Repossessed Writeup
+description: Analyzing and blocking five evolving malware stages across the Pyramid of Pain. From hashes to rules and behaviour blocking.
+pubDate: 2026-10-22
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+image: /image/repossessed.png
+---
+---
+## Important Notes:
+
+
+---
+## Objective
+
+- Identify what caused the unusual activity observed on a workstation.
+- Determine whether the activity indicates the workstation was communicating with an external party.
+- Determine how the actor may have gained access to additional systems on the network.
+- Assess whether any data was accessed or removed from the network.
+
+---
+
+We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high severity alerts first, then a critical one. For this exercise, I want to choose the highest severity first and then the oldest alert. That will be the order of the whole exercise and the triage method I choose.
+
+## First Alert - 6355 (Anomalous Credential Vault Access)
+
+![](../../assets/Pasted%20image%2020261022192315.png)
+![](../../assets/Pasted%20image%2020261022192322.png)
+<Kbd>
+**Alert & Event Metadata**
+* **Host:** `THM-MSMITH.tryhatmestudios.thm`
+* **Timestamp:** `10/23/2026 11:31:04.782`
+* **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+* **Event ID:** `1` (Process Create)
+* **Record ID:** `46167`
+* **Target User:** `TRYHATME\m.smith`
+* **User SID:** `S-1-5-18`
+* **Logon ID:** `0x9C30E0`
+* **Logon GUID:** `{3af46175-c39c-6a8f-e030-9c0000000000}`
+* **Terminal Session ID:** `4`
+ **Parent Process (Execution Source)**
+* **Parent Image:** `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+* **Parent Process ID:** `9356`
+* **Parent Process GUID:** `{3af46175-390a-6a90-991d-000000001200}`
+* **Parent User:** `TRYHATME\m.smith`
+* **Parent CommandLine:** `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoP -W Hidden -ExecutionPolicy Bypass -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1"`
+* **Referenced Script Path:** `C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1`
+**Child Process (Target Execution)**
+* **Image Path:** `C:\Windows\System32\VaultCmd.exe`
+* **Original File Name:** `VAULTCMD.EXE`
+* **Process ID:** `10872`
+* **Process GUID:** `{3af46175-390c-6a90-9d1d-000000001200}`
+* **CommandLine:** `"C:\Windows\Sysnative\vaultcmd.exe" "/listcreds:Windows Credentials"`
+* **Current Directory:** `C:\Windows\system32\`
+* **Integrity Level:** `Medium`
+* **Product:** `Microsoft® Windows® Operating System`
+* **File Version:** `10.0.22621.1 (WinBuild.160101.0800)`
+ **Process Hashes (VaultCmd.exe)**
+* **MD5:** `4D2AD9A08F33212EDE3A128E23F00759`
+* **SHA256:** `D76274F883C86EF2B9090E43935D9ADC6B81B35A2A6FA39E37890F80FDFA9B76`
+* **IMPHASH:** `423E299DF33B8039596FF81AE53C9CA4`
+**Detection Context**
+* **Description:** Process queried the local Windows Credential Store (`Windows Credentials`). Stored credentials are routinely targeted after initial code execution to enable lateral movement across domain systems without further exploit execution.
+</Kbd>
+
+
+
+
+
+
+
+![](../../assets/Pasted%20image%2020261022192330.png)
+
+
+
+
+![](../../assets/Pasted%20image%2020261022192358.png)
+![](../../assets/Pasted%20image%2020261022192407.png)
+
+
+![](../../assets/Pasted%20image%2020261022192348.png)
+
+![](../../assets/Pasted%20image%2020261022192453.png)
+
+![](../../assets/Pasted%20image%2020261022192521.png)
+
+
+![](../../assets/Pasted%20image%2020261022194450.png)![](../../assets/Pasted%20image%2020261022194501.png)
+
+
+![](../../assets/Pasted%20image%2020261022194953.png)
+
+![](../../assets/Pasted%20image%2020261022195245.png)
+![](../../assets/Pasted%20image%2020261022195255.png)
+
+
+![](../../assets/Pasted%20image%2020261022195734.png)
+![](../../assets/Pasted%20image%2020261022195743.png)
+
+![](../../assets/Pasted%20image%2020261022200257.png)
+![](../../assets/Pasted%20image%2020261022200306.png)
+
+
+
+
+
+![](../../assets/Pasted%20image%2020261022201303.png)
+![](../../assets/Pasted%20image%2020261022201315.png)
+
+![](../../assets/Pasted%20image%2020261022201455.png)
+![](../../assets/Pasted%20image%2020261022201504.png)
+
+
+![](../../assets/Pasted%20image%2020261023133941.png)
+![](../../assets/Pasted%20image%2020261023133958.png)
+
+
+
+![](../../assets/Pasted%20image%2020261022204100.png)
+
+
+![](../../assets/Pasted%20image%2020261022204107.png)
+
+![](../../assets/Pasted%20image%2020261022204113.png)
+
+![](../../assets/Pasted%20image%2020261022204128.png)
+
+----
+
