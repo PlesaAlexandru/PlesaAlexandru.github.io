@@ -82,18 +82,54 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 > **Detection Context**
 > * **Description:** Process queried the local Windows Credential Store (`Windows Credentials`). Stored credentials are routinely targeted after initial code execution to enable lateral movement across domain systems without further exploit execution.
 
-<Success>True Positive </Success>
-<Info>Escalation Needed </Info>
+#### Overview Investigation
 
+The investigation should be done by the playbook, but since no playbook was done in this scenario for us to follow, we are going to focus on the obvious signs to decide if it is a True Positive or False Positive.
 
-
-
-
+So, first, the description is enumeration / reading credentials held in Windows. Let's have a look at the processes:
+  
+`VAULTCMD.EXE` is a legit file that we can also search the hash into VirusTotal or internal tools for more informations to confirm the legitimate executable file.
 ![](../../assets/Pasted%20image%2020261022192330.png)
 
+After that, we are going to see what exactly triggered the alert, while looking at the `Parent CommandLine` we can see that Powershell have a couple of sketchy flags, I will do a table to explain each flag.
+
+| Flag                                                               | Description                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -NoP                                                               | Don't load user profile settings. Every time PowerShell starts normally, it loads custom settings, shortcuts, and plugins configured for that specific user.                                                                                                                      |
+| -W Hidden                                                          | Do not show a window on the screen.                                                                                                                                                                                                                                               |
+| -ExecutionPolicy Bypass                                            | Ignore all Windows security locks on running scripts. By default, Windows blocks untrusted or downloaded scripts (`.ps1`) to protect your computer. This flag disables that safety check for this specific session, allowing the script to run regardless of system restrictions. |
+| -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1" | The exact file and path that PowerShell is instructed to open and execute. Attackers love using this location because standard users have full permission to write and run files here.                                                                                            |
+
+Every flag is a huge problem, why any normal user would want to hide the powershell window for example? It is a suspicious behaviour that has nothing to do with internal services. Just for that, the whole alert is `True Positive` and should be escalated further for more a deeper investigation.
+But also, executing files from the Temp folder is also a huge red flag due to the fact that there never should be a `svchost_update.ps1` file. 
+
+`svchost` is a legitimate Windows process that is used to run background services stored as DLL files. But the attacker is adding the `_update.ps1` at the end to mimic an Update executable file, but in reality that doesn't exist. `svchost` is updating based on windows, not from an external file.
+
+The extension is also different, from `.exe` to `.ps1`.
+An `.ps1` file is a plain text script file containing a sequence of commands written for PowerShell, which could be highly malicious
+
+Also, the path is completely wrong
 
 
+| `svchost` legitimate path       | `svchost_update.ps1` path                                  |
+| ------------------------------- | ---------------------------------------------------------- |
+| C:\Windows\System32\svchost.exe | C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1 |
 
+In this case we can assume that the attacker is trying to do an internal reconnaissance or enumeration.
+
+#### Verdict - 6355 (Anomalous Credential Vault Access)
+
+The following methods were identified:
+
+**Masquerading** (`svchost.exe`)
+- **Technique:** T1036 — Masquerading
+- **Sub-technique:** T1036.005 — Match Legitimate Name or Location
+
+**Execution via Command and Scripting Interpreter**
+- **Technique:** T1059 — Command and Scripting Interpreter
+- **Sub-technique:** T1059.001 — PowerShell
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
 
 
 
