@@ -44,7 +44,7 @@ We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high 
 ![](../../assets/Pasted%20image%2020261022192315.png)
 ![](../../assets/Pasted%20image%2020261022192322.png)
 >  **Alert & Event Metadata** 
-> * Host: `THM-MSMITH.tryhatmestudios.thm`
+> * Host: `THM-MSMITH[.]tryhatmestudios[.]thm`
 > * **Timestamp:** `10/23/2026 11:31:04.782`
 > * **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
 > * **Event ID:** `1` (Process Create)
@@ -110,7 +110,6 @@ An `.ps1` file is a plain text script file containing a sequence of commands wri
 
 Also, the path is completely wrong
 
-
 | `svchost` legitimate path       | `svchost_update.ps1` path                                  |
 | ------------------------------- | ---------------------------------------------------------- |
 | C:\Windows\System32\svchost.exe | C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1 |
@@ -122,19 +121,16 @@ In this case we can assume that the attacker is trying to do an internal reconna
 The following methods were identified:
 
 **Masquerading** (`svchost.exe`)
-- **Technique:** T1036 — Masquerading
-- **Sub-technique:** T1036.005 — Match Legitimate Name or Location
+- **Technique:** T1036 
+- **Sub-technique:** T1036.005 (Match Legitimate Name or Location)
 
 **Execution via Command and Scripting Interpreter**
-- **Technique:** T1059 — Command and Scripting Interpreter
-- **Sub-technique:** T1059.001 — PowerShell
+- **Technique:** T1059 (Command and Scripting Interpreter)
+- **Sub-technique:** T1059.001 (PowerShell)
 
 <Success>True Positive case. Escalation needed for further investigation. </Success>
 
-
-
-
-
+## Second Alert - 6360 (Suspicious External Connection Following Archive Creation)
 ![](../../assets/Pasted%20image%2020261022192358.png)
 ![](../../assets/Pasted%20image%2020261022192407.png)
 > **Alert & Event Metadata**
@@ -163,6 +159,10 @@ The following methods were identified:
 > **Detection Context**
 > - **Description:** This detection fires when a host transmits data to an external destination around the time an archive file is created locally. Connections to the same destination are grouped, so an alert may represent several connections rather than one, and the analyst is expected to establish how many occurred and over what interval. Archive creation followed by an outbound transfer matches the pattern used to move collected data out of an environment, but it also matches routine backup, telemetry, and vendor integration traffic. The analyst must establish what the archive contained, which process opened the connection, and whether the destination is a known and approved service before reaching a verdict.
 
+#### Overview Investigation
+
+
+
 
 
 
@@ -172,6 +172,14 @@ The following methods were identified:
 ![](../../assets/Pasted%20image%2020261022192453.png)
 
 ![](../../assets/Pasted%20image%2020261022192521.png)
+
+#### Verdict - 6360 (Suspicious External Connection Following Archive Creation)
+
+
+
+
+
+
 
 
 ![](../../assets/Pasted%20image%2020261022194450.png)![](../../assets/Pasted%20image%2020261022194501.png)
