@@ -1,7 +1,7 @@
 ---
 title: Repossessed Writeup
 description: Analyzing and blocking five evolving malware stages across the Pyramid of Pain. From hashes to rules and behaviour blocking.
-pubDate: 2026-10-22
+pubDate: 2026-10-23
 categories:
   - SOC
   - TryHackMe
@@ -792,10 +792,12 @@ Based on the time and action we can make a Kill Chain of the attack.
 
 ![](../../assets/Pasted%20image%2020261022204128.png)
 
+## Personal Note After Writeup
+
 Some remarks.
 
 We successfully triage the True Positives and False Positives. But I didn't fully investigate what was the kill chain of action. Even identified, I could go deeper to see what happened. But that's a job for the L2 or Threat Hunter / Incident Responder. The simulation was done from the SOC L1 perspective. 
-The biggest mistake I made in that simulation was not going **deep enough** in the alerts. Even if the verdict is good, the documentation lacks the understanding of the Kill Chain.
+The biggest mistake I made in that simulation was not going **deep enough** in the alerts. Even if the verdict is good, the documentation lacks the full understanding of the Kill Chain.
 
 Overall a good, first CTF try without finishing the SOC L1 path from the TryHackMe yet.
 
