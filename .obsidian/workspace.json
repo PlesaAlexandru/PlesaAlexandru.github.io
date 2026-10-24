@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "7df83c839984edff",
+        "id": "c9e089d01af1b34c",
         "type": "tabs",
         "children": [
           {
-            "id": "6c836355bc6f662f",
+            "id": "090a1ee3175a3c11",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -198,29 +198,34 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6c836355bc6f662f",
+  "active": "090a1ee3175a3c11",
   "lastOpenFiles": [
-    "src/content/blog/Cyber Kill Chain Walkthrough.md",
+    "src/assets/Pasted image 20261024170240.png",
+    "Backup/Notes threat hunting.md",
     "src/content/blog/Repossessed Writeup.mdx",
+    "Backup/Elastic Stack The Basics Walkthrough 1.md",
+    "Backup/Template Walkthrough.md",
+    "src/assets/Pasted image 20261023233400.png",
+    "src/content/blog/Summit Writeup.mdx",
+    "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
+    "src/content/blog/MITRE Walkthrough.md",
+    "src/assets/Pasted image 20261023203604.png",
+    "src/assets/Pasted image 20261023201247.png",
+    "src/assets/Pasted image 20261023200908.png",
+    "src/assets/Pasted image 20261023200733.png",
+    "src/assets/Pasted image 20261023181633.png",
+    "src/assets/Pasted image 20261023180548.png",
+    "src/assets/Pasted image 20261023175733.png",
+    "src/assets/Pasted image 20261023170315.png",
+    "src/content/blog/Cyber Kill Chain Walkthrough.md",
     "src/assets/Pasted image 20261023133958.png",
-    "src/assets/Pasted image 20261023133941.png",
     "public/image/repossessed_tmp2603",
-    "public/image/repossessed.png",
-    "src/assets/Pasted image 20261022204128.png",
-    "src/assets/Pasted image 20261022204113.png",
-    "src/assets/Pasted image 20261022204107.png",
-    "src/assets/Pasted image 20261022204100.png",
-    "src/assets/Pasted image 20261022201504.png",
-    "src/assets/Pasted image 20261022201455.png",
-    "src/assets/Pasted image 20261022201315.png",
     "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
     "src/content/blog/Phishing Prevention Walkthrough.md",
     "src/content/blog/Phishing Emails in Action Walkthrough.md",
     "src/content/blog/Phishing Analysis Tools Walkthrough.md",
-    "Backup/Template Walkthrough.md",
     "public/image/phish-prev_tmp7148",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
-    "src/content/blog/Summit Writeup.mdx",
     "public/image/phish-tools_tmp30819",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "public/image/phish-in-action_tmp20056",
@@ -235,15 +240,11 @@
     "Backup/Introduction to EDR Walkthrough.md",
     "Tutorial Markup/mathematics-examples.md",
     "2026-10-15.md",
-    "src/content/blog/MITRE Walkthrough.md",
     "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/content/blog/Introduction to EDR Walkthrough.md",
-    "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
-    "Backup/Elastic Stack The Basics Walkthrough 1.md",
     "Tutorial Markup/markdown-style-guide.md",
-    "Tutorial Markup/adding-comment-systems.md",
-    "README.md"
+    "Tutorial Markup/adding-comment-systems.md"
   ]
 }
