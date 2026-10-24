@@ -770,7 +770,7 @@ The following methods were discovered:
 
 Based on the time and action we can make a Kill Chain of the attack.
 
-| Time (UTC)   | Host         | Alert ID | Kill Chain Phase               | Observed Activity                                                                        | Verdict  |
+| Time         | Host         | Alert ID | Kill Chain Action              | Observation                                                                              | Verdict  |
 | :----------- | :----------- | :------- | :----------------------------- | :--------------------------------------------------------------------------------------- | :------- |
 | **11:31:00** | `THM-MSMITH` | **6352** | Baseline Activity              | `WINWORD.EXE` launched `ai.exe` (Office AI helper).                                      | `**FP**` |
 | **11:31:00** | `THM-MSMITH` | **6353** | Initial Access & Execution     | User opened `Q3_PressKit_Feedback.docm`. Macro launched base64-encoded PowerShell.       | `**TP**` |
