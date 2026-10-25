@@ -315,6 +315,10 @@ Similar with the alert **#6355**, we can confidently identify the same behaviour
 
 `-NonI` which makes the powershell Non Interactable which is another obvious method to hide your shell, even if you would eliminate the Hidden flag, you couldn't interact with the powershell.
 
+![](../../assets/Pasted%20image%2020261025163232.png)
+
+Here we can see user `THM-SREYES` creates the service `SvcUpdate` at 2026-10-25 14:19:31.905.
+
 #### Verdict - 6357 (Suspicious Remote Logon and Service Creation)
 
 Description:  The suspicious Temp file `svchost_update.ps1` is starting / modifying a service SvcUpdate.  
@@ -484,7 +488,9 @@ So basically a script that downloads svchost_update.ps1 from the `http[:]//payli
 
 We understand what is actually executing and doing, of course it is obvious that no normal user or legitimate service will encrypt in base64 an script for downloading an app from the `paylink-cdn[.]thm`. So with even without going further we can confidently say that the alert is True Positive.
 
+![](../../assets/Pasted%20image%2020261025163056.png)
 
+Here we can see in Splunk when and where exactly was the command executed.
 #### Verdict - 6353 (Suspicious Child Process Spawned)
 
 **Description**:  The attacker is establishing an connection with paylink-cdn[.]thm:8067 to get the malicious file `svchost_update.ps1` to the host via encoding the script into the command line.
