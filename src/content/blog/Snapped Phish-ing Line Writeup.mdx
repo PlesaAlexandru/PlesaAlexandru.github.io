@@ -1,0 +1,54 @@
+---
+title: Snapped Phish-ing Line Writeup
+description: As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email.
+pubDate: 2026-10-27
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+image: /image/snapped.png
+---
+---
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+
+## Scenario:
+
+As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email. Several users noted unusual characteristics in the message, and unfortunately, some had already submitted their credentials and were no longer able to access their accounts. With the potential for a wider compromise, the incident has been escalated for investigation. Your task is to analyze the available evidence, determine the scope of the attack, and uncover how the adversary operated.
+
+---
+## Objective
+
+- Analyze the provided email samples to identify key artifacts
+- Investigate phishing URLs to understand redirection
+- Retrieve and examine the phishing kit used in the attack
+- Use CTI tools to gather intelligence on the adversary
+- Analyze the phishing kit to uncover additional indicators
+
+---
+## Summary
+
+Description: Phishing attempt via an fake receipt from an transfer via SWIFT. But SPF, DMARC tests failed. Other IOCs available below. 
+Receiver: webmaster[at]edacted[.]org
+Sender: Mr. James Jackson (info[.]mutawamarine[at]mail[.]com)
+Timestamp: `10-06-2020 05:58:55` (dd-mm-yyyy hh:mm:ss) 
+IOCs:a
+- info[.]mutawamarine[at]mail[.]com
+- info[at]mutawamarine[.]com
+- `SWT_#09674321____PDF__.CAB`
+Attachment Details:
+- **Trojan MSIL/Loki** is a type of malicious software (malware) designed to steal sensitive data or compromise Windows-based computers.
+
+---
