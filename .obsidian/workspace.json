@@ -83,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 308.5
+    "width": 241.5
   },
   "right": {
     "id": "55442de039d15212",
@@ -184,7 +184,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 214.5
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -200,24 +200,27 @@
   },
   "active": "090a1ee3175a3c11",
   "lastOpenFiles": [
-    "public/image/snapped_tmp10015",
-    "public/image/snapped.png",
-    "src/content/blog/The Greenholt Phish Writeup.mdx",
-    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
-    "src/assets/Pasted image 20261026170556.png",
-    "src/assets/Pasted image 20261026021003.png",
-    "src/assets/Pasted image 20261026015329.png",
-    "src/assets/Pasted image 20261026012948.png",
-    "src/assets/Pasted image 20261026003741.png",
-    "src/assets/Pasted image 20261026003737.png",
-    "src/content/blog/Splunk The Basics Walkthrough.md",
-    "src/content/blog/Summit Writeup.mdx",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
-    "src/assets/Pasted image 20261025181743.png",
-    "src/assets/Pasted image 20261025181452.png",
-    "src/assets/Pasted image 20261025181254.png",
+    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
     "src/content/blog/Repossessed Writeup.mdx",
+    "src/assets/Pasted image 20261027145901.png",
+    "src/assets/Pasted image 20261027145736.png",
+    "src/assets/Pasted image 20261027145633.png",
+    "src/assets/Pasted image 20261027144500.png",
+    "src/assets/Pasted image 20261027144222.png",
+    "src/assets/Pasted image 20261027144204.png",
+    "src/assets/Pasted image 20261027144158.png",
+    "src/assets/Pasted image 20261027144149.png",
+    "src/assets/Pasted image 20261027144143.png",
+    "src/assets/Pasted image 20261027144137 1.png",
+    "Backup/Notes Phishing.md",
     "Backup/Notes threat hunting.md",
+    "src/content/blog/Summit Writeup.mdx",
+    "src/content/blog/Phishing Analysis Tools Walkthrough.md",
+    "src/content/blog/Phishing Emails in Action Walkthrough.md",
+    "public/image/snapped_tmp10015",
+    "src/content/blog/The Greenholt Phish Writeup.mdx",
+    "src/content/blog/Splunk The Basics Walkthrough.md",
     "Backup/Template Walkthrough.md",
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
@@ -226,14 +229,11 @@
     "public/image/repossessed_tmp2603",
     "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
     "src/content/blog/Phishing Prevention Walkthrough.md",
-    "src/content/blog/Phishing Emails in Action Walkthrough.md",
-    "src/content/blog/Phishing Analysis Tools Walkthrough.md",
     "public/image/phish-prev_tmp7148",
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "public/image/phish-tools_tmp30819",
     "public/image/phish-in-action_tmp20056",
     "public/image/Summit_c_tmp11121",
-    "public/image/introd-to-phishing-fund_tmp4508",
     "Backup/Introduction to EDR Walkthrough 1.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
@@ -244,7 +244,6 @@
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/content/blog/Introduction to EDR Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
-    "Tutorial Markup/markdown-style-guide.md",
-    "Tutorial Markup/adding-comment-systems.md"
+    "Tutorial Markup/markdown-style-guide.md"
   ]
 }
