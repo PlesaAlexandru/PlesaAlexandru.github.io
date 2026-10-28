@@ -1,0 +1,503 @@
+---
+title: Snapped Phishing Line Writeup - Work In Progress
+description: Five phishing emails hit SwiftSpend Financial and several employees handed over their credentials. A SOC L1 triage of the emails, the phishing kit and the adversary infrastructure behind them.
+pubDate: 2026-10-28
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+  - Phishing
+image: /image/snapped.png
+---
+
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+## Scenario:
+
+As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email. Several users noted unusual characteristics in the message, and unfortunately, some had already submitted their credentials and were no longer able to access their accounts. With the potential for a wider compromise, the incident has been escalated for investigation. Your task is to analyze the available evidence, determine the scope of the attack, and uncover how the adversary operated.
+
+---
+## Objective
+
+- Analyze the provided email samples to identify key artifacts
+- Investigate phishing URLs to understand redirection
+- Retrieve and examine the phishing kit used in the attack
+- Use CTI tools to gather intelligence on the adversary
+- Analyze the phishing kit to uncover additional indicators
+
+---
+## Case Summary
+
+<Success>TRUE POSITIVE. Credential phishing campaign against SwiftSpend Financial. Credential theft is confirmed for at least four accounts. Escalation to L2 / Incident Response is required.</Success>
+
+| Field | Value |
+|---|---|
+| Verdict | True Positive, credential harvesting (Microsoft 365 lookalike) |
+| Severity | High, valid credentials are in the attacker's hands |
+| Emails analyzed | 5 (four HTML attachments, one PDF attachment) |
+| Recipients | derick.marshall, michael.ascot, michelle.chen, zoe.duncan, william.mcclean |
+| Sender identity | `Accounts.Payable[at]groupmarketingonline[.]icu` (spoofed display name "Group Marketing Online Accounts Payable") |
+| Delivery time | `28-06-2020 ~22:01 UTC` |
+| Phishing infrastructure | `kennaroads[.]buzz` (open directory, phishing kit exposed) |
+| Exfiltration channel | Email to `m3npat[at]yandex[.]com` plus a local `log.txt` |
+| Confirmed victims | At least 4 accounts in the harvested log |
+
+<Info>Workflow used for every mail: 1) read the email as the user sees it, 2) read the headers and the authentication results, 3) hash and check the attachment, 4) follow the link to the landing page, 5) pivot on the infrastructure, 6) classify and decide whether to escalate.</Info>
+
+---
+## Timeline
+
+| When | What |
+|---|---|
+| 28-06-2020 22:01:33 UTC | Mails 1 to 4 enter the Microsoft 365 tenant (relay hops 22:01:33 to 22:01:56 UTC) |
+| 28-06-2020 ~22:01 UTC | Mail 5 delivered through `basmail[.]jp` |
+| 29-06-2020 10:00 to 10:01 (server local time) | Credential entries written to `log.txt` on the phishing server |
+| Later | Users report the email and some can no longer log in, ticket escalated |
+
+<Warning>The domain `kennaroads[.]buzz` was registered on 2023-07-16 according to VirusTotal, while the emails are dated 2020. This is an artifact of how the lab was recreated. In a real case, a sender domain younger than the email itself would be a finding of its own, so it is worth stating the discrepancy instead of ignoring it.</Warning>
+
+---
+## Mail 1: derick.marshall
+
+### Summary
+
+- **Description:** Fake "Direct Credit Advice" with an HTML attachment that redirects to a fake Microsoft 365 password page. SPF, DKIM and DMARC do not align with the visible sender.
+- **Receiver:** `derick[.]marshall[at]swiftspend[.]finance`
+- **Sender:** Group Marketing Online Accounts Payable (`Accounts[.]Payable[at]groupmarketingonline[.]icu`)
+- **Return-Path:** `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`
+- **Timestamp:** `28-06-2020 17:01:33 -0500` (22:01:33 UTC)
+- **IOCs:**
+  - `groupmarketingonline[.]icu`
+  - `BRAEMARHOWELLS[.]COM`
+  - `hxxp://kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php`
+- **Attachment details:** `Direct Credit Advice.html`, 520 bytes, SHA-256 `c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6`, VirusTotal 0/62
+
+### The email as the user sees it
+
+![](../../assets/Pasted%20image%2020261027134035.png)
+
+![](../../assets/Pasted%20image%2020261027134102.png)
+
+What stands out at first sight:
+
+- The subject contains the recipient's own address (`... - derick.marshall@swiftspend.finance`). That is a mail-merge template, not something a real accounts payable team would write.
+- Generic greeting (`Good Day!`) and no reference to any real transaction, invoice number or amount.
+- The only content is an attachment, and the attachment is an `.html` file. A legitimate remittance advice would be a PDF or live in a portal.
+- The signature looks polished but is empty on inspection: the phone numbers are `(800) 555-xxxx` placeholders and the address is nonsense (`Public Luggage 99929, Oldmarket, Yorkshire 1024, New Island`).
+- The red `EXTERNAL SENDER` banner was added by the mail gateway. It did its job, but it only helps if the user reads it.
+
+### Header analysis
+
+Authentication results, searched in the message source for `SPF`, `DKIM`, `DMARC` and `Return`:
+
+![](../../assets/Pasted%20image%2020261027134428.png)
+
+![](../../assets/Pasted%20image%2020261027134452.png)
+
+![](../../assets/Pasted%20image%2020261027134544.png)
+
+![](../../assets/Pasted%20image%2020261027134608.png)
+
+| Check | Result | Comment |
+|---|---|---|
+| SPF | `pass` for `BRAEMARHOWELLS.COM`, `fail` at the hop with `helo=apicap.org`, `pass` for `groupmarketingonline.icu` | Contradictory results depending on the hop, and the passing domain is not the one the user sees in From |
+| DKIM | `none` (message not signed) | Nothing ties the message to the claimed sender |
+| DMARC | `none`, `dmarc=bestguesspass` in the original results | No policy exists, so there was nothing to enforce |
+| Return-Path | `9ZTKYQdyZIim@BRAEMARHOWELLS.COM` | Different domain from the From header |
+
+<Info>Exchange Online reported `compauth=pass reason=109` and `dmarc=bestguesspass`. With no DMARC record on the sender domain, the platform fell back to an implicit best-guess authentication, which very likely helped this message reach the inbox instead of junk.</Info>
+
+Cross-checking with MXToolbox gives the same picture:
+
+![](../../assets/Pasted%20image%2020261027134836.png)
+
+![](../../assets/Pasted%20image%2020261027134855.png)
+
+![](../../assets/Pasted%20image%2020261027134915.png)
+
+- No DMARC record for `groupmarketingonline.icu`, and SPF/DKIM alignment fail.
+- 13 hops in 24 seconds. Hop 7 is `apicap.org` (`10.13.5.136`), which is not blacklisted. Being unlisted does not mean clean.
+- Hop 2 shows `Trustwave MailMarshal`, which matches the footer claim `Scanned by MailMarshal`. That footer is also exactly what an attacker would copy to look legitimate.
+
+### Attachment analysis
+
+![](../../assets/Pasted%20image%2020261027134142.png)
+
+![](../../assets/Pasted%20image%2020261027134218.png)
+
+<Warning>VirusTotal shows 0/62 for the HTML file. That does not make it harmless. At 520 bytes, the file is only a redirector, there is no malicious payload to detect inside it. The detection value lives in the infrastructure it points to, which is why the pivot on the URL matters more than the hash here.</Warning>
+
+### Landing page
+
+Opening the link from the attachment in the sandbox:
+
+`hxxp://kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php?b43GLA...&email=derick.marshall@swiftspend.finance&error=`
+
+![](../../assets/Pasted%20image%2020261027134335.png)
+
+- Clones the Microsoft "Enter password" screen and pre-fills the victim's address, so the user only has to type the password. The pre-filled address makes the page feel like a normal re-authentication.
+- Served over plain HTTP (`Not Secure`) from an unrelated domain, with a `©2019 Microsoft` footer.
+- The `&error=` parameter matches the redirect logic found later in the phishing kit.
+
+<Success>TRUE POSITIVE, escalation needed.</Success>
+
+---
+## Mail 2: michael.ascot
+
+### Summary
+
+- **Description:** Same campaign, same template, different victim.
+- **Receiver:** `michael[.]ascot[at]swiftspend[.]finance`
+- **Sender:** `Accounts[.]Payable[at]groupmarketingonline[.]icu`
+- **Return-Path:** `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`
+- **Timestamp:** `28-06-2020 17:01:33 -0500`
+- **IOCs:** same domains as Mail 1
+- **Attachment details:** `Direct Credit Advice.html`, 515 bytes
+
+![](../../assets/Pasted%20image%2020261027140646.png)
+
+### Findings
+
+![](../../assets/Pasted%20image%2020261027140825.png)
+
+![](../../assets/Pasted%20image%2020261027140749.png)
+
+![](../../assets/Pasted%20image%2020261027140927.png)
+
+![](../../assets/Pasted%20image%2020261027141007.png)
+
+- Identical authentication outcome: SPF fail at `apicap.org`, `dkim=none`, `dmarc=none`.
+- This time MXToolbox also shows the cause behind the SPF result: `braemarhowells.com` publishes **no SPF record at all** (DNS hosted on Cloudflare). Any server can claim to send for that domain.
+- Same 13-hop path and the same 24 seconds. Same mail run, different recipient.
+- The attachment is 515 bytes instead of 520. The size follows the length of the recipient address, which suggests the address is baked into each file. That is an inference from file sizes, I did not open the attachment.
+
+<Success>TRUE POSITIVE, escalation needed.</Success>
+
+---
+## Mail 3: michelle.chen
+
+### Summary
+
+- **Description:** Same campaign, same template, different victim.
+- **Receiver:** `michelle[.]chen[at]swiftspend[.]finance`
+- **Sender:** `Accounts[.]Payable[at]groupmarketingonline[.]icu`
+- **Return-Path:** `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`
+- **Timestamp:** `28-06-2020 17:01:33 -0500`
+- **Attachment details:** `Direct Credit Advice.html`, 515 bytes
+
+![](../../assets/Pasted%20image%2020261027141647.png)
+
+### Findings
+
+![](../../assets/Pasted%20image%2020261027142035.png)
+
+![](../../assets/Pasted%20image%2020261027142043.png)
+
+![](../../assets/Pasted%20image%2020261027142106.png)
+
+![](../../assets/Pasted%20image%2020261027142205.png)
+
+![](../../assets/Pasted%20image%2020261027142219.png)
+
+![](../../assets/Pasted%20image%2020261027142240.png)
+
+- Header results are the same as Mail 1 and 2. All four MXToolbox checks (DMARC, SPF alignment/authentication, DKIM alignment/authentication) fail.
+- Same attachment size as Mail 2 (515 bytes). Both recipient local parts have 13 characters, which fits the idea of a per-recipient file.
+- At this point three emails share sender, Return-Path, relay path and timestamp. For triage purposes they are one event, not three, and the detection rule should key on the sender and Return-Path, not on the recipient.
+
+<Success>TRUE POSITIVE, escalation needed.</Success>
+
+---
+## Mail 4: zoe.duncan
+
+This is the mail where the investigation turns from email analysis into infrastructure analysis.
+
+### Summary
+
+- **Description:** Same campaign. Following the URL up its directory path exposed the phishing kit and the harvested credentials.
+- **Receiver:** `zoe[.]duncan[at]swiftspend[.]finance`
+- **Sender:** `Accounts[.]Payable[at]groupmarketingonline[.]icu`
+- **Timestamp:** `28-06-2020 17:01:33 -0500`
+- **IOCs:**
+  - `hxxp://kennaroads[.]buzz/data/`
+  - `hxxp://kennaroads[.]buzz/data/Update365.zip`
+  - `hxxp://kennaroads[.]buzz/data/Update365/log[.]txt`
+  - `m3npat[at]yandex[.]com`
+- **Attachment details:** `Direct Credit Advice.html`, 509 bytes
+
+![](../../assets/Pasted%20image%2020261027142328.png)
+
+### Email and headers
+
+![](../../assets/Pasted%20image%2020261027143146.png)
+
+![](../../assets/Pasted%20image%2020261027143153.png)
+
+![](../../assets/Pasted%20image%2020261027143204.png)
+
+![](../../assets/Pasted%20image%2020261027143408.png)
+
+![](../../assets/Pasted%20image%2020261027143419.png)
+
+![](../../assets/Pasted%20image%2020261027143448.png)
+
+The header story is unchanged (SPF fail on the `apicap.org` hop, no DKIM, no DMARC, no SPF record for `braemarhowells.com`). The new information comes from the server.
+
+### Open directory on the phishing server
+
+Removing the filename and walking up the URL path shows that directory listing is enabled:
+
+![](../../assets/Pasted%20image%2020261027143816.png)
+
+- Apache/2.4.56 (Debian), plain HTTP.
+- `Update365.zip` (394 KB) is the kit itself, sitting next to the live copy in `Update365/`.
+
+### The phishing kit
+
+Downloaded the archive in the sandbox, hashed it and checked it:
+
+![](../../assets/Pasted%20image%2020261027143858.png)
+
+![](../../assets/Pasted%20image%2020261027143907.png)
+
+![](../../assets/Pasted%20image%2020261027144058.png)
+
+| Property | Value |
+|---|---|
+| SHA-256 | `ba3c15267393419eb08c7b2652b8b6b39b406ef300ae8a18fee4d16b19ac9686` |
+| Detections | 32/64, `trojan.phishmailer/phishingms` |
+| Family labels | phishmailer, phishingms, akgpp |
+| Contents | 49 files, 520.27 KB uncompressed, 12 PHP files |
+| Other names seen on VT | `update.zip`, `abc.zip` |
+| Behaviour tags | long-sleeps, checks-user-input, detect-debug-environment |
+
+The behaviour tags matter for an analyst: the kit tries to evade sandboxes, so a clean detonation of the HTML on its own would not prove anything.
+
+### Harvested credentials
+
+The live directory also contains `log.txt` (2.8 KB) and the `office365/` folder:
+
+![](../../assets/Pasted%20image%2020261027144204.png)
+
+{/* The screenshot of log.txt (Pasted image 20261027144222.png) shows cleartext passwords. Blur the password column before publishing it, or leave it out. */}
+
+What `log.txt` contains, with the passwords intentionally left out of this writeup:
+
+- Entries for `michael.ascot`, `zoe.duncan`, `derick.marshall` and `michelle.chen` at `swiftspend.finance`. **That confirms credential theft for at least four accounts.**
+- `michael.ascot` appears twice. That is consistent with the `retry.php` behaviour described below, where the victim is asked to enter the password a second time.
+- The employee entries I could read in full come from the same client IP (`64.62.197.80`, United States) with the same user agent (Chrome 60 on Windows 10), all stamped `10:01 am`. Four different employees sharing one IP and browser in the same minute is not how real users behave. In a production case I would treat that as automation or a shared egress and not as four independent victims.
+- One entry uses a Gmail address and comes from a different IP (`158.62.17.197`, Philippines) with Firefox on Ubuntu. It is the odd one out and could be the operator testing the kit, or an unrelated victim.
+- Every entry carries the banner `Created BY Real Carder`, which works as a branding string for the kit.
+
+### Kit code: where the credentials go
+
+![](../../assets/Pasted%20image%2020261027144500.png)
+
+`submit.php` shows the exfiltration logic:
+
+1. If the password is shorter than 6 characters, the user is sent back to `index.php?...&email=...&error=2` and has to type it again.
+2. Otherwise, `mail()` sends the data to `m3npat[at]yandex[.]com`.
+3. The victim is then redirected to `retry.php`, which asks again. This gives the attacker a second attempt and makes typos less likely to slip through.
+
+<Info>The `&email=...&error=` pattern in the phishing URL from Mail 1 is the same pattern the kit uses in its redirects. That ties the URL we saw in the email to this exact kit.</Info>
+
+### The flag
+
+Browsing to `office365/flag.txt` returns a Base64 string. Decoding it in CyberChef with `From Base64` and then `Reverse` (by character) gives the answer:
+
+![](../../assets/Pasted%20image%2020261027145633.png)
+
+![](../../assets/Pasted%20image%2020261027145901.png)
+
+<Collapse title="Flag">`THM{pL4y_w1Th_tH3_URL}`</Collapse>
+
+<Success>TRUE POSITIVE, escalation needed. Confirmed credential theft, kit and exfiltration address identified.</Success>
+
+---
+## Mail 5: william.mcclean
+
+A different lure and a different delivery chain, but the same actor.
+
+### Summary
+
+- **Description:** "Quote for Services Rendered" with a PDF attachment. Sent through a Japanese mail provider and fully authenticated for that provider's domain.
+- **Receiver:** `william[.]mcclean[at]swiftspend[.]finance`
+- **Sender:** `Accounts[.]Payable[at]groupmarketingonline[.]icu`
+- **Return-Path:** `goudo-k[at]po3[.]across[.]or[.]jp`
+- **Timestamp:** `28-06-2020 22:01:32 +0000`
+- **IOCs:**
+  - `po3[.]across[.]or[.]jp`
+  - `basmail[.]jp`
+  - `goudo-k[at]po3[.]across[.]or[.]jp`
+  - `kennaroads[.]buzz`
+- **Attachment details:** `Quote.pdf`, 106.92 KB, SHA-256 `04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441`, VirusTotal 17/60
+
+![](../../assets/Pasted%20image%2020261027135218.png)
+
+![](../../assets/Pasted%20image%2020261027135231.png)
+
+The signature, display name and `EXTERNAL SENDER` banner are identical to the first four mails. The subject, however, does not contain the recipient address, and the processing timestamp in the subject (`June 29, 2020, 10:01:32 AM`) matches the time the campaign ran.
+
+### Header analysis
+
+![](../../assets/Pasted%20image%2020261027135528.png)
+
+![](../../assets/Pasted%20image%2020261027135546.png)
+
+![](../../assets/Pasted%20image%2020261027135608.png)
+
+![](../../assets/Pasted%20image%2020261027135632.png)
+
+This mail looks better on paper than the others:
+
+- `spf=pass` for `po3.across.or.jp`, `dkim=pass` with `d=po3.across.or.jp; s=mmtr1`, and `dmarc=pass`.
+- But the passing domain is `po3.across.or.jp`, while the user sees `groupmarketingonline.icu` in From. Authentication passed for a domain the recipient never sees.
+- Relay path: `m-msa-com.basmail[.]jp`, then Outlook Protection, then the internal SwiftSpend relays. 9 hops, 19 seconds.
+
+![](../../assets/Pasted%20image%2020261027135841.png)
+
+![](../../assets/Pasted%20image%2020261027135855.png)
+
+![](../../assets/Pasted%20image%2020261027135917.png)
+
+![](../../assets/Pasted%20image%2020261027140008.png)
+
+![](../../assets/Pasted%20image%2020261027140101.png)
+
+| Check | Result |
+|---|---|
+| SPF record of `po3.across.or.jp` | `v=spf1 ip4:218.223.68.14 include:spf.basmail.jp ~all` (softfail) |
+| SPF alignment | Fail, From domain `groupmarketingonline.icu` does not match Return-Path domain `po3.across.or.jp` |
+| DKIM signature | `d=po3.across.or.jp`, `s=mmtr1`, RSA 2048-bit key, signature domain not aligned with From |
+| DKIM body hash | MXToolbox reports "Body Hash Did Not Verify" |
+| DMARC for `groupmarketingonline.icu` | No record found |
+
+<Warning>MXToolbox warns that pasting headers can break DKIM validation, and Outlook itself reported `dkim=pass`. So the body-hash mismatch is something to note, not proof of tampering in transit. I would only report it as an observation.</Warning>
+
+The takeaway for L1 triage: **a message can pass SPF, DKIM and DMARC and still be phishing**. Passing authentication only proves that the sending provider is who it says it is, not that the content is trustworthy. Here a legitimate mail service was used to send mail with a spoofed display name.
+
+### Attachment analysis
+
+![](../../assets/Pasted%20image%2020261027140334.png)
+
+![](../../assets/Pasted%20image%2020261027140351.png)
+
+- 17/60 detections, label `trojan.cwsda14c54d/tl0101gf26zt`, categories trojan and phishing.
+- VirusTotal's Code insights describes the PDF as a phishing lure that impersonates a Microsoft OneDrive share notification, with an "Access Document" button and hidden white-font text that repeats the lure, a known trick to confuse automated scanners.
+- A PDF whose only job is to host one external link is a way of getting past gateways that block `.html` attachments, which is the opposite choice from Mails 1 to 4.
+
+### Linking Mail 5 to the same adversary
+
+![](../../assets/Pasted%20image%2020261027140515.png)
+
+In the **Relations** tab, the PDF contacts `kennaroads[.]buzz` (12/92 detections, created 2023-07-16, registrar Dynadot). The other contacted domains (Adobe, Google, gstatic) are normal PDF-reader traffic and not relevant.
+
+That is the correlation that matters: different sending infrastructure, different attachment format, **same landing infrastructure**. All five mails belong to one campaign.
+
+The signature icons also point to social profiles under the `GroupMarketingOnline` name (hover URLs only):
+
+![](../../assets/Pasted%20image%2020261027140547.png)
+
+![](../../assets/Pasted%20image%2020261027140600.png)
+
+![](../../assets/Pasted%20image%2020261027140609.png)
+
+These links go to the big social platforms and not to the sender's domain, so they do not help attribute anything. They are there to make the signature look real.
+
+<Success>TRUE POSITIVE, escalation needed. I could not confirm credential submission for this recipient from the visible part of `log.txt`, so the account should be treated as at risk until sign-in logs say otherwise.</Success>
+
+---
+## Correlation Across the Five Mails
+
+| Shared indicator | Mails |
+|---|---|
+| `Accounts[.]Payable[at]groupmarketingonline[.]icu` and the same signature | 1, 2, 3, 4, 5 |
+| `kennaroads[.]buzz` as landing and kit server | 1, 2, 3, 4 (URL and kit), 5 (contacted by the PDF) |
+| Return-Path `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`, no SPF record for that domain | 1, 2, 3, 4 |
+| Relay path of 13 hops through `apicap[.]org` | 1, 2, 3, 4 |
+| Japanese relay `po3[.]across[.]or[.]jp` / `basmail[.]jp` | 5 |
+| Attachment type | 1 to 4: HTML redirector, 5: PDF with a link |
+
+Reading the table, I would describe the campaign like this: one operator, one landing server and two delivery methods. The HTML variants relied on an abused Return-Path domain with no SPF, while the PDF variant used a real mail provider so that authentication would pass.
+
+---
+## MITRE ATT&CK Mapping
+
+| Tactic | Technique | Evidence |
+|---|---|---|
+| Resource Development | T1583.001 Acquire Infrastructure: Domains | `groupmarketingonline[.]icu`, `kennaroads[.]buzz` |
+| Initial Access | T1566.001 Phishing: Spearphishing Attachment | `Direct Credit Advice.html`, `Quote.pdf` |
+| Defense Evasion | T1656 Impersonation | Fake accounts payable vendor, fake Microsoft and OneDrive pages |
+| Execution | T1204.002 User Execution: Malicious File | The user has to open the attachment and click through |
+| Credential Access | T1056.003 Input Capture: Web Portal Capture | Fake Microsoft login that logs to `log.txt` and emails the data |
+| Exfiltration | T1048 Exfiltration Over Alternative Protocol (approximate fit) | `mail()` call to `m3npat[at]yandex[.]com` |
+
+<Info>Valid Accounts (T1078) is the technique to watch next. Nothing in my evidence shows the stolen credentials being used yet, which is why the sign-in log review below is the first thing I would ask L2 to do.</Info>
+
+---
+## Indicators of Compromise
+
+| Type | Indicator |
+|---|---|
+| Sender address | `Accounts[.]Payable[at]groupmarketingonline[.]icu` |
+| Sender domain | `groupmarketingonline[.]icu` |
+| Return-Path | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`, `goudo-k[at]po3[.]across[.]or[.]jp` |
+| Domains | `kennaroads[.]buzz`, `braemarhowells[.]com`, `po3[.]across[.]or[.]jp`, `basmail[.]jp`, `apicap[.]org` |
+| URLs | `hxxp://kennaroads[.]buzz/data/`, `hxxp://kennaroads[.]buzz/data/Update365.zip`, `hxxp://kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php` |
+| Exfiltration email | `m3npat[at]yandex[.]com` |
+| IPs | `64.62.197.80`, `158.62.17.197`, `218.223.68.14` (SPF-authorized IP of `across.or.jp`, not necessarily the sender) |
+| SHA-256 `Direct Credit Advice.html` (Mail 1) | `c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6` |
+| SHA-256 `Update365.zip` | `ba3c15267393419eb08c7b2652b8b6b39b406ef300ae8a18fee4d16b19ac9686` |
+| SHA-256 `Quote.pdf` | `04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441` |
+| Kit marker | String `Created BY Real Carder` in the log output |
+
+---
+## Recommended Actions (L1 handoff to L2 / IR)
+
+**Containment**
+
+1. Reset the passwords of the four confirmed accounts and revoke their active sessions and refresh tokens. Enforce MFA if it is not already required.
+2. Block `kennaroads[.]buzz`, `groupmarketingonline[.]icu` and the sender and Return-Path addresses at the mail gateway, proxy and DNS.
+3. Search all mailboxes for the sender, the Return-Path domains and the subject patterns (`Direct Credit Advice`, `Quote for Services Rendered`) and purge the messages that are still unread.
+
+**Scoping**
+
+4. Review Entra ID / Microsoft 365 sign-in logs for the five accounts, looking for logins from `64.62.197.80` or any new location or device after `28-06-2020 22:01 UTC`.
+5. Check the affected mailboxes for new inbox rules, forwarding and OAuth app consents, which are the usual follow-up after a credential theft.
+6. Search proxy and DNS logs for any other host that contacted `kennaroads[.]buzz`, since users who clicked but did not submit credentials still matter.
+7. Check whether `william.mcclean` opened the PDF and clicked the link.
+
+**Reporting and prevention**
+
+8. Report the domain and the exposed kit to the registrar (Dynadot) and the hosting provider, and submit the samples to VirusTotal and URLhaus-style feeds.
+9. Block external `.html` attachments, or detonate them in a sandbox before delivery.
+10. Publish `p=reject` DMARC with SPF and DKIM for the company's own domain, so SwiftSpend cannot be spoofed the same way.
+11. Run a short awareness reminder: the `EXTERNAL SENDER` banner was present on every mail and was still not enough.
+
+---
+## What I Would Improve in the Detection
+
+- The gateway let through a message with `dkim=none`, `dmarc=none` and an SPF fail on one hop. A rule that raises the score of that exact combination for first-time external senders would have caught Mails 1 to 4.
+- Mail 5 is the lesson that authentication results alone are not a verdict. A detection on `From` domain different from the DKIM `d=` and Return-Path domain, combined with an attachment containing a single link, would cover it.
+- An HTML attachment of around 500 bytes is a strong signal on its own. Attachment size plus type is cheap to alert on.
+
+---
+## Conclusion
+
+A well-organized credential harvesting campaign: five emails, one vendor identity, one landing server and two delivery tricks. The HTML redirectors have a clean VirusTotal score because the real signal is in the infrastructure, and the PDF mail passes SPF, DKIM and DMARC because it travels through a legitimate provider. In both cases the way to catch it is the same: do not stop at the verdict of a single check, pivot on the infrastructure and correlate the mails.
+
+The exposed open directory made the investigation easy, since it gave us the kit, the exfiltration address and the harvested accounts. The result is a clear True Positive with four confirmed compromised accounts and a list of follow-up checks for L2.
+
+Thank you for reading.

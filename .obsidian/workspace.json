@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
+                "file": "Backup/Snapped Phish-ing Line Writeup.mdx",
                 "mode": "source",
                 "source": false
               },
@@ -198,13 +198,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d9c2818928c03d6f",
+  "active": "090a1ee3175a3c11",
   "lastOpenFiles": [
+    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
+    "Backup/Snapped Phish-ing Line Writeup.mdx",
+    "Backup/Snapped Phish-ing Line Writeup 1.mdx",
     "src/content/blog/Phishing Emails in Action Walkthrough.md",
     "Backup/Template Walkthrough.md",
     "Backup/Notes threat hunting.md",
     "Backup/Notes Phishing.md",
-    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
     "src/content/blog/Repossessed Writeup.mdx",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/assets/Pasted image 20261027145901.png",
@@ -233,7 +235,6 @@
     "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "public/image/phish-tools_tmp30819",
     "public/image/phish-in-action_tmp20056",
-    "public/image/Summit_c_tmp11121",
     "Backup/Introduction to EDR Walkthrough 1.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
