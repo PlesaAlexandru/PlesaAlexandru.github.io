@@ -4,25 +4,32 @@ import { Icon } from "astro-icon/components";
 
 const roadmap = [
   {
-    period: "2026 — PRESENT",
+    period: "October 2026",
     status: "active",
-    title: "SOC L1 Preparation & Detection Labs",
-    description: "Deepening hands-on investigation workflows via LetsDefend and enterprise alert simulations. Working on packet inspection with Wireshark and SIEM query rules.",
-    tags: ["LetsDefend", "SIEM", "Wireshark", "MITRE ATT&CK"]
+    title: "SOC L1 Preparation & Detection Labs (SOC L1 Learning Path)",
+    description: "Deepening hands-on investigation workflows via TryHackMe (SOC L1 Learning path, CTFs, Challenges) and enterprise alert simulations (Splunk mainly). Working on packet inspection with Wireshark, SIEM query, IDS rules. Also there, as a team, we managed to get ~29/1700 teams in Downtime CTF (An TryHackMe CTF focused on Blue Team) and Hackout #5th edition (Osint, Forensics CTF).",
+    tags: ["Snort", "Splunk", "Wireshark", "MITRE ATT&CK", "Downtime - CTF", "Hackout - CTF"]
   },
   {
-    period: "2025 — 2026",
+    period: "September-October 2026",
     status: "completed",
-    title: "Defensive Foundations & CTF Practice",
-    description: "Hands-on fundamentals across TryHackMe and Hack The Box modules. Studied adversary techniques, Windows event logs, and Linux system telemetry.",
+    title: "Cyber Security 101 - TryHackMe",
+    description: "Building foundation and developing essential skills in log analysis, Linux administration, and hands-on penetration testing methodologies to understand core security concepts and threat identification.",
+    tags: ["Splunk - Basic", "Elastic - Basic", "Linux logs", "Windows logs"]
+  },
+  {
+    period: "July-August 2026",
+    status: "completed",
+    title: "Pre Security - TryHackMe",
+    description: "Theorethical hands-on fundamentals across TryHackMe and other platforms such as Let's Defend, Hack the Box and online resources. Studied adversary techniques, Windows event logs, and Linux system telemetry. Also in this period I completed Pre Security learning path.",
     tags: ["TryHackMe", "Hack The Box", "Log Analysis", "Linux"]
   },
   {
-    period: "INITIAL PHASE",
+    period: "June 2018",
     status: "completed",
-    title: "Systems, Networking & Protocols",
-    description: "Building the foundation. Studying OSI model protocols, TCP/IP fundamentals, and OS internals. TryHackMe courses such as Cybersecurity 101, PreSecurity were really useful in this phase.",
-    tags: ["Networking", "Protocols", "Foundation", "TryHackMe - Focused"]
+    title: "Penetration Testing Intern (Temporary / Project based)",
+    description: "I was introduced into Web Penetration Testing by a friend who worked at SmartMedia. We found an critical vulnerability via parameter tampering we could change the hidden role to admin and obtain an Administrator account when resetting password. No contract was made but more of an learning opportunity.",
+    tags: ["Burp Suite", "Protocols", "Vulnerability", "Web Penetration Testing"]
   }
 ];
 ---
