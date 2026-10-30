@@ -45,7 +45,7 @@ Direct links to my hands-on incident writeups and lab analysis:
 
 ## 🧰 Toolkit & Platforms
 
-- **Security Platforms:** TryHackMe SOC Path, Splunk, Elastic, Brim/Zeek, MITRE ATT&CK
+- **Security Platforms:** TryHackMe SOC Path, Splunk, Elastic, MITRE ATT&CK
 - **Threat Research Tools:** VirusTotal, CyberChef, URLscan.io, WHOIS, Email Header Analyzers
 - **Documentation & Workflow:** Obsidian (Knowledge Base), Astro & Markdown/MDX, Git/GitHub
 
