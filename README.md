@@ -1,230 +1,57 @@
-<pre align="center">
-A clean, elegant, and fast static blog template! 🚀 Built with Astro
-</pre>
+# 🛡️ Alexandru Pleșa | Aspiring SOC Analyst L1
 
-<div align="center">
-<img alt="Frosti Logo" src="https://github.com/EveSunMaple/Frosti/blob/main/docs/logo.png" width="280px">
-</div>
+[![Live Blog](https://img.shields.io/badge/Security_Blog-plesaalexandru.github.io-blue?style=flat&logo=safari&logoColor=white)](https://plesaalexandru.github.io)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-Security_Research-red?style=flat&logo=tryhackme&logoColor=white)](https://tryhackme.com)
+[![GitHub](https://img.shields.io/badge/GitHub-PlesaAlexandru-181717?style=flat&logo=github&logoColor=white)](https://github.com/PlesaAlexandru)
 
-[![license](https://badgen.net/github/license/EveSunMaple/Frosti)](https://github.com/EveSunMaple/Frosti/blob/main/LICENSE)&nbsp;&nbsp;&nbsp;[![release](https://badgen.net/github/release/EveSunMaple/Frosti)](https://github.com/EveSunMaple/Frosti/releases)&nbsp;&nbsp;&nbsp;[![stackblitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/github/EveSunMaple/Frosti)
+---
 
-[**🖥️ Frosti Demo**](https://frosti.saroprock.com)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏 Chinese README**](https://github.com/EveSunMaple/Frosti/blob/main/docs/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**❤️ My Blog**](https://www.saroprock.com)
+## 🎯 About Me
 
-## 📷 Preview
+I am a security practitioner focused on **SOC Tier 1 operations, threat detection, and incident analysis**. I build, test, and document end-to-end security investigations to develop strong analytical instincts for defensive operations.
 
-![preview](./docs/preview-light.png)
+My hands-on work covers alert triage, SIEM telemetry correlation, email forensics (header decoding, SPF/DKIM/DMARC checks), endpoint artifact analysis, and threat actor mapping using MITRE ATT&CK.
 
-## ✨ Features
+I run a personal documentation hub at [**plesaalexandru.github.io**](https://plesaalexandru.github.io), where I publish detailed case notes, attack timelines, evidence logs, and triage decisions from real-world simulated labs.
 
-- ✅ **Light** / **Dark** mode available
-- ✅ Super fast performance with excellent SEO
-- ✅ View transition animations (using ClientRouter)
-- ✅ Search functionality for your articles (using Pagefind)
-- ✅ Responsive design built with [Tailwind CSS](https://tailwindcss.com/) and [daisyUI](https://daisyui.com/)
-- ✅ RSS feed support
-- 🛠️ Easy to use blog
-  - Customize your blog content in `frosti.config.yaml`
-  
-## 💬 Comment System
+---
 
-- **Tutorial (Waline)**
-  - https://frosti.saroprock.com/blog/adding-comment-systems
-- **Custom styles (SCSS)**
-  - This repo provides a default, site-matching comment stylesheet at `src/styles/waline.scss`. You can use it as-is or modify it to fit your needs.
+## 📑 Practical Security Writeups & Investigations
 
-## ✒️ Article Information
+Direct links to my hands-on incident writeups and lab analysis:
 
-|    Name     |       Meaning       | Required |
-| :---------: | :-----------------: | :------: |
-|    title    |    Article title    |   Yes    |
-| description | Article description |   Yes    |
-|   pubDate   |  Publication date   |   Yes    |
-|    image    | Article cover image |    No    |
-| categories  | Article categories  |    No    |
-|    tags     |    Article tags     |    No    |
-|    badge    |    Article badge    |    No    |
-|    draft    |    Draft status     |    No    |
+| Investigation | Domain | Focus & Methodology | Writeup Link |
+| :--- | :--- | :--- | :--- |
+| **The Greenholt Phish** | Phishing Analysis & Email Forensics | Full email header analysis, defanging malicious indicators, attachment analysis, and credential harvester triage. | [📖 Read Investigation](https://plesaalexandru.github.io/blog/the-greenholt-phish-writeup/) |
+| **Repossessed** | DFIR & Incident Response | Forensic artifact discovery, system timeline reconstruction, process tree investigation, and attacker containment. | [📖 Read Investigation](https://plesaalexandru.github.io/blog/repossessed-writeup/) |
+| **Summit** | Network Defense & SOC Triage | Network traffic inspection, IDS/IPS telemetry evaluation, malware C2 traffic tracking, and perimeter remediation. | [📖 Read Investigation](https://plesaalexandru.github.io/blog/summit-writeup/) |
+| **Introduction to Phishing** | SIEM Triage & Domain Analysis | Multi-vector triage (Email + Firewall logs), Typosquatting/brand abuse (`m1crosoftsupport[.]co`), and IoC extraction. | [📖 Read Investigation](https://plesaalexandru.github.io/blog/introduction-to-phishing-writeup/) |
 
-> [!TIP]
->
-> - You can pin your article by setting the `badge` property to `Pin`
-> - Setting `draft: true` will mark the article as a draft, and it won't appear in the article list
+---
 
-## ⬇️ Usage
+## 🔬 Core Competencies & Methodology
 
-1. Install pnpm package manager (if you haven't already)
+### 1. Alert Triage & SIEM Analysis
+- **Log Correlation:** Evaluating raw telemetry across endpoint, authentication, and network feeds.
+- **Verdict Determination:** Distinguishing false positives from confirmed threats to prevent alert fatigue while escalating incidents systematically.
+- **Reporting:** Writing structured incident tickets: *Context $\to$ Evidence Gathered $\to$ Impact Assessment $\to$ Containment Recommendation*.
 
-```sh
-npm i -g pnpm
-```
+### 2. Threat Intel & Artifact Analysis
+- **IoC Extraction & Defanging:** Standardizing IPs, domains, hashes, and URLs for defensive sharing.
+- **OSINT & Intelligence:** Enriching indicators with VirusTotal, Hybrid Analysis, IPVoid, and WHOIS.
+- **Frameworks:** Mapping adversary tactics, techniques, and procedures (TTPs) using the **MITRE ATT&CK Navigator**.
 
-2. Clone the project
+---
 
-```sh
-git clone https://github.com/EveSunMaple/Frosti.git Frosti
-```
+## 🧰 Toolkit & Platforms
 
-3. Enter the project folder
+- **Security Platforms:** TryHackMe SOC Path, Splunk, Elastic, Brim/Zeek, MITRE ATT&CK
+- **Threat Research Tools:** VirusTotal, CyberChef, URLscan.io, WHOIS, Email Header Analyzers
+- **Documentation & Workflow:** Obsidian (Knowledge Base), Astro & Markdown/MDX, Git/GitHub
 
-```sh
-cd Frosti
-```
+---
 
-4. Install dependencies
+## 🌐 Connect & Read
 
-```sh
-pnpm i
-```
-
-### 5. Debug and Run the Project
-
-**On first run or after updating content**, execute `search:index` to generate the search index:
-
-```sh
-# Generate the search index for development use
-pnpm run search:index
-
-pnpm run dev
-```
-
-## 🔧 Configuration
-
-Frosti uses `frosti.config.yaml` as its configuration file, where you can configure the website's basic information, navigation bar, footer, and more.
-
-### Website Basic Information (site)
-
-```yaml
-site:
-  tab: Frosti # Text displayed in the browser tab
-  title: Frosti # Website title
-  description: A clean, elegant, and fast static blog template! # Website description for SEO
-  language: en # Website language code, e.g., "en" for English, "zh" for Chinese
-  favicon: /favicon.ico # Website favicon path
-```
-
-### Theme Settings (theme)
-
-```yaml
-theme:
-  light: winter # Light mode theme, based on daisyUI themes
-  dark: dracula # Dark mode theme, based on daisyUI themes
-  code: github-dark # Code block theme style
-```
-
-- Themes are based on options provided by [daisyUI](https://daisyui.com/docs/themes/)
-- Code block themes use styles from [Shiki](https://shiki.style/themes)
-
-### Date Format (date_format)
-
-```yaml
-date_format: ddd MMM DD YYYY # Date display format
-```
-
-### Menu Configuration (menu)
-
-```yaml
-menu:
-  - id: home # Unique identifier for the menu item
-    text: Home # Text displayed in the menu
-    href: / # Link address
-    svg: "material-symbols:home-outline-rounded" # Icon
-    target: _self # Link target
-```
-
-Each menu item includes the following properties:
-
-- `id`: Unique identifier
-- `text`: Displayed text
-- `href`: Link address
-- `svg`: Icon code using [Iconify](https://icon-sets.iconify.design/) icon set
-- `target`: Link target (`_self` for current window or `_blank` for new window)
-
-#### Sub-menu Items (subItems)
-
-You can configure sub-menu items by adding `subItems` with the same format as main menu items.
-
-### User Information (user)
-
-```yaml
-user:
-  name: EveSunMaple # Username
-  site: "https://example.com" # User website
-  avatar: /profile.png # User avatar
-```
-
-### Social Media Configuration (social)
-
-Sidebar and footer can have different social media links:
-
-```yaml
-sidebar:
-  social:
-    - href: "https://github.com/username" # Link address
-      ariaLabel: Github # Accessibility label
-      title: Github # Tooltip on hover
-      svg: "ri:github-line" # Icon code
-```
-
-### Icon Settings (icon)
-
-Frosti uses [Iconify](https://icon-sets.iconify.design/) as its icon library. You can search for icons you like on their website, then copy the icon code to the `svg` field in the configuration file.
-
-### Language Settings (language)
-
-Frosti supports multiple languages, configured through:
-
-1. Setting the default language in `frosti.config.yaml`:
-
-```yaml
-site:
-  language: en # Set to "en" for English, "zh" for Chinese
-```
-
-2. Managing all interface text translations in the `src/i18n/translations.yaml` file:
-
-```yaml
-en: # English translations
-  label:
-    noTag: No tags assigned
-    tagCard: Tags
-    # Other English labels...
-
-zh: # Chinese translations
-  label:
-    noTag: 未分配标签
-    tagCard: 标签
-    # Other Chinese labels...
-```
-
-#### Adding or Modifying Translations
-
-To add new language support or modify existing translations:
-
-1. Add a new language code and corresponding translations in the `translations.yaml` file, or modify existing translations
-2. Change `site.language` in `frosti.config.yaml` to your preferred language code
-
-## 🚀 Automatic Updates
-
-To keep your project up to date with the latest version of Frosti, you can use the provided update script.
-
-```sh
-bash frosti.update.sh
-```
-
-This script will:
-
-1.  **Clone the latest version** of the Frosti repository.
-2.  **Safely update** your project files, adding and overwriting files based on the `.updateignore` file.
-3.  **Intelligently delete** files that have been removed from the official repository, without affecting your ignored files.
-4.  **Clean up** any remaining empty folders and temporary files.
-5.  **Install or update** dependencies using `pnpm`.
-
-## 👀 Issues
-
-If you have any questions or suggestions, you can provide feedback or communicate with the developer by submitting Issues!
-
-## 🎉 Acknowledgements
-
-@[Saicaca](https://github.com/saicaca) Their inspiration was the main reason I created this theme
-
-@[WRXinYue](https://github.com/WRXinYue) They helped me a lot when I was first getting started
+- **Portfolio & Blog:** [plesaalexandru.github.io](https://plesaalexandru.github.io/)
+- **Repository:** [github.com/PlesaAlexandru/PlesaAlexandru.github.io](https://github.com/PlesaAlexandru/PlesaAlexandru.github.io)
