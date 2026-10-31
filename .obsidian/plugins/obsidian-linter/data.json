@@ -178,7 +178,7 @@
       "style": "consistent"
     },
     "two-spaces-between-lines-with-content": {
-      "enabled": true,
+      "enabled": false,
       "line-break-indicator": "  "
     },
     "unordered-list-style": {
@@ -226,7 +226,7 @@
       "enabled": false
     },
     "paragraph-blank-lines": {
-      "enabled": false
+      "enabled": true
     },
     "remove-empty-lines-between-list-markers-and-checklists": {
       "enabled": false
@@ -256,7 +256,7 @@
     },
     "trailing-spaces": {
       "enabled": false,
-      "two-space-line-break": false
+      "two-space-line-break": true
     },
     "add-blockquote-indentation-on-paste": {
       "enabled": false
