@@ -7,9 +7,8 @@ categories:
   - Walkthrough
   - TryHackMe
 tags:
-  - TryHackMe
-  - Walkthrough
-  - Rooms
+  - Lessons
+  - Tools
 image: /image/phish-tools.png
 ---
 ---

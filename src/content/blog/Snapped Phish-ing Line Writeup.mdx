@@ -1,15 +1,14 @@
 ---
-title: Snapped Phishing Line Writeup WIP
+title: Snapped Phishing Line Writeup
 description: As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email.
-pubDate: 2026-10-27
+pubDate: 2026-10-28
 categories:
   - SOC
   - TryHackMe
   - Writeup
+  - Phishing
 tags:
-  - TryHackMe
-  - Rooms
-  - Writeup
+  - Investigation
 image: /image/snapped.png
 ---
 ---
@@ -40,20 +39,25 @@ As a member of the IT department at SwiftSpend Financial, you are responsible fo
 ---
 ## Summary
 
-Description: We received 5 phishing mails to 5 different employees on `29/06/2020 06:01` (dd/mm/yyyy hh:mm). All mails had malicious intent via credential gathering while pretending to be a legitimate login page (Microsoft). After further investigation we could see that the employees interacted with the attack and credentials were stolen. Based on the investigation, remediation must be done immediately.
-Receivers: 
-Sender: Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
-Timestamps: `29/06/2020 06:01` (dd-mm-yyyy hh:mm) 
-IOCs:
-- `Accounts.Payable@groupmarketingonline.icu`
-- 
-- 
-Attachment Details:
+**Description**: We received 5 phishing mails to 5 different employees on `29/06/2020 06:01` (dd/mm/yyyy hh:mm). All mails had malicious intent via credential gathering while pretending to be a legitimate login page (Microsoft). After further investigation we could see that the employees interacted with the attack and credentials were stolen. Based on the investigation, remediation must be done immediately.
+**Receivers**:
+- Derick Marshall (`derick.marshall[at]swiftspend[.]finance`)
+- Michael Asscot (`michael.ascot[at]swiftspend[.]finance`)
+- Michelle Chen (`michelle.chen[at]swiftspend[.]finance`)
+- Zoe Duncan (`zoe.duncan[at]swiftspend[.]finance`)
+- William McClean (`william.mcclean[at]swiftspend[.]finance`)
+**Sender**: 
+- Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
+**Timestamps**: `29/06/2020 06:01` (dd-mm-yyyy hh:mm) 
+**IOCs**:
+- `Accounts.Payable[at]groupmarketingonline.icu`
+- `goudo-k[at]po3[.]across[.]or[.]jp`
+- `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`
+- `http[:]//kennaroads[.]buzz/`
 - `Direct Credit Advice.html`(520 bytes)  c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6
 - `Quote.pdf` (107 KB) 04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441
 
 ---
-
 ## Mail 1
 
 ![](../../assets/Pasted%20image%2020261027134035.png)
@@ -63,14 +67,13 @@ Attachment Details:
 #### **Incident Overview**
 
 **Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
-**Target:** Derick Marshall (`derick.marshall@swiftspend.finance`)
-**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Target:** Derick Marshall (`derick.marshall[at]swiftspend[.]finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
 **Timestamp:** `June 29, 2020, 06:01 AM`
-**Subject:** `Group Marketing Online Direct Credit Advice - derick.marshall@swiftspend.finance`
+**Subject:** `Group Marketing Online Direct Credit Advice - derick.marshall[at]swiftspend[.]finance`
 **Attachment**: `Direct Credit Advice.html` (520 bytes)
 
 ---
-
 #### Overview Investigation
 
 At first, we will analyse the mail overview before checking for technical details such as: SPF, DKIM, DMARC.
@@ -118,7 +121,7 @@ The low file size of the HTML file could a red flag due to the possibility of be
 
 By accessing in an sandbox we get the following result: 
 
-**URL:** `http[:]//kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php?b43GLA17931013731bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e&email=derick.marshall@swiftspend.finance&error=`
+**URL:** `http[:]//kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php?b43GLA17931013731bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e&email=derick.marshall[at]swiftspend[.]finance&error=`
 
 ![](../../assets/Pasted%20image%2020261027134335.png)
 
@@ -158,7 +161,7 @@ Based on the header analysis and everything provided we can confidently say it i
 
 | **Artifact Type** | **Value**                                       | Hashes                                                           |
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------- |
-| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                  |
+| Sender Email      | `Accounts.Payable[[at]]groupmarketingonline[.]icu` |                                                                  |
 | Attachment Name   | `Direct Credit Advice.html`(520 bytes)          | c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6 |
 | URL               | `http[:]//kennaroads[.]buzz/`                   |                                                                  |
 | Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |                                                                  |
@@ -188,10 +191,10 @@ Based on the header analysis and everything provided we can confidently say it i
 #### **Incident Overview**
 
 **Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
-**Target:** Michael Asscot (`michael.ascot@swiftspend.finance`)
-**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Target:** Michael Asscot (`michael.ascot[at]swiftspend[.]finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
 **Timestamp:** `June 29, 2020, 06:01 AM`
-**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot[at]swiftspend[.]finance`
 **Attachment**: `Direct Credit Advice.html` (515 bytes)
 
 ---
@@ -219,7 +222,7 @@ Using the mxtoolbox we get the exact same result.
 
 | **Artifact Type** | **Value**                                       |
 | ----------------- | ----------------------------------------------- |
-| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |
+| Sender Email      | `Accounts.Payable[[at]]groupmarketingonline[.]icu` |
 | Attachment Name   | `Direct Credit Advice.html`(520 bytes)          |
 | URL               | `http[:]//kennaroads[.]buzz/`                   |
 | Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |
@@ -246,10 +249,10 @@ Using the mxtoolbox we get the exact same result.
 #### **Incident Overview**
 
 **Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
-**Target:** Michelle Chen (`michelle.chen@swiftspend.finance`)
-**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Target:** Michelle Chen (`michelle.chen[at]swiftspend[.]finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
 **Timestamp:** `June 29, 2020, 06:01 AM`
-**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot[at]swiftspend[.]finance`
 **Attachment**: `Direct Credit Advice.html` (515 bytes)
 
 ---
@@ -279,7 +282,7 @@ Same report as the last, but it is still important to double check for the sake 
 
 | **Artifact Type** | **Value**                                       |
 | ----------------- | ----------------------------------------------- |
-| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |
+| Sender Email      | `Accounts.Payable[[at]]groupmarketingonline[.]icu` |
 | Attachment Name   | `Direct Credit Advice.html`(515 bytes)          |
 | URL               | `http[:]//kennaroads[.]buzz/`                   |
 | Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |
@@ -305,10 +308,10 @@ Same report as the last, but it is still important to double check for the sake 
 #### **Incident Overview**
 
 **Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
-**Target:** Zoe Duncan (`zoe.duncan@swiftspend.finance`)
-**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Target:** Zoe Duncan (`zoe.duncan[at]swiftspend[.]finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
 **Timestamp:** `June 29, 2020, 06:01 AM`
-**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot[at]swiftspend[.]finance`
 **Attachment**: `Direct Credit Advice.html` (509 bytes)
 
 ---
@@ -390,7 +393,7 @@ MHT at the end is a sign of reversal, in CyberChef we can use the reverse funcio
 
 | **Artifact Type** | **Value**                                       | Hashes / Description                                                  |
 | ----------------- | ----------------------------------------------- | --------------------------------------------------------------------- |
-| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                       |
+| Sender Email      | `Accounts.Payable[[at]]groupmarketingonline[.]icu` |                                                                       |
 | Attachment Name   | `Direct Credit Advice.html`(509 bytes),         |                                                                       |
 | URL               | `http[:]//kennaroads[.]buzz/`                   |                                                                       |
 | Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |                                                                       |
@@ -425,8 +428,8 @@ MHT at the end is a sign of reversal, in CyberChef we can use the reverse funcio
 #### **Incident Overview**
 
 **Threat Type:** Spearphishing (T1566.002) / Malicious PDF Attachment (T1566.001)
-**Target:** William McClean (`william.mcclean@swiftspend.finance`)
-**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Target:** William McClean (`william.mcclean[at]swiftspend[.]finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable[at]groupmarketingonline.icu`)
 **Timestamp:** `June 29, 2020, 06:01 AM`
 **Subject:** `Quote for Services Rendered: processed on June 29, 2020, 10:01:32 AM`
 **Attachment**: `Quote.pdf` (107 KB)
@@ -444,7 +447,6 @@ Similar grammar or addressing ways as in the other mails.
 | **Wrong**: `or phoning us.`             | **Right**:`or by calling us. / or by phone.`                                 |
 | **Wrong**: `and or`                     | **Right**: `and/or`                                                          |
 | **Wrong**: `Good Day!`                  | **Right**: `Good day, / Dear Mr. McClean,`                                   |
-
 
 #### Header analysis
 
@@ -493,7 +495,7 @@ Looking at relations, we can see the same kennaroads[.]buzz as before.
 
 | **Artifact Type** | **Value**                                       | Hashes                                                           |
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------- |
-| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                  |
+| Sender Email      | `Accounts.Payable[[at]]groupmarketingonline[.]icu` |                                                                  |
 | Attachment Name   | `Quote.pdf` (107 KB)                            | 04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441 |
 | Return-Path       | `goudo-k[at]po3[.]across[.]or[.]jp`             |                                                                  |
 | SPF               | failed, allignment                              |                                                                  |

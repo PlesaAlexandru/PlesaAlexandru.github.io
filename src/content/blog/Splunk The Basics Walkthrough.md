@@ -6,10 +6,9 @@ categories:
   - SOC
   - Walkthrough
   - TryHackMe
+  - Splunk
 tags:
-  - TryHackMe
-  - Walkthrough
-  - Rooms
+  - Lessons
 image: /image/introd-to-splunk.png
 ---
 ---

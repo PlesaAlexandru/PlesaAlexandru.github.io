@@ -7,9 +7,7 @@ categories:
   - Walkthrough
   - TryHackMe
 tags:
-  - TryHackMe
-  - Walkthrough
-  - Rooms
+  - Lessons
 image: /image/phish-in-action.png
 ---
 ---

@@ -7,9 +7,7 @@ categories:
   - Walkthrough
   - TryHackMe
 tags:
-  - TryHackMe
-  - Walkthrough
-  - Rooms
+  - Lessons
 image: /image/Elastic_Stack_The-_Basics.png
 ---
 ---
