@@ -1,0 +1,520 @@
+---
+title: Snapped Phishing Line Writeup WIP
+description: As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email.
+pubDate: 2026-10-27
+categories:
+  - SOC
+  - TryHackMe
+  - Writeup
+tags:
+  - TryHackMe
+  - Rooms
+  - Writeup
+image: /image/snapped.png
+---
+---
+import Collapse from "../../components/mdx/Collapse.astro";
+import Diff from "../../components/mdx/Diff.astro";
+import Error from "../../components/mdx/Error.astro";
+import Info from "../../components/mdx/Info.astro";
+import Kbd from "../../components/mdx/Kbd.astro";
+import Success from "../../components/mdx/Success.astro";
+import Warning from "../../components/mdx/Warning.astro";
+import TimeLine from "../../components/mdx/TimeLine.astro";
+import LinkCard from "../../components/mdx/LinkCard.astro";
+
+
+## Scenario:
+
+As a member of the IT department at SwiftSpend Financial, you are responsible for assisting employees with technical concerns. What initially appeared to be a routine day quickly escalated when multiple employees across different departments reported receiving a suspicious email. Several users noted unusual characteristics in the message, and unfortunately, some had already submitted their credentials and were no longer able to access their accounts. With the potential for a wider compromise, the incident has been escalated for investigation. Your task is to analyze the available evidence, determine the scope of the attack, and uncover how the adversary operated.
+
+---
+## Objective
+
+- Analyze the provided email samples to identify key artifacts
+- Investigate phishing URLs to understand redirection
+- Retrieve and examine the phishing kit used in the attack
+- Use CTI tools to gather intelligence on the adversary
+- Analyze the phishing kit to uncover additional indicators
+
+---
+## Summary
+
+Description: We received 5 phishing mails to 5 different employees on `29/06/2020 06:01` (dd/mm/yyyy hh:mm). All mails had malicious intent via credential gathering while pretending to be a legitimate login page (Microsoft). After further investigation we could see that the employees interacted with the attack and credentials were stolen. Based on the investigation, remediation must be done immediately.
+Receivers: 
+Sender: Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+Timestamps: `29/06/2020 06:01` (dd-mm-yyyy hh:mm) 
+IOCs:
+- `Accounts.Payable@groupmarketingonline.icu`
+- 
+- 
+Attachment Details:
+- `Direct Credit Advice.html`(520 bytes)  c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6
+- `Quote.pdf` (107 KB) 04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441
+
+---
+
+## Mail 1
+
+![](../../assets/Pasted%20image%2020261027134035.png)
+
+![](../../assets/Pasted%20image%2020261027134102.png)
+
+#### **Incident Overview**
+
+**Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
+**Target:** Derick Marshall (`derick.marshall@swiftspend.finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Timestamp:** `June 29, 2020, 06:01 AM`
+**Subject:** `Group Marketing Online Direct Credit Advice - derick.marshall@swiftspend.finance`
+**Attachment**: `Direct Credit Advice.html` (520 bytes)
+
+---
+
+#### Overview Investigation
+
+At first, we will analyse the mail overview before checking for technical details such as: SPF, DKIM, DMARC.
+Let's analyse the Sender first. 
+`https[:]//groupmarketingonline[.]icu` is not an reachable site. Which is already an strong indicator of an phishing attempt but due to the old email date it could also be an legitimate service which ended some time ago. Also, `.icu` is not an high-reputation TLD.
+
+![](../../assets/Pasted%20image%2020261031133714.png)
+
+Next, we can check for the body content and subject at matter.
+First thing first, typically phishing emails contain a lot of grammatical errors, in our case:
+
+| **Wrong** / Unproffesional          | Right / Proffesional<br>                                              |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| **Wrong**: `a Direct Credit Advice` | **Right**: `a direct credit advice notice / the direct credit advice` |
+| **Wrong**: `Direct Credit Advices`  | **Right**: `direct credit advice notices / direct credit advice`      |
+| **Wrong**: `hardcopy`               | **Right**: `hard copy`                                                |
+| **Wrong**: `or phoning us.`         | **Right**: `or by calling us. / or by phone.`                         |
+| **Wrong**: `Good Day!`              | **Right**: `Good day, / Dear Customer,`<br>                           |
+Second, to verify the legitimacy of the service we can check the links from their social media pages.
+
+![](../../assets/Pasted%20image%2020261027140547.png)
+![](../../assets/Pasted%20image%2020261027140600.png)
+![](../../assets/Pasted%20image%2020261027140609.png)
+
+The only interesting detail is that they have an `Pinterest` page. Which is kind off unusual for an service that provides monetary advices for banks and financial services.
+
+Right under the pages, we can spot an fake HQ address:
+`31337 Waysbroad, New Island`.
+
+Generic phone numbers:
+`(800) 555-0299`, `(800) 555-0199`
+
+Let's have a look at the attachment, we download and get the hash into an isolated environment to further investigate and note the IOC.
+
+![](../../assets/Pasted%20image%2020261027134142.png)
+
+Hash received after `sha256sum` : **Direct Credit Advice.html** (c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6)
+
+Let's check the file hash on VirusTotal:
+![](../../assets/Pasted%20image%2020261027134218.png)
+
+The result is 0/62 vendors find it as being malicious, but even if the file itself is not malicious, it doesn't automatically is **safe**.
+
+The low file size of the HTML file could a red flag due to the possibility of being an redirect source to something else or simulated login page to steal data.
+
+By accessing in an sandbox we get the following result: 
+
+**URL:** `http[:]//kennaroads[.]buzz/data/Update365/office365/40e7baa2f826a57fcf04e5202526f8bd/enterpassword.php?b43GLA17931013731bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e1bcfe686da02fad7eb15254e3a26b10e&email=derick.marshall@swiftspend.finance&error=`
+
+![](../../assets/Pasted%20image%2020261027134335.png)
+
+The "advice" is actually an impersonation of an legitimate service (Microsoft). The URL doesn't corresponds with the service at all, instead of `microsoft[.]com` for example, we see `kennaroads[.]buzz`.
+It is a page that collects data such as email & password combination and maybe IPs.
+So, even if the file itself is not malicious, it is malicious intended.
+
+
+#### Header analysis
+
+![](../../assets/Pasted%20image%2020261027134722.png)
+
+First, let's check SPF, DKIM and DMARC before looking at anything else.
+
+**Overview MXTOOLBOX**
+![](../../assets/Pasted%20image%2020261027134836.png)
+
+![](../../assets/Pasted%20image%2020261027134855.png)
+
+![](../../assets/Pasted%20image%2020261027134915.png)
+
+**SPF** = failed / unaligned  
+![](../../assets/Pasted%20image%2020261027134428.png)
+
+**DKIM** = none
+![](../../assets/Pasted%20image%2020261027134452.png)
+
+**DMARC** = none
+![](../../assets/Pasted%20image%2020261027134544.png)
+
+**Return-Path** = `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`
+![](../../assets/Pasted%20image%2020261027134608.png)
+
+Based on the header analysis and everything provided we can confidently say it is an Phishing attack.
+
+#### **Indicators of Compromise (IoCs)**
+
+| **Artifact Type** | **Value**                                       | Hashes                                                           |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------- |
+| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                  |
+| Attachment Name   | `Direct Credit Advice.html`(520 bytes)          | c6ed70c3970a9ba62ef5f54be8608913a631f53e08e4914a4036299bb5d3ddb6 |
+| URL               | `http[:]//kennaroads[.]buzz/`                   |                                                                  |
+| Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |                                                                  |
+| SPF               | failed                                          |                                                                  |
+| DKIM              | none                                            |                                                                  |
+| DMARC             | none                                            |                                                                  |
+
+#### **Key Findings & TTPs**
+
+- **MITRE ATT&CK**: T1566.001 (Spearphishing Attachment), T1566.002 (Spearphishing)
+- **Lure / Pretext**: Financial incentive ("Direct Credit Advice") designed to induce engagement.
+- **Payload Footprint**: The 520-byte file size and extension (.html instead of .pdf) strongly suggests a embedded credential harvesting way rather than a legitimate statement.
+- **Fake Identifiers**: Sender signature uses fictitious details (`31337 Waysbroad`, 555-numbers), URL, anormal social media pages, grammatical problems, extension of attachment, login pages.
+
+#### **Recommended Actions**
+
+- **Host Isolation:** Disconnect the target endpoint and verify if the attachment was executed.
+- **Remediation:** Reset the victim's domain credentials and revoke existing MFA sessions if credentials were submitted.
+- **Defensive Perimeter:** Block `groupmarketingonline[.]icu` 
+
+
+
+## Mail 2
+
+![](../../assets/Pasted%20image%2020261027140646.png)
+
+#### **Incident Overview**
+
+**Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
+**Target:** Michael Asscot (`michael.ascot@swiftspend.finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Timestamp:** `June 29, 2020, 06:01 AM`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Attachment**: `Direct Credit Advice.html` (515 bytes)
+
+---
+#### Overview Investigation
+
+After investigating the second mail, we can see the template used for this attack. It is not only similar, it is an 1:1 copy of the first mail. The attachment has the exact same hash meaning that is the same file.
+The redirect link is the same. It is the exact same attack but different target. This could mean the bad actor is focusing the company as a whole or have multiple targets inside the company.
+The only difference is the bytes in the HTML file. ( 515 bytes != 520 bytes ) 
+#### Header analysis
+
+Using the mxtoolbox we get the exact same result.
+![](../../assets/Pasted%20image%2020261027140927.png)
+
+![](../../assets/Pasted%20image%2020261027140937.png)
+
+![](../../assets/Pasted%20image%2020261027141007.png)
+
+**SPF** = failed
+![](../../assets/Pasted%20image%2020261027140825.png)
+
+**Return-Path** stays the same as the last mail.
+![](../../assets/Pasted%20image%2020261027140749.png)
+
+#### **Indicators of Compromise (IoCs)**
+
+| **Artifact Type** | **Value**                                       |
+| ----------------- | ----------------------------------------------- |
+| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |
+| Attachment Name   | `Direct Credit Advice.html`(520 bytes)          |
+| URL               | `http[:]//kennaroads[.]buzz/`                   |
+| Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |
+| SPF               | failed                                          |
+| DKIM              | none                                            |
+| DMARC             | none                                            |
+
+#### **Key Findings & TTPs**
+
+- **MITRE ATT&CK**: T1566.001 (Spearphishing Attachment), T1566.002 (Spearphishing)
+- **Lure / Pretext**: Financial incentive ("Direct Credit Advice") designed to induce engagement.
+- **Payload Footprint**: The 520-byte file size and extension (.html instead of .pdf) strongly suggests a embedded credential harvesting way rather than a legitimate statement.
+- **Fake Identifiers**: Sender signature uses fictitious details (`31337 Waysbroad`, 555-numbers), URL, anormal social media pages, grammatical problems, extension of attachment, login pages.
+
+#### **Recommended Actions**
+
+- **Host Isolation:** Disconnect the target endpoint and verify if the attachment was executed.
+- **Remediation:** Reset the victim's domain credentials and revoke existing MFA sessions if credentials were submitted.
+- **Defensive Perimeter:** Block `groupmarketingonline[.]icu` 
+
+## Mail 3
+
+![](../../assets/Pasted%20image%2020261027141647.png)
+#### **Incident Overview**
+
+**Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
+**Target:** Michelle Chen (`michelle.chen@swiftspend.finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Timestamp:** `June 29, 2020, 06:01 AM`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Attachment**: `Direct Credit Advice.html` (515 bytes)
+
+---
+#### Overview Investigation
+
+Same as the last email, the only difference is receiver. 
+
+#### Header analysis
+
+Same report as the last, but it is still important to double check for the sake of learning.
+![](../../assets/Pasted%20image%2020261027142035.png)
+
+![](../../assets/Pasted%20image%2020261027142043.png)
+
+![](../../assets/Pasted%20image%2020261027142106.png)
+
+**SPF** = failed, as before
+![](../../assets/Pasted%20image%2020261027142205.png)
+
+**DKIM** = none
+![](../../assets/Pasted%20image%2020261027142219.png)
+
+**DMARC** = none
+![](../../assets/Pasted%20image%2020261027142240.png)
+
+#### **Indicators of Compromise (IoCs)**
+
+| **Artifact Type** | **Value**                                       |
+| ----------------- | ----------------------------------------------- |
+| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |
+| Attachment Name   | `Direct Credit Advice.html`(515 bytes)          |
+| URL               | `http[:]//kennaroads[.]buzz/`                   |
+| Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |
+| SPF               | failed                                          |
+| DKIM              | none                                            |
+| DMARC             | none                                            |
+
+#### **Key Findings & TTPs**
+
+- **MITRE ATT&CK**: T1566.001 (Spearphishing Attachment), T1566.002 (Spearphishing)
+- **Lure / Pretext**: Financial incentive ("Direct Credit Advice") designed to induce engagement.
+- **Payload Footprint**: The 520-byte file size and extension (.html instead of .pdf) strongly suggests a embedded credential harvesting way rather than a legitimate statement.
+- **Fake Identifiers**: Sender signature uses fictitious details (`31337 Waysbroad`, 555-numbers), URL, anormal social media pages, grammatical problems, extension of attachment, login pages.
+
+#### **Recommended Actions**
+
+- **Host Isolation:** Disconnect the target endpoint and verify if the attachment was executed.
+- **Remediation:** Reset the victim's domain credentials and revoke existing MFA sessions if credentials were submitted.
+- **Defensive Perimeter:** Block `groupmarketingonline[.]icu` 
+## Mail 4
+
+![](../../assets/Pasted%20image%2020261027142328.png)
+#### **Incident Overview**
+
+**Threat Type:** Spearphishing (T1566.002) / Malicious HTML Attachment (T1566.001)
+**Target:** Zoe Duncan (`zoe.duncan@swiftspend.finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Timestamp:** `June 29, 2020, 06:01 AM`
+**Subject:** `Group Marketing Online Direct Credit Advice - michael.ascot@swiftspend.finance`
+**Attachment**: `Direct Credit Advice.html` (509 bytes)
+
+---
+#### Overview Investigation
+
+The file size is still shrinking, from 520 bytes -> 515 bytes -> 509 bytes.
+The rest of the template is the same.
+
+#### Header analysis
+
+For the sake of learning, we are going analyse the header again. But no details differ from the other ones.
+![](../../assets/Pasted%20image%2020261027143146.png)
+
+![](../../assets/Pasted%20image%2020261027143153.png)
+
+![](../../assets/Pasted%20image%2020261027143204.png)
+
+**SPF** = failed
+![](../../assets/Pasted%20image%2020261027143408.png)
+
+**DKIM** = none
+![](../../assets/Pasted%20image%2020261027143419.png)
+
+**DMARC** = none
+![](../../assets/Pasted%20image%2020261027143448.png)
+
+#### Analysis of kennaroads[.]buzz
+
+We are tasked by TryHackMe to search for specific details for Update365.zip file hidden in kennaroads[.]buzz. More details about the TryHackMe questions can be seen at the Q&A section of this write-up.
+
+For that, we are going to access: kennaroads[.]buzz/data
+Here we can see an folder and an .zip file that we have to investigate.
+Update365.zip (394K) `ba3c15267393419eb08c7b2652b8b6b39b406ef300ae8a18fee4d16b19ac9686`
+
+![](../../assets/Pasted%20image%2020261027143816.png)
+
+We can download it in the sandbox and get the hash of the file with `sha256sum`.
+![](../../assets/Pasted%20image%2020261027143858.png)
+
+After getting the sha256 hash, we can use platforms such as VirusTotal.
+![](../../assets/Pasted%20image%2020261027143907.png)
+
+Result: 32/64 vendors find it as being malicious
+It is tagged as being an trojan file, more exactly troja.pishmailer/phishingms.
+
+Getting back to the TryHackMe question, we are tasked to see how many files does the zip contains, for that we can go to Details and look at the Contained Files.
+![](../../assets/Pasted%20image%2020261027144058.png)
+
+
+Another task is to download and see the contents of log.txt file
+
+log.txt (2.8K)
+![](../../assets/Pasted%20image%2020261027144204.png)
+
+![](../../assets/Pasted%20image%2020261027144222.png)
+
+The log file contains the information of every target that completed the fake Microsoft login form.
+Every credential stolen is plain text, under the format of:
+`Client IP, User-Agent, Country, Date, Email and Password.`
+
+The fact that we can see our employees on this list is concerning, the attack worked and the logs contain the real Microsoft credentials of the targets. 
+
+Based on that, the remediation must be done as soon as possible. Every minute wasted could create bigger problems. 
+
+After that, we are tasked to find email that the log file is redirected to.
+For that we can unzip the file and look at the `submit.php` code to find the mail `m3npat[at]yandex[.]com`.
+![](../../assets/Pasted%20image%2020261027144500.png)
+ 
+After that, we are tasked to find the flag, without any more information. The zip file doesn't contain any flag file. But we can try to search it via URL.
+![](../../assets/Pasted%20image%2020261027145633.png)
+We received the "secret" which is looking at base64 encoded message.
+Let's use CyberChef to decode the secret message.
+The decode returns `}LRU_3Ht_hT1w_y4Lp{MHT`.
+MHT at the end is a sign of reversal, in CyberChef we can use the reverse funcion.
+![](../../assets/Pasted%20image%2020261027145901.png)
+`}LRU_3Ht_hT1w_y4Lp{MHT -> THM{pL4y_w1Th_tH3_URL} `
+
+#### **Indicators of Compromise (IoCs)**
+
+| **Artifact Type** | **Value**                                       | Hashes / Description                                                  |
+| ----------------- | ----------------------------------------------- | --------------------------------------------------------------------- |
+| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                       |
+| Attachment Name   | `Direct Credit Advice.html`(509 bytes),         |                                                                       |
+| URL               | `http[:]//kennaroads[.]buzz/`                   |                                                                       |
+| Return-Path       | `9ZTKYQdyZIim[at]BRAEMARHOWELLS[.]COM`          |                                                                       |
+| SPF               | failed                                          |                                                                       |
+| DKIM              | none                                            |                                                                       |
+| DMARC             | none                                            |                                                                       |
+| Data Collector    | `m3npat[at]yandex[.]com`                        | After reviewing sumbit.php, data goes to `m3npat[at]yandex[.]com`     |
+| Hidden Files      | `Update365.zip` (394K)                          | `ba3c15267393419eb08c7b2652b8b6b39b406ef300ae8a18fee4d16b19ac9686`    |
+|                   | `log.txt` (2.8K)                                | Contains: `Client IP, User-Agent, Country, Date, Email and Password.` |
+|                   | `submit.php`                                    |                                                                       |
+
+#### **Key Findings & TTPs**
+
+- **MITRE ATT&CK**: T1566.001 (Spearphishing Attachment), T1566.002 (Spearphishing), T1114.002 (Email Collection).
+- **Lure / Pretext**: Financial incentive ("Direct Credit Advice") designed to induce engagement.
+- **Payload Footprint**: The 509-byte file size and extension (.html instead of .pdf) strongly suggests a embedded credential harvesting way rather than a legitimate statement.
+- **Fake Identifiers**: Sender signature uses fictitious details (`31337 Waysbroad`, 555-numbers), URL, anormal social media pages, grammatical problems, extension of attachment, login pages.
+- **Hidden Files**: After investigation, we found an entire archive named `Update365.zip` containing 49 files. From which `sumbit.php` contained the direction where `logs.txt` will be sent. logs.txt contained the Email, Passwords and other sensitive data such as IP addresses of our employees.
+
+#### **Recommended Actions**
+
+- **Mass Credential Invalidation & Session Revocation (All Exposed Users)**: Based on findings, we can forcefully reset credentials and revoke active sessions.
+- **Exfiltration Infrastructure Blocking & Abuse Takedown**: Based on findings in the `submit.php` code.
+- **Host training**: The employees affected should be put into training to remove any suspicion or misunderstanding of the luring aspects in phishing attacks
+- **Legal & Compliance Notification (Data Breach)**
+
+## Mail 5
+
+![](../../assets/Pasted%20image%2020261027135218.png)
+
+![](../../assets/Pasted%20image%2020261027135231.png)
+#### **Incident Overview**
+
+**Threat Type:** Spearphishing (T1566.002) / Malicious PDF Attachment (T1566.001)
+**Target:** William McClean (`william.mcclean@swiftspend.finance`)
+**Sender:** Group Marketing Online Accounts Payable (`Accounts.Payable@groupmarketingonline.icu`)
+**Timestamp:** `June 29, 2020, 06:01 AM`
+**Subject:** `Quote for Services Rendered: processed on June 29, 2020, 10:01:32 AM`
+**Attachment**: `Quote.pdf` (107 KB)
+
+---
+#### Overview Investigation
+
+We can spot the same company but an different template. Details remain the same, sender, location, phone.
+This time is is an quote for services used and different attachment that matches the reasoning (Quote.pdf)
+Similar grammar or addressing ways as in the other mails.
+
+| Wrong / Unproffesional                  | Right / Proffesional                                                         |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| **Wrong**: `please find attached quote` | **Right**: `please find attached the quote. / please find attached a quote.` |
+| **Wrong**: `or phoning us.`             | **Right**:`or by calling us. / or by phone.`                                 |
+| **Wrong**: `and or`                     | **Right**: `and/or`                                                          |
+| **Wrong**: `Good Day!`                  | **Right**: `Good day, / Dear Mr. McClean,`                                   |
+
+
+#### Header analysis
+
+![](../../assets/Pasted%20image%2020261027135841.png)
+
+![](../../assets/Pasted%20image%2020261027135855.png)
+
+**SPF**: failed due to allignment
+![](../../assets/Pasted%20image%2020261027135528.png)
+![](../../assets/Pasted%20image%2020261027140008.png)
+
+
+**DKIM**: failed, same as SPF
+![](../../assets/Pasted%20image%2020261027135608.png)
+![](../../assets/Pasted%20image%2020261027140101.png)
+
+
+**DMARC**: failed, even if it was published.
+![](../../assets/Pasted%20image%2020261027135546.png)
+![](../../assets/Pasted%20image%2020261027135917.png)
+
+**Return-Path**: goudo-k[at]po3[.]across[.]or[.]jp, changed this time
+![](../../assets/Pasted%20image%2020261027135632.png)
+
+#### Attachment Analsys
+
+We are going to download the file in the same way as before. `sha256sum` returns the sha256 hash of the `Quote.pdf` file.
+
+`04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441`
+
+![](../../assets/Pasted%20image%2020261027140334.png)
+
+Upon using VirusTotal,
+![](../../assets/Pasted%20image%2020261027140351.png)
+
+We gather valuable information.
+The report states 17/60 vendors find the file as being malicious. It has the tag of `trojan.cwsda14c54d/tl0101gf26zt`.
+
+"The document is a phishing lure designed to impersonate a Microsoft OneDrive file-sharing notification. It utilizes social engineering tactics to encourage the user to click an 'Access Document' button, a common method for redirecting targets to credential-harvesting sites. Visual analysis reveals several red flags, including inconsistent branding, generic messaging without specific recipient details, and the use of a PDF file to host a single external link to bypass email security filters."
+
+![](../../assets/Pasted%20image%2020261027140515.png)
+
+Looking at relations, we can see the same kennaroads[.]buzz as before.
+
+#### **Indicators of Compromise (IoCs)**
+
+| **Artifact Type** | **Value**                                       | Hashes                                                           |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------- |
+| Sender Email      | `Accounts.Payable[@]groupmarketingonline[.]icu` |                                                                  |
+| Attachment Name   | `Quote.pdf` (107 KB)                            | 04ae3286641e71356ab3fb8e05cee0da58d94a7f6afe49620d24831db33d3441 |
+| Return-Path       | `goudo-k[at]po3[.]across[.]or[.]jp`             |                                                                  |
+| SPF               | failed, allignment                              |                                                                  |
+| DKIM              | failed, allignment                              |                                                                  |
+| DMARC             | failed                                          |                                                                  |
+#### **Key Findings & TTPs**
+
+- **MITRE ATT&CK**: T1566.001 (Spearphishing Attachment), T1566.002 (Spearphishing).
+- **Lure / Pretext**: Financial incentive ("Quote") designed to induce engagement.
+- **Payload Footprint**: The 107-KB file after being tased on VirusTotal, it was tagged as: `trojan.cwsda14c54d/tl0101gf26zt`
+- **Fake Identifiers**: Sender signature uses fictitious details (`31337 Waysbroad`, 555-numbers), URL, anormal social media pages, grammatical problems, extension of attachment, login pages.
+- **Connections**: It is linked to kennaroads[.]buzz. 
+#### **Recommended Actions**
+
+- **Host Isolation:** Disconnect the target endpoint and verify if the attachment was executed.
+- **Remediation:** Reset the victim's domain credentials and revoke existing MFA sessions if credentials were submitted.
+- **Defensive Perimeter:** Block `groupmarketingonline[.]icu` 
+
+## Conclusion
+
+It was a fun challenge to end the module of Phishing with. But the tasks from TryHackMe were more of an "go there and do that" rather than spotting the little details in the mails.
+I successfully determined the breach details, credentials stolen and destination of exfiltration for the stolen data.
+Out of the 5 emails, 4 where 1:1 copy with little to no differences meaning that the same template fooled the employees who need more training to further eliminate the threat.
+Technical details of remediation are still recommended and could be found at the end of each email analysis.

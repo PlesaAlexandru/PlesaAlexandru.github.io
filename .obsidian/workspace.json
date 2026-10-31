@@ -4,16 +4,114 @@
     "type": "split",
     "children": [
       {
-        "id": "c9e089d01af1b34c",
+        "id": "bb7db65c0e76972b",
         "type": "tabs",
         "children": [
           {
-            "id": "090a1ee3175a3c11",
+            "id": "75e9f1d5d090aea2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Backup/Snapped Phish-ing Line Writeup W.I.P.mdx",
+                "file": "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SOC L1 Alert Triage Walkthrough"
+            }
+          },
+          {
+            "id": "c71430a579fef8f1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SOC L1 Alert Reporting Walkthrough"
+            }
+          },
+          {
+            "id": "e5715f6c8b66e184",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "SOC L1 Alert Triage Walkthrough"
+            }
+          },
+          {
+            "id": "f33ebd843cdd1db1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Pyramid Of Pain Walkthrough.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Pyramid Of Pain Walkthrough"
+            }
+          },
+          {
+            "id": "9f07a61f4a940067",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Repossessed Writeup.mdx",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Repossessed Writeup"
+            }
+          },
+          {
+            "id": "eeb2c9d603df4494",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Snapped Phish-ing Line Writeup W.I.P.mdx",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Snapped Phish-ing Line Writeup W.I.P"
+            }
+          },
+          {
+            "id": "57de61ede679ae19",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Repossessed Writeup.mdx",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Repossessed Writeup"
+            }
+          },
+          {
+            "id": "98f2b2abd72ba5e3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "src/content/blog/Snapped Phish-ing Line Writeup W.I.P.mdx",
                 "mode": "source",
                 "source": false
               },
@@ -21,7 +119,8 @@
               "title": "Snapped Phish-ing Line Writeup W.I.P"
             }
           }
-        ]
+        ],
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -198,17 +297,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "090a1ee3175a3c11",
+  "active": "98f2b2abd72ba5e3",
   "lastOpenFiles": [
-    "Backup/Snapped Phish-ing Line Writeup.mdx",
-    "Backup/Snapped Phish-ing Line Writeup W.I.P.mdx",
-    "Backup/Snapped Phish-ing Line Writeup W.I.P.mdx",
-    "src/content/blog/Phishing Emails in Action Walkthrough.md",
+    "src/content/blog/Repossessed Writeup.mdx",
+    "src/content/blog/Snapped Phish-ing Line Writeup W.I.P.mdx",
+    "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/content/blog/The Greenholt Phish Writeup.mdx",
+    "src/content/blog/Unified Kill Chain Walkthrough.md",
+    "src/content/blog/Summit Writeup.mdx",
+    "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
+    "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
+    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
+    "src/content/blog/Phishing Prevention Walkthrough.md",
+    "src/assets/Pasted image 20261031133714.png",
+    "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "Backup/Template Walkthrough.md",
+    "Backup/Snapped Phish-ing Line Writeup.mdx",
+    "src/content/blog/Phishing Emails in Action Walkthrough.md",
     "Backup/Notes threat hunting.md",
     "Backup/Notes Phishing.md",
-    "src/content/blog/Repossessed Writeup.mdx",
-    "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
     "src/assets/Pasted image 20261027145901.png",
     "src/assets/Pasted image 20261027145736.png",
     "src/assets/Pasted image 20261027145633.png",
@@ -218,33 +325,24 @@
     "src/assets/Pasted image 20261027144158.png",
     "src/assets/Pasted image 20261027144149.png",
     "src/assets/Pasted image 20261027144143.png",
-    "src/assets/Pasted image 20261027144137 1.png",
-    "src/content/blog/Summit Writeup.mdx",
     "src/content/blog/Phishing Analysis Tools Walkthrough.md",
     "public/image/snapped_tmp10015",
-    "src/content/blog/The Greenholt Phish Writeup.mdx",
     "src/content/blog/Splunk The Basics Walkthrough.md",
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
-    "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/MITRE Walkthrough.md",
     "src/content/blog/Cyber Kill Chain Walkthrough.md",
     "public/image/repossessed_tmp2603",
     "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
-    "src/content/blog/Phishing Prevention Walkthrough.md",
     "public/image/phish-prev_tmp7148",
-    "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "public/image/phish-tools_tmp30819",
     "public/image/phish-in-action_tmp20056",
     "Backup/Introduction to EDR Walkthrough 1.md",
-    "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
-    "src/content/blog/Unified Kill Chain Walkthrough.md",
     "Backup/Introduction to EDR Walkthrough.md",
     "Tutorial Markup/mathematics-examples.md",
     "2026-10-15.md",
     "src/content/blog/Introduction to SOAR Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "src/content/blog/Introduction to EDR Walkthrough.md",
-    "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
     "Tutorial Markup/markdown-style-guide.md"
   ]
 }
