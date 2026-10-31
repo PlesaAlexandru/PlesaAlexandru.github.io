@@ -9,7 +9,7 @@ categories:
   - Network
 tags:
   - Lessons
-image: /image/template.png
+image: /image/networktrafficbasics.png
 ---
 ---
 ## Summary
