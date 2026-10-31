@@ -229,7 +229,7 @@
       "enabled": true
     },
     "remove-empty-lines-between-list-markers-and-checklists": {
-      "enabled": false
+      "enabled": true
     },
     "remove-link-spacing": {
       "enabled": false
@@ -247,7 +247,7 @@
       "characters-to-remove-space-after": "¿¡‘“(["
     },
     "space-after-list-markers": {
-      "enabled": false
+      "enabled": true
     },
     "space-between-chinese-japanese-or-korean-and-english-or-numbers": {
       "enabled": false,
