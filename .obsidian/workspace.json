@@ -112,8 +112,8 @@
               "type": "markdown",
               "state": {
                 "file": "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
-                "mode": "source",
-                "source": false
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
               "title": "Snapped Phish-ing Line Writeup"
