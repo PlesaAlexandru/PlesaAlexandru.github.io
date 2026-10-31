@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Repossessed Writeup.mdx",
+                "file": "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Repossessed Writeup"
+              "title": "Snapped Phish-ing Line Writeup"
             }
           }
         ]
@@ -201,26 +201,27 @@
   },
   "active": "98f2b2abd72ba5e3",
   "lastOpenFiles": [
+    "src/content/blog/Repossessed Writeup.mdx",
+    "src/content/blog/Summit Writeup.mdx",
+    "src/content/blog/Phishing Prevention Walkthrough.md",
+    "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
-    "src/content/blog/Repossessed Writeup.mdx",
+    "src/content/blog/Network Traffic Basics Walkthrough.md",
+    "Backup/Template Walkthrough.md",
     "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
     "src/content/blog/Splunk The Basics Walkthrough.md",
-    "src/content/blog/Summit Writeup.mdx",
     "Backup/Notes Phishing.md",
     "Backup/Notes threat hunting.md",
-    "Backup/Template Walkthrough.md",
     "Backup/Writeup Template.mdx",
     "Backup/Introduction to EDR Walkthrough.md",
     "Backup/Elastic Stack The Basics Walkthrough 1.md",
-    "src/content/blog/Phishing Prevention Walkthrough.md",
     "src/content/blog/Phishing Analysis Tools Walkthrough.md",
     "src/content/blog/Cyber Kill Chain Walkthrough.md",
     "src/content/blog/Unified Kill Chain Walkthrough.md",
     "src/content/blog/The Greenholt Phish Writeup.mdx",
     "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
     "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
-    "src/content/blog/Pyramid Of Pain Walkthrough.md",
     "src/content/blog/Phishing Emails in Action Walkthrough.md",
     "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
     "src/content/blog/MITRE Walkthrough.md",
@@ -244,7 +245,6 @@
     "public/image/repossessed_tmp2603",
     "Backup/Introduction to EDR Walkthrough 1.md",
     "Tutorial Markup/mathematics-examples.md",
-    "2026-10-15.md",
-    "Tutorial Markup/markdown-style-guide.md"
+    "2026-10-15.md"
   ]
 }
