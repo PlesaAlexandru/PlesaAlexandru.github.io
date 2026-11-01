@@ -25,7 +25,7 @@ In this lesson, we are presented what network analysis is and how it works. Base
 - Know how to observe network traffic
 - Know typical network traffic sources and flows
 
-
+---
 ## Task 1
 
 **What is the name of the technique used to smuggle C2 commands via DNS?**
