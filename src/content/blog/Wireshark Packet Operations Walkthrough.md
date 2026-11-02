@@ -30,7 +30,7 @@ In this room we tested a couple of filters and operators to get the feeling of a
 ---
 ## Task 1.1
 
-**Investigate the resolved addresses. What is the IP address of the hostname starts with "bbc"?**
+**Investigate the resolved addresses. What is the IP address of the hostname starts with "bbc"?**  
 **Answer**: `199.232.24.81`
 
 **Why?**
@@ -41,7 +41,7 @@ Here we can filter my name or address, we can directly search for bbc.
 ![](../../assets/Pasted%20image%2020261101182248.png)
 ## Task 1.2
 
-**What is the number of IPv4 conversations?**
+**What is the number of IPv4 conversations?**  
 **Answer**: `435`
 
 **Why?**
@@ -52,7 +52,7 @@ We can straight up look at the upper tabs and at the IPv4 tab lies the answer.![
 
 ## Task 1.3
 
-**How many bytes (k) were transferred from the "Micro-St" MAC address?**
+**How many bytes (k) were transferred from the "Micro-St" MAC address?**  
 **Answer**: `7474`
 
 **Why?**
@@ -70,7 +70,7 @@ Then search for the specific MAC Address. Then look at the bytes
 
 ## Task 1.4
 
-**What is the number of IP addresses linked with "Kansas City"?**
+**What is the number of IP addresses linked with "Kansas City"?**  
 **Answer**: `4`
 
 **Why?**
@@ -78,7 +78,7 @@ In the same window as the last task, we can sort it by city and look at the Kans
 ![](../../assets/Pasted%20image%2020261101183550.png)
 ## Task 1.5
 
-**Which IP address is linked with "Blicnet" AS Organisation?**
+**Which IP address is linked with "Blicnet" AS Organisation?**  
 **Answer**: `188.246.82.7`
 
 **Why?**
@@ -91,7 +91,7 @@ Then move the side bar to the left to reveal the IP Address
 
 ## Task 2.1
 
-**What is the most used IPv4 destination address?**
+**What is the most used IPv4 destination address?**  
 **Answer**: `10.100.1.33`
 
 **Why?**  
@@ -102,7 +102,7 @@ Sort it by percentage to reveal the most used IPv4 address.
 ![](../../assets/Pasted%20image%2020261101235254.png)
 
 ## Task 2.2
-**What is the max service request-response time of the DNS packets?**
+**What is the max service request-response time of the DNS packets?**  
 **Answer**: `0.467897`
 
 **Why?**
@@ -113,7 +113,7 @@ We can scroll down to see "request-response time(secs)" and look at "Max val" to
 ![](../../assets/Pasted%20image%2020261102000929.png)
 
 ## Task 2.3
-**What is the number of HTTP Requests accomplished by "rad[.]msn[.]com?**
+**What is the number of HTTP Requests accomplished by "rad[.]msn[.]com?**  
 **Answer**: `39`
 
 **Why?**
@@ -133,7 +133,7 @@ Then 39 packets are displayed, which was the real value after all.
 
 ## Task 3.1
 
-**What is the number of IP packets?**
+**What is the number of IP packets?**  
 **Answer**: `81420`
 
 **Why?**
@@ -144,7 +144,7 @@ Simply type IP in the filter bar and it returns `81420` IPs.
 
 ## Task 3.2
 
-**What is the number of packets with a "TTL value less than 10"?**
+**What is the number of packets with a "TTL value less than 10"?**  
 **Answer**: `66`
 
 
@@ -154,7 +154,7 @@ The `ip.ttl` is the filter we are going to use combined with the `<=` (less) ope
 It returns 66 packets.
 ## Task 3.3
 
-**What is the number of packets which uses "TCP port 4444"?**
+**What is the number of packets which uses "TCP port 4444"?**  
 **Answer**: `632`
 
 **Why?**
@@ -162,7 +162,7 @@ It returns 66 packets.
 ![](../../assets/Pasted%20image%2020261102014134.png)
 ## Task 3.4
 
-**What is the number of "HTTP GET" requests sent to port "80"?**
+**What is the number of "HTTP GET" requests sent to port "80"?**  
 **Answer**: `527`
 
 **Why?**
@@ -173,7 +173,7 @@ For that, we can use the && (AND) operator. `http.reqiest.method == "GET"` filte
 
 ## Task 3.5
 
-**What is the number of type A DNS Queries?**
+**What is the number of type A DNS Queries?**  
 **Answer**: `51`
 
 **Why?**
@@ -183,7 +183,7 @@ Honestly, I didn't know the syntax for the task. So what I did was, searching fo
 
 ## Task 4.1
 
-**Find all Microsoft IIS servers. What is the number of packets that did not originate from "port 80"?**
+**Find all Microsoft IIS servers. What is the number of packets that did not originate from "port 80"?**  
 **Answer**: `21`
 
 **Why?**
@@ -193,7 +193,7 @@ As an similar fashion, no idea about which format is Microsoft IIS but we can us
 
 ## Task 4.2
 
-**Find all Microsoft IIS servers. What is the number of packets that have "version 7.5"?**
+**Find all Microsoft IIS servers. What is the number of packets that have "version 7.5"?**  
 **Answer**: `71`
 
 **Why?**
@@ -203,7 +203,7 @@ Due to the last task, we can look at the version and simply add it to the filter
 
 ## Task 4.3
 
-**What is the total number of packets that use ports 3333, 4444 or 9999?**
+**What is the total number of packets that use ports 3333, 4444 or 9999?**  
 **Answer**: `2235`
 
 **Why?**
@@ -212,7 +212,7 @@ Instead of adding `&&`, we can use the `IN {List}` operator to find all the port
 
 ## Task 4.4
 
-**What is the number of packets with "even TTL numbers"?**
+**What is the number of packets with "even TTL numbers"?**  
 **Answer**: `77289`
 
 **Why?**
@@ -221,7 +221,7 @@ Based on that, we can change the frame number to match our task, in that case, T
 ![](../../assets/Pasted%20image%2020261102031551.png)
 ## Task 4.5
 
-**Change the profile to "Checksum Control". What is the number of "Bad TCP Checksum" packets?**
+**Change the profile to "Checksum Control". What is the number of "Bad TCP Checksum" packets?**  
 **Answer**: `34185`
 
 **Why?**
@@ -236,7 +236,7 @@ To filter Bad TCP Checksum we can use `tcp.checksum.status == bad`.
 
 ## Task 4.6
 
-**Use the existing filtering button to filter the traffic. What is the number of displayed packets?**
+**Use the existing filtering button to filter the traffic. What is the number of displayed packets?**  
 **Answer**: `261`
 
 **Why?**

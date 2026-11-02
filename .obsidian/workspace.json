@@ -201,8 +201,10 @@
   },
   "active": "98f2b2abd72ba5e3",
   "lastOpenFiles": [
-    "src/content/blog/Unified Kill Chain Walkthrough.md",
+    "src/content/blog/Wireshark Traffic Analysis Walkthrough.md",
+    "Backup/Wireshark Traffic Analysis Walkthrough 1.md",
     "src/content/blog/Wireshark Packet Operations Walkthrough.md",
+    "src/content/blog/Unified Kill Chain Walkthrough.md",
     "src/assets/Pasted image 20261102032104.png",
     "src/assets/Pasted image 20261102032020.png",
     "src/assets/Pasted image 20261102032010.png",
@@ -244,7 +246,6 @@
     "src/content/blog/Introduction to EDR Walkthrough.md",
     "src/content/blog/Elastic Stack The Basics Walkthrough.md",
     "public/cv.pdf",
-    "Backup/Introduction to EDR Walkthrough 1.md",
-    "Tutorial Markup/mathematics-examples.md"
+    "Backup/Introduction to EDR Walkthrough 1.md"
   ]
 }
