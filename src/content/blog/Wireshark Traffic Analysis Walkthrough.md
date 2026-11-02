@@ -1,5 +1,5 @@
 ---
-title: Wireshark Traffic Analysis Walkthrough
+title: Wireshark Traffic Analysis Walkthrough Work in progress
 description: Learn the basics of traffic analysis with Wireshark and how to find anomalies on your network!
 pubDate: 2026-11-02
 categories:
