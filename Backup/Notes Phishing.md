@@ -208,7 +208,7 @@ MAIL 2
 mail 3
 
 Direct credit advice html  
-![](Pasted%20image%2020261027141810.png)
+![](../../assets/Pasted%20image%2020261027141810.png)
 
 # Headers Found
 

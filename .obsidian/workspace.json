@@ -13,13 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
+                "file": "src/content/blog/Wireshark Traffic Analysis Walkthrough.md",
                 "mode": "source",
-                "source": false,
-                "backlinks": false
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "Snapped Phish-ing Line Writeup"
+              "title": "Wireshark Traffic Analysis Walkthrough"
             }
           }
         ]
@@ -84,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 647.5
+    "width": 323.5
   },
   "right": {
     "id": "55442de039d15212",
@@ -199,53 +198,53 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "98f2b2abd72ba5e3",
+  "active": "d9c2818928c03d6f",
   "lastOpenFiles": [
-    "src/assets/Pasted image 20261103220138.png",
+    "Backup/TO BE DONE/DONE/Linux Threat Detection 1 Walkthrough.md",
     "src/content/blog/Network Traffic Basics Walkthrough.md",
-    "src/content/blog/Phishing Prevention Walkthrough.md",
-    "Backup/TO BE DONE/Wireshark Traffic Analysis Walkthrough.md",
-    "Backup/Wireshark Traffic Analysis Walkthrough 1.md",
-    "Backup/Template Walkthrough.md",
-    "Backup/Notes Phishing.md",
-    "Backup/Introduction to EDR Walkthrough.md",
-    "Backup/Elastic Stack The Basics Walkthrough 1.md",
-    "src/content/blog/Unified Kill Chain Walkthrough.md",
-    "src/content/blog/Introduction to EDR Walkthrough.md",
-    "src/content/blog/Elastic Stack The Basics Walkthrough.md",
-    "src/content/blog/Phishing Emails in Action Walkthrough.md",
-    "src/content/blog/Phishing Analysis Tools Walkthrough.md",
-    "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
-    "src/content/blog/Wireshark Packet Operations Walkthrough.md",
-    "Backup/TO BE DONE/Man-in-the-Middle Detection Walkthrough.md",
-    "Backup/TO BE DONE/Network Discovery Detection Walkthrough.md",
-    "Backup/TO BE DONE/Network Security Essentials Walkthrough.md",
-    "Backup/TO BE DONE/NetworkMiner Walkthrough.md",
-    "src/content/blog/Splunk The Basics Walkthrough.md",
-    "src/content/blog/SOC Workbooks and Lookups Walkthrough.md",
-    "src/content/blog/SOC Metrics and Objectives Walkthrough.md",
-    "src/content/blog/SOC L1 Alert Triage Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Intro to Cyber Threat Intel Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Linux Threat Detection 2 Walkthrough.md",
     "src/content/blog/SOC L1 Alert Reporting Walkthrough.md",
-    "src/content/blog/Pyramid Of Pain Walkthrough.md",
+    "src/assets/Pasted image 20261011182714.png",
+    "Backup/TO BE DONE/DONE/Man-in-the-Middle Detection Walkthrough.md",
+    "src/content/blog/Phishing Analysis Tools Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Windows Threat Detection 2 Walkthrough.md",
+    "src/content/blog/Phishing Analysis Fundamentals Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Intro to Malware Analysis Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Detecting Web DDoS Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Boogeyman 3 Walkthrough.md",
+    "src/content/blog/Wireshark Traffic Analysis Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Alert Triage With Elastic Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Data Exfiltration Detection Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Boogeyman 1 Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Alert Triage With Splunk Walkthrough.md",
+    "Backup/TO BE DONE/Writeups TO BE DONE/Benign.md",
+    "Backup/TO BE DONE/Writeups TO BE DONE/Invite Only.md",
+    "Backup/TO BE DONE/Writeups TO BE DONE/ItsyBitsy.md",
+    "Backup/TO BE DONE/Writeups TO BE DONE/Shadow Trace.md",
+    "Backup/TO BE DONE/IDS Fundamentals Walkthrough.md",
+    "Backup/Elastic Stack The Basics Walkthrough 1.md",
+    "Backup/TO BE DONE/Alert Triage With Elastic Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Tempest Walkthrough.md",
+    "Backup/TO BE DONE/DONE/Log Analysis with SIEM Walkthrough.md",
+    "src/assets/Pasted image 20261115184056.png",
+    "src/assets/Pasted image 20261115184040.png",
+    "src/assets/Pasted image 20261115183638.png",
+    "src/assets/Pasted image 20261115183626.png",
+    "src/assets/Pasted image 20261115183535.png",
+    "src/assets/Pasted image 20261115183504.png",
+    "src/assets/Pasted image 20261115183420.png",
+    "src/assets/Pasted image 20261115183416.png",
+    "src/assets/Pasted image 20261115183305.png",
+    "Backup/TO BE DONE/Writeups TO BE DONE",
+    "Backup/TO BE DONE/DONE",
+    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
     "Backup/TO BE DONE",
-    "src/assets/Pasted image 20261103212952.png",
-    "src/assets/Pasted image 20261103212942.png",
-    "src/assets/Pasted image 20261103212417.png",
-    "src/assets/Pasted image 20261103212131.png",
-    "src/assets/Pasted image 20261103212058.png",
-    "src/assets/Pasted image 20261103212050.png",
-    "src/assets/Pasted image 20261103212044.png",
-    "src/assets/Pasted image 20261103212039.png",
-    "src/assets/Pasted image 20261103212022.png",
-    "src/assets/Pasted image 20261103211951.png",
     "public/image/networksecess_tmp30032",
     "public/image/networkminer_tmp2952",
-    "src/content/blog/Snapped Phish-ing Line Writeup.mdx",
     "src/content/blog/Repossessed Writeup.mdx",
     "src/content/blog/Eviction Walkthrough.mdx",
     "public/image/wiresharkpacketop_tmp5624",
-    "public/image/networktrafficbasics_tmp1731",
-    "src/content/blog/Summit Writeup.mdx",
-    "Backup/Writeup Template.mdx"
+    "public/image/networktrafficbasics_tmp1731"
   ]
 }
